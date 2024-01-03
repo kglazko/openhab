@@ -9,6 +9,7 @@
 package org.openhab.binding.insteonplm.internal.driver;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -267,7 +268,7 @@ public class Port {
         public void run() {
             logger.debug("starting reader...");
             byte[] buffer = new byte[2 * m_readSize];
-            Random rng = new Random();
+            Random rng = new SecureRandom();
             try {
                 for (int len = -1; (len = m_ioStream.read(buffer, 0, m_readSize)) > 0;) {
                     if (m_dropRandomBytes && rng.nextInt(100) < 20) {
@@ -331,7 +332,7 @@ public class Port {
          */
         private int dropBytes(byte[] buffer, int len) {
             final int DROP_RATE = 2; // in percent
-            Random rng = new Random();
+            Random rng = new SecureRandom();
             ArrayList<Byte> l = new ArrayList<Byte>();
             for (int i = 0; i < len; i++) {
                 if (rng.nextInt(100) >= DROP_RATE) {
