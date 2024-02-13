@@ -278,7 +278,9 @@ public class SitemapResource {
 	    		String widgetId = pageId + "_" + cntWidget;
 	    		WidgetBean subWidget = createWidgetBean(sitemapName, widget, drillDown, uri, widgetId);
 				if(subWidget != null)
-	    		bean.widgets.add(subWidget);
+	    		{
+	    		    bean.widgets.add(subWidget);
+	    		}
 	    		cntWidget++;
 	    	}
     	} else {
@@ -292,7 +294,9 @@ public class SitemapResource {
 
 		// Test visibility
 		if(itemUIRegistry.getVisiblity(widget) == false)
-			return null;
+			{
+			    return null;
+			}
 
     	WidgetBean bean = new WidgetBean();
     	if(widget.getItem()!=null) {
