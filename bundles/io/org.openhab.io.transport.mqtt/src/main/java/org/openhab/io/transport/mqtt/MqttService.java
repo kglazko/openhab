@@ -50,7 +50,7 @@ public class MqttService implements ManagedService {
 
             String key = keys.nextElement();
 
-            if (key.equals("service.pid")) {
+            if ("service.pid".equals(key)) {
                 // ignore the only non-broker property..
                 continue;
             }
@@ -78,25 +78,25 @@ public class MqttService implements ManagedService {
                 brokerConnections.put(name, conn);
             }
 
-            if (property.equals("url")) {
+            if ("url".equals(property)) {
                 conn.setUrl(value);
-            } else if (property.equals("user")) {
+            } else if ("user".equals(property)) {
                 conn.setUser(value);
-            } else if (property.equals("pwd")) {
+            } else if ("pwd".equals(property)) {
                 conn.setPassword(value);
-            } else if (property.equals("qos")) {
+            } else if ("qos".equals(property)) {
                 conn.setQos(Integer.parseInt(value));
-            } else if (property.equals("retain")) {
+            } else if ("retain".equals(property)) {
                 conn.setRetain(Boolean.parseBoolean(value));
-            } else if (property.equals("async")) {
+            } else if ("async".equals(property)) {
                 conn.setAsync(Boolean.parseBoolean(value));
-            } else if (property.equals("clientId")) {
+            } else if ("clientId".equals(property)) {
                 conn.setClientId(value);
-            } else if (property.equals("lwt")) {
+            } else if ("lwt".equals(property)) {
                 MqttWillAndTestament will = MqttWillAndTestament.fromString(value);
                 logger.debug("Setting last will: {}", will);
                 conn.setLastWill(will);
-            } else if (property.equals("keepAlive")) {
+            } else if ("keepAlive".equals(property)) {
                 conn.setKeepAliveInterval(Integer.parseInt(value));
             } else {
                 logger.warn("Unrecognized property: {}", key);

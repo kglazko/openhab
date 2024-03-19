@@ -59,7 +59,7 @@ public class OneWireClearCacheControlBindingConfig extends AbstractOneWireContro
             pvOneWireBinding.clearCacheItemState();
         } else if (pvCommand instanceof StringType) {
             String lvItemName = pvCommand.toString();
-            if (lvItemName != null && !lvItemName.trim().equals("")) {
+            if (lvItemName != null && !"".equals(lvItemName.trim())) {
                 pvOneWireBinding.clearCacheItemState(lvItemName);
             }
         }

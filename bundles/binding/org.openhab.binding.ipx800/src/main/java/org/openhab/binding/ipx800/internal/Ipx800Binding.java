@@ -131,14 +131,14 @@ public class Ipx800Binding extends AbstractBinding<Ipx800BindingProvider>impleme
                 Ipx800Item item;
                 if (port.getCommandType() == Ipx800PortType.OUPUT) {
                     boolean pulse = false;
-                    if (config.getExtra(0).equals("p")) {
+                    if ("p".equals(config.getExtra(0))) {
                         pulse = true;
                     }
                     item = new Ipx800OutputItem(pulse);
                 } else if (port.getCommandType() == Ipx800PortType.COUNTER) {
-                    if (config.getExtra(0).equals("a")) {
+                    if ("a".equals(config.getExtra(0))) {
                         float unit = 1;
-                        if (!config.getExtra(1).equals("")) {
+                        if (!"".equals(config.getExtra(1))) {
                             unit = Float.parseFloat(config.getExtra(1));
                         }
                         Ipx800ConsumptionPeriod period = Ipx800ConsumptionPeriod.getPeriod(config.getExtra(2));
@@ -147,20 +147,20 @@ public class Ipx800Binding extends AbstractBinding<Ipx800BindingProvider>impleme
                         item = new Ipx800Counter();
                     }
                 } else {
-                    if (config.getExtra(0).equals("D")) {
+                    if ("D".equals(config.getExtra(0))) {
                         item = new Ipx800DoubleClic();
                         port.switchToMultiHandler();
-                    } else if (config.getExtra(0).equals("d")) {
+                    } else if ("d".equals(config.getExtra(0))) {
                         item = new Ipx800SimpleClic();
                         port.switchToMultiHandler();
-                    } else if (config.getExtra(0).equals("v")) {
-                        if (config.getExtra(1).equals("")) {
+                    } else if ("v".equals(config.getExtra(0))) {
+                        if ("".equals(config.getExtra(1))) {
                             item = new Ipx800Dimmer();
                         } else {
                             item = new Ipx800Dimmer(new Integer(config.getExtra(1)));
                         }
                         port.switchToMultiHandler();
-                    } else if (config.getExtra(0).equals("m")) {
+                    } else if ("m".equals(config.getExtra(0))) {
                         item = new Ipx800Mirror();
                     } else {
                         item = new Ipx800AstableSwitch();

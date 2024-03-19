@@ -66,17 +66,17 @@ public class NikobusCommandProvider implements CommandProvider {
         try {
             String cmd = intp.nextArgument();
 
-            if (cmd.equals("help")) {
+            if ("help".equals(cmd)) {
                 intp.println(getHelp());
                 return null;
             }
 
-            if (cmd.equals("connect")) {
+            if ("connect".equals(cmd)) {
                 binding.connect();
                 return null;
             }
 
-            if (cmd.equals("send")) {
+            if ("send".equals(cmd)) {
                 String data = intp.nextArgument();
                 if (data != null && data.length() > 0) {
                     binding.sendCommand(new NikobusCommand(data));
@@ -88,7 +88,7 @@ public class NikobusCommandProvider implements CommandProvider {
                 return null;
             }
 
-            if (cmd.equals("status")) {
+            if ("status".equals(cmd)) {
                 intp.println(binding.getConnectionStatus());
                 return null;
             }

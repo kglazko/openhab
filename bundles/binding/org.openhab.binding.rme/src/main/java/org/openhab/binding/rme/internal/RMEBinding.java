@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.rme.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -303,7 +304,7 @@ public class RMEBinding extends AbstractActiveBinding<RMEBindingProvider>impleme
 
                         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream), 32 * 1024 * 1024);
                         while (br.ready()) {
-                            String line = br.readLine();
+                            String line = BoundedLineReader.readLine(br, 5_000_000);
                             line = StringUtils.chomp(line);
 
                             // little hack to overcome Locale limits of the RME Rain Manager
@@ -351,9 +352,9 @@ public class RMEBinding extends AbstractActiveBinding<RMEBindingProvider>impleme
                                     cachedValues.put(selector, matcher.group(selector.getFieldIndex()));
                                     State value;
                                     try {
-                                        if (matcher.group(selector.getFieldIndex()).equals("0")) {
+                                        if ("0".equals(matcher.group(selector.getFieldIndex()))) {
                                             value = createStateForType(selector, "OFF");
-                                        } else if (matcher.group(selector.getFieldIndex()).equals("1")) {
+                                        } else if ("1".equals(matcher.group(selector.getFieldIndex()))) {
                                             value = createStateForType(selector, "ON");
                                         } else {
                                             value = createStateForType(selector,

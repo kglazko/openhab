@@ -117,7 +117,7 @@ public class Ipx800GenericBindingProvider extends AbstractGenericBindingProvider
                             toDeviceName = slots[0];
                             toSlotField = slots[1];
                             if (slots.length >= 3) {
-                                toPulse = slots[2].equals("p");
+                                toPulse = "p".equals(slots[2]);
                             }
                         }
                     }

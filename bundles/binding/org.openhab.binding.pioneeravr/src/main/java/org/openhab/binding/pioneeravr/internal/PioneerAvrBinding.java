@@ -275,7 +275,7 @@ public class PioneerAvrBinding extends AbstractBinding<PioneerAvrBindingProvider
                 } else if ("port".equals(configKey)) {
                     deviceConfig.port = Integer.valueOf(value);
                 } else if ("checkconn".equals(configKey)) {
-                    if (value.equals("0")) {
+                    if ("0".equals(value)) {
                         deviceConfig.connectionCheckActive = false;
                     } else {
                         deviceConfig.connectionCheckActive = true;

@@ -403,15 +403,15 @@ public class PifaceBinding extends AbstractActiveBinding<PifaceBindingProvider>i
 
                 PifaceNode pifaceNode = pifaceNodes.get(pifaceId);
 
-                if (configKey.equals(CONFIG_KEY_HOST)) {
+                if (CONFIG_KEY_HOST.equals(configKey)) {
                     pifaceNode.host = value;
-                } else if (configKey.equals(CONFIG_KEY_LISTENER_PORT)) {
+                } else if (CONFIG_KEY_LISTENER_PORT.equals(configKey)) {
                     pifaceNode.listenerPort = Integer.parseInt(value);
-                } else if (configKey.equals(CONFIG_KEY_MONITOR_PORT)) {
+                } else if (CONFIG_KEY_MONITOR_PORT.equals(configKey)) {
                     pifaceNode.monitorPort = Integer.parseInt(value);
-                } else if (configKey.equals(CONFIG_KEY_SOCKET_TIMEOUT)) {
+                } else if (CONFIG_KEY_SOCKET_TIMEOUT.equals(configKey)) {
                     pifaceNode.socketTimeout = Integer.parseInt(value);
-                } else if (configKey.equals(CONFIG_KEY_MAX_RETRIES)) {
+                } else if (CONFIG_KEY_MAX_RETRIES.equals(configKey)) {
                     pifaceNode.maxRetries = Integer.parseInt(value);
                 } else {
                     throw new ConfigurationException(key, "Unrecognised configuration parameter: " + configKey);

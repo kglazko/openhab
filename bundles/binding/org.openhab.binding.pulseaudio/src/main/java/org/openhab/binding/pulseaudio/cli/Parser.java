@@ -136,7 +136,7 @@ public class Parser {
                     }
                 }
                 if (properties.containsKey("muted")) {
-                    sink.setMuted(properties.get("muted").equalsIgnoreCase("yes"));
+                    sink.setMuted("yes".equalsIgnoreCase(properties.get("muted")));
                 }
                 if (properties.containsKey("volume")) {
                     sink.setVolume(Integer.valueOf(parseVolume(properties.get("volume"))));
@@ -207,7 +207,7 @@ public class Parser {
                     }
                 }
                 if (properties.containsKey("muted")) {
-                    item.setMuted(properties.get("muted").equalsIgnoreCase("yes"));
+                    item.setMuted("yes".equalsIgnoreCase(properties.get("muted")));
                 }
                 if (properties.containsKey("volume")) {
                     item.setVolume(Integer.valueOf(parseVolume(properties.get("volume"))));
@@ -267,7 +267,7 @@ public class Parser {
                     }
                 }
                 if (properties.containsKey("muted")) {
-                    source.setMuted(properties.get("muted").equalsIgnoreCase("yes"));
+                    source.setMuted("yes".equalsIgnoreCase(properties.get("muted")));
                 }
                 if (properties.containsKey("volume")) {
                     source.setVolume(Integer.valueOf(parseVolume(properties.get("volume"))));
@@ -327,7 +327,7 @@ public class Parser {
                     }
                 }
                 if (properties.containsKey("muted")) {
-                    item.setMuted(properties.get("muted").equalsIgnoreCase("yes"));
+                    item.setMuted("yes".equalsIgnoreCase(properties.get("muted")));
                 }
                 if (properties.containsKey("volume")) {
                     item.setVolume(Integer.valueOf(parseVolume(properties.get("volume"))));

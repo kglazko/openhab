@@ -124,7 +124,7 @@ public class IhcGenericBindingProvider extends AbstractGenericBindingProvider
                     } else {
                         // new style out binding
                         Command command = TypeParser.parseCommand(item.getAcceptedCommandTypes(), m.group(1));
-                        if (command == null && !m.group(1).equals("*")) {
+                        if (command == null && !"*".equals(m.group(1))) {
                             throw new BindingConfigParseException(
                                     "Item '" + item.getName() + " invalid Command: " + m.group(1));
                         }

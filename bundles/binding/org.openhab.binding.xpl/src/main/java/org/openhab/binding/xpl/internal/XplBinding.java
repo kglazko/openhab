@@ -95,9 +95,9 @@ public class XplBinding extends AbstractBinding<XplBindingProvider>implements xP
                 Item item = provider.getItem(itemName);
                 if (item != null) {
                     if (item instanceof SwitchItem) {
-                        OnOffType status = (current.equalsIgnoreCase("on") || current.equalsIgnoreCase("true")
-                                || current.equalsIgnoreCase("1") || current.equalsIgnoreCase("open")
-                                || current.equalsIgnoreCase("high")) ? OnOffType.ON : OnOffType.OFF;
+                        OnOffType status = ("on".equalsIgnoreCase(current) || "true".equalsIgnoreCase(current)
+                                || "1".equalsIgnoreCase(current) || "open".equalsIgnoreCase(current)
+                                || "high".equalsIgnoreCase(current)) ? OnOffType.ON : OnOffType.OFF;
                         synchronized (item) {
                             if (!item.getState().equals(status)) {
                                 eventPublisher.postUpdate(itemName, status);

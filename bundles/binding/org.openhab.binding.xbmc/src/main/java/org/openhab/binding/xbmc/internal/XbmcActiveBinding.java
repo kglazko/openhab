@@ -138,7 +138,7 @@ public class XbmcActiveBinding extends AbstractActiveBinding<XbmcBindingProvider
 
             if (property.startsWith("Application")) {
                 connector.requestApplicationUpdate();
-            } else if (property.equals("System.State")) {
+            } else if ("System.State".equals(property)) {
                 connector.updateSystemStatus();
             }
         }
@@ -302,29 +302,29 @@ public class XbmcActiveBinding extends AbstractActiveBinding<XbmcBindingProvider
             }
 
             // TODO: handle other commands
-            if (property.equals("Player.PlayPause")) {
+            if ("Player.PlayPause".equals(property)) {
                 connector.playerPlayPause();
-            } else if (property.equals("Player.Open")) {
+            } else if ("Player.Open".equals(property)) {
                 connector.playerOpen(command.toString());
-            } else if (property.equals("Player.Stop")) {
+            } else if ("Player.Stop".equals(property)) {
                 connector.playerStop();
-            } else if (property.equals("Input.ExecuteAction")) {
+            } else if ("Input.ExecuteAction".equals(property)) {
                 connector.inputExecuteAction(command.toString());
-            } else if (property.equals("GUI.ShowNotification")) {
+            } else if ("GUI.ShowNotification".equals(property)) {
                 connector.showNotification("openHAB", command.toString());
-            } else if (property.equals("System.Shutdown") && command == OnOffType.OFF) {
+            } else if ("System.Shutdown".equals(property) && command == OnOffType.OFF) {
                 connector.systemShutdown();
-            } else if (property.equals("System.Suspend") && command == OnOffType.OFF) {
+            } else if ("System.Suspend".equals(property) && command == OnOffType.OFF) {
                 connector.systemSuspend();
-            } else if (property.equals("System.Hibernate") && command == OnOffType.OFF) {
+            } else if ("System.Hibernate".equals(property) && command == OnOffType.OFF) {
                 connector.systemHibernate();
-            } else if (property.equals("System.Reboot") && command == OnOffType.OFF) {
+            } else if ("System.Reboot".equals(property) && command == OnOffType.OFF) {
                 connector.systemReboot();
-            } else if (property.equals("Application.Volume")) {
+            } else if ("Application.Volume".equals(property)) {
                 connector.applicationSetVolume(command.toString());
-            } else if (property.equals("PVR.OpenTV")) {
+            } else if ("PVR.OpenTV".equals(property)) {
                 connector.playerOpenPVR(command.toString(), 2);
-            } else if (property.equals("PVR.OpenRadio")) {
+            } else if ("PVR.OpenRadio".equals(property)) {
                 connector.playerOpenPVR(command.toString(), 1);
             }
 
@@ -357,11 +357,11 @@ public class XbmcActiveBinding extends AbstractActiveBinding<XbmcBindingProvider
             }
 
             // TODO: handle other updates
-            if (property.equals("GUI.ShowNotification")) {
+            if ("GUI.ShowNotification".equals(property)) {
                 connector.showNotification("openHAB", newState.toString());
-            } else if (property.equals("Player.Open")) {
+            } else if ("Player.Open".equals(property)) {
                 connector.playerOpen(newState.toString());
-            } else if (property.equals("Application.SetVolume")) {
+            } else if ("Application.SetVolume".equals(property)) {
                 connector.applicationSetVolume(newState.toString());
             }
 

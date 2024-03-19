@@ -191,7 +191,7 @@ public class NotifyMyAndroid {
         if (root.getTagName().equals("nma")) {
             Node item = root.getFirstChild();
             String childName = item.getNodeName();
-            if (!childName.equals("success")) {
+            if (!"success".equals(childName)) {
                 lastError = item.getFirstChild().getNodeValue();
             }
         }

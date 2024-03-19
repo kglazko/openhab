@@ -369,7 +369,7 @@ public class RRD4jService implements QueryablePersistenceService {
 
             String key = keys.next();
 
-            if (key.equals("service.pid") || key.equals("component.name")) { // ignore service.pid and name
+            if ("service.pid".equals(key) || "component.name".equals(key)) { // ignore service.pid and name
                 continue;
             }
 
@@ -399,11 +399,11 @@ public class RRD4jService implements QueryablePersistenceService {
                 }
 
                 try {
-                    if (property.equals("def")) {
+                    if ("def".equals(property)) {
                         rrdDef.setDef(value);
-                    } else if (property.equals("archives")) {
+                    } else if ("archives".equals(property)) {
                         rrdDef.addArchives(value);
-                    } else if (property.equals("items")) {
+                    } else if ("items".equals(property)) {
                         rrdDef.addItems(value);
                     } else {
                         logger.debug("Unknown property {} : {}", property, value);
@@ -464,13 +464,13 @@ public class RRD4jService implements QueryablePersistenceService {
                 return;
             }
 
-            if (opts[0].equals("ABSOLUTE")) { // dsType
+            if ("ABSOLUTE".equals(opts[0])) { // dsType
                 dsType = DsType.ABSOLUTE;
-            } else if (opts[0].equals("COUNTER")) {
+            } else if ("COUNTER".equals(opts[0])) {
                 dsType = DsType.COUNTER;
-            } else if (opts[0].equals("DERIVE")) {
+            } else if ("DERIVE".equals(opts[0])) {
                 dsType = DsType.DERIVE;
-            } else if (opts[0].equals("GAUGE")) {
+            } else if ("GAUGE".equals(opts[0])) {
                 dsType = DsType.GAUGE;
             } else {
                 logger.warn("{}: dsType {} not supported", name, opts[0]);
@@ -478,13 +478,13 @@ public class RRD4jService implements QueryablePersistenceService {
 
             heartbeat = Integer.parseInt(opts[1]);
 
-            if (opts[2].equals("U")) {
+            if ("U".equals(opts[2])) {
                 min = Double.NaN;
             } else {
                 min = Double.parseDouble(opts[2]);
             }
 
-            if (opts[3].equals("U")) {
+            if ("U".equals(opts[3])) {
                 max = Double.NaN;
             } else {
                 max = Double.parseDouble(opts[3]);
@@ -507,17 +507,17 @@ public class RRD4jService implements QueryablePersistenceService {
                 }
                 RrdArchiveDef arc = new RrdArchiveDef();
 
-                if (opts[0].equals("AVERAGE")) {
+                if ("AVERAGE".equals(opts[0])) {
                     arc.fcn = ConsolFun.AVERAGE;
-                } else if (opts[0].equals("MIN")) {
+                } else if ("MIN".equals(opts[0])) {
                     arc.fcn = ConsolFun.MIN;
-                } else if (opts[0].equals("MAX")) {
+                } else if ("MAX".equals(opts[0])) {
                     arc.fcn = ConsolFun.MAX;
-                } else if (opts[0].equals("LAST")) {
+                } else if ("LAST".equals(opts[0])) {
                     arc.fcn = ConsolFun.LAST;
-                } else if (opts[0].equals("FIRST")) {
+                } else if ("FIRST".equals(opts[0])) {
                     arc.fcn = ConsolFun.FIRST;
-                } else if (opts[0].equals("TOTAL")) {
+                } else if ("TOTAL".equals(opts[0])) {
                     arc.fcn = ConsolFun.TOTAL;
                 } else {
                     logger.warn("{}: consolidation function  {} not supported", name, opts[0]);

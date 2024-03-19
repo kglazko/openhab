@@ -56,10 +56,10 @@ public class GaradgetBindingConfig implements BindingConfig {
                 configContent = config.substring(firstPos + 1, lastPos);
             }
 
-            if (type.equals("<")) {
+            if ("<".equals(type)) {
                 GaradgetSubscriber subscribeConfig = new GaradgetSubscriber(item, configContent);
                 subscribeConfigurations.add(subscribeConfig);
-            } else if (type.equals(">")) {
+            } else if (">".equals(type)) {
                 GaradgetPublisher publishConfig = new GaradgetPublisher(item, configContent);
                 publishConfigurations.add(publishConfig);
             } else {

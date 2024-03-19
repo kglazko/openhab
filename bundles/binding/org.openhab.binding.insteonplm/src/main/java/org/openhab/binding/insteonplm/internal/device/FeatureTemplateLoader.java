@@ -151,13 +151,13 @@ public class FeatureTemplateLoader {
     }
 
     private static Class<? extends Command> s_parseCommandClass(String c) throws ParsingException {
-        if (c.equals("OnOffType")) {
+        if ("OnOffType".equals(c)) {
             return OnOffType.class;
-        } else if (c.equals("PercentType")) {
+        } else if ("PercentType".equals(c)) {
             return PercentType.class;
-        } else if (c.equals("DecimalType")) {
+        } else if ("DecimalType".equals(c)) {
             return DecimalType.class;
-        } else if (c.equals("IncreaseDecreaseType")) {
+        } else if ("IncreaseDecreaseType".equals(c)) {
             return IncreaseDecreaseType.class;
         } else {
             throw new ParsingException("Unknown Command Type");

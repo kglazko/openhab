@@ -347,9 +347,9 @@ public class SonosBinding extends AbstractActiveBinding<SonosBindingProvider>imp
             // be enhanced, or a TrueFalseType should be developed
             if (ctype.equals(OnOffType.class)) {
                 finalValue = StringUtils.upperCase(value);
-                if (finalValue.equals("TRUE") || finalValue.equals("1")) {
+                if ("TRUE".equals(finalValue) || "1".equals(finalValue)) {
                     finalValue = "ON";
-                } else if (finalValue.equals("FALSE") || finalValue.equals("0")) {
+                } else if ("FALSE".equals(finalValue) || "0".equals(finalValue)) {
                     finalValue = "OFF";
                 }
             }
@@ -478,7 +478,7 @@ public class SonosBinding extends AbstractActiveBinding<SonosBindingProvider>imp
             // or are things we want to store for further reference
             for (String stateVariable : values.keySet()) {
 
-                if (stateVariable.equals("ZoneGroupState")) {
+                if ("ZoneGroupState".equals(stateVariable)) {
                     try {
                         setSonosZoneGroups(SonosXMLParser.getZoneGroupFromXML(values.get(stateVariable).toString()));
                     } catch (SAXException e) {

@@ -241,7 +241,7 @@ public class ModuleChannelGroup implements NikobusModule {
                     channels[i].setState(value);
                 }
             } else {
-                if (newValue.equals(LOW_BYTE)) {
+                if (LOW_BYTE.equals(newValue)) {
                     if (channels[i].getState().equals(OnOffType.ON)) {
                         binding.postUpdate(channels[i].getName(), OnOffType.OFF);
                         channels[i].setState(OnOffType.OFF);

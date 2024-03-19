@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.oceanic.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -129,7 +130,7 @@ public class OceanicBinding extends AbstractActiveBinding<OceanicBindingProvider
                     break;
             }
             String response = serialDevice.requestResponse(commandAsString);
-            if (response.equals("ERR")) {
+            if ("ERR".equals(response)) {
                 logger.error("An error occurred while setting '{}' to {}", valueSelector.toString(),
                         command.toString());
             }
@@ -463,7 +464,7 @@ public class OceanicBinding extends AbstractActiveBinding<OceanicBindingProvider
                     try {
                         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream), 32 * 1024 * 1024);
                         if (br.ready()) {
-                            String line = br.readLine();
+                            String line = BoundedLineReader.readLine(br, 5_000_000);
                             line = StringUtils.chomp(line);
                             line = line.replace(",", ".");
                             response = line.trim();
@@ -494,7 +495,7 @@ public class OceanicBinding extends AbstractActiveBinding<OceanicBindingProvider
             synchronized (this) {
                 writeString(msg + "\r");
                 String response = "";
-                while (response.equals("")) {
+                while ("".equals(response)) {
                     response = getResponse();
                     try {
                         Thread.sleep(5);

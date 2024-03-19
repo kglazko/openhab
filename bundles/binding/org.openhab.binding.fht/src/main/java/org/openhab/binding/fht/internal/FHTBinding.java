@@ -406,11 +406,11 @@ public class FHTBinding extends AbstractActiveBinding<FHTBindingProvider>impleme
                 state = FHTState.BATTERY_LOW;
             }
 
-            if (argument.substring(1).equals("1")) {
+            if ("1".equals(argument.substring(1))) {
                 state = FHTState.WINDOW_OPEN;
             }
 
-            if (argument.substring(1).equals("2")) {
+            if ("2".equals(argument.substring(1))) {
                 state = FHTState.WINDOW_CLOSED;
             }
 

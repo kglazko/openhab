@@ -158,7 +158,7 @@ public class SerialBinding extends AbstractEventSubscriber implements BindingCon
                 pattern = substring.substring(6, substring.length() - 1);
             }
 
-            if (substring.equals("BASE64")) {
+            if ("BASE64".equals(substring)) {
                 base64 = true;
             }
         }

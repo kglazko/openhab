@@ -90,16 +90,16 @@ public class ZWaveGenericBindingProvider extends AbstractGenericBindingProvider 
                         String key = pair[0].trim().toLowerCase();
                         String value = pair[1].trim().toLowerCase();
 
-                        if (key.equals("refresh_interval")) {
+                        if ("refresh_interval".equals(key)) {
                             refreshInterval = Integer.parseInt(value);
                         } else {
                             arguments.put(key, value);
                         }
 
                         // Sanity check the command class
-                        if (key.equals("command")) {
+                        if ("command".equals(key)) {
                             if (ZWaveCommandClass.CommandClass.getCommandClass(pair[1]) == null
-                                    && value.equals("info") == false) {
+                                    && "info".equals(value) == false) {
                                 logger.error("{}: Invalid command class '{}'", item.getName(), pair[1].toUpperCase());
                                 throw new BindingConfigParseException("Invalid command class " + pair[1].toUpperCase());
                             }

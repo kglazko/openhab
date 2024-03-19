@@ -106,7 +106,7 @@ public class AlarmDecoderGenericBindingProvider extends AbstractGenericBindingPr
         HashMap<String, String> params = new HashMap<String, String>();
         String[] parts = s_parseConfigString(item.getName(), bindingConfig, params);
         AlarmDecoderBindingConfig bc = null;
-        if (parts[0].equals("SEND")) {
+        if ("SEND".equals(parts[0])) {
             // binding for sending commands
             if (!(parts.length == 2)) {
                 throw new BindingConfigParseException("invalid SEND item config: " + bindingConfig);
@@ -164,7 +164,7 @@ public class AlarmDecoderGenericBindingProvider extends AbstractGenericBindingPr
         if (segments.length != 2) {
             throw new BindingConfigParseException("invalid item format: " + bindingConfig + ", " + shouldBe);
         }
-        if (segments[0].equals("SEND")) {
+        if ("SEND".equals(segments[0])) {
             String[] params = segments[1].split(",");
             s_parseParameters(itemName, params, 0, map);
             return (segments);
@@ -223,7 +223,7 @@ public class AlarmDecoderGenericBindingProvider extends AbstractGenericBindingPr
     static private boolean s_isValidAddress(ADMsgType type, String addr) {
         switch (type) {
             case KPM:
-                return (addr.matches("[0-9]+") || addr.equalsIgnoreCase("any"));
+                return (addr.matches("[0-9]+") || "any".equalsIgnoreCase(addr));
             case RFX:
                 return (addr.matches("[0-9]+")); // e.g. 0923844
             case EXP:

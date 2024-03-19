@@ -619,17 +619,17 @@ public class GetStationsDataResponse extends AbstractResponse {
             int high;
             int medium;
             int low;
-            if (this.type.equalsIgnoreCase(TYPE_MODULE_1)) {
+            if (TYPE_MODULE_1.equalsIgnoreCase(this.type)) {
                 full = BATTERY_MODULE_1_FULL;
                 high = BATTERY_MODULE_1_HIGH;
                 medium = BATTERY_MODULE_1_MEDIUM;
                 low = BATTERY_MODULE_1_LOW;
-            } else if (this.type.equalsIgnoreCase(TYPE_MODULE_2)) {
+            } else if (TYPE_MODULE_2.equalsIgnoreCase(this.type)) {
                 full = BATTERY_MODULE_2_FULL;
                 high = BATTERY_MODULE_2_HIGH;
                 medium = BATTERY_MODULE_2_MEDIUM;
                 low = BATTERY_MODULE_2_LOW;
-            } else if (this.type.equalsIgnoreCase(TYPE_MODULE_3)) {
+            } else if (TYPE_MODULE_3.equalsIgnoreCase(this.type)) {
                 full = BATTERY_MODULE_3_FULL;
                 high = BATTERY_MODULE_3_HIGH;
                 medium = BATTERY_MODULE_3_MEDIUM;
@@ -661,13 +661,13 @@ public class GetStationsDataResponse extends AbstractResponse {
         public int getBatteryPercentage() {
             int max;
             int min;
-            if (this.type.equalsIgnoreCase(TYPE_MODULE_1)) {
+            if (TYPE_MODULE_1.equalsIgnoreCase(this.type)) {
                 max = BATTERY_MODULE_1_RANGE_MAX;
                 min = BATTERY_MODULE_1_RANGE_MIN;
-            } else if (this.type.equalsIgnoreCase(TYPE_MODULE_2)) {
+            } else if (TYPE_MODULE_2.equalsIgnoreCase(this.type)) {
                 max = BATTERY_MODULE_2_RANGE_MAX;
                 min = BATTERY_MODULE_2_RANGE_MIN;
-            } else if (this.type.equalsIgnoreCase(TYPE_MODULE_3)) {
+            } else if (TYPE_MODULE_3.equalsIgnoreCase(this.type)) {
                 max = BATTERY_MODULE_3_RANGE_MAX;
                 min = BATTERY_MODULE_3_RANGE_MIN;
             } else {

@@ -89,8 +89,8 @@ public abstract class AbstractOneWireDevicePropertyBindingConfig implements OneW
         }
 
         // DeviceId and property must be filled
-        if (this.ivDeviceId == null || this.ivDeviceId.trim().equals("") || this.ivPropertyName == null
-                || this.ivPropertyName.trim().equals("")) {
+        if (this.ivDeviceId == null || "".equals(this.ivDeviceId.trim()) || this.ivPropertyName == null
+                || "".equals(this.ivPropertyName.trim())) {
             logger.error("deviceId and propertyName not set in config!");
             throw new BindingConfigParseException(
                     "Onewire sensor configuration must contain at least the deviceId and the propertyName");

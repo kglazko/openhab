@@ -59,10 +59,10 @@ public class S300THGenericBindingProvider extends AbstractGenericBindingProvider
             // to avoid beginner error
             keyValue[0] = keyValue[0].trim();
             keyValue[1] = keyValue[1].trim();
-            if (keyValue[0].equals("address")) {
+            if ("address".equals(keyValue[0])) {
                 config.address = keyValue[1];
             }
-            if (keyValue[0].equals("datapoint")) {
+            if ("datapoint".equals(keyValue[0])) {
                 config.datapoint = Datapoint.valueOf(keyValue[1]);
             }
         }

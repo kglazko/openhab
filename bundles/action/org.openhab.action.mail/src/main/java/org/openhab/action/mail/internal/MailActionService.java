@@ -68,11 +68,11 @@ public class MailActionService implements ActionService, ManagedService {
 
             String tlsString = (String) config.get("tls");
             if (StringUtils.isNotBlank(tlsString)) {
-                Mail.tls = tlsString.equalsIgnoreCase("true");
+                Mail.tls = "true".equalsIgnoreCase(tlsString);
             }
             String popBeforeSmtpString = (String) config.get("popbeforesmtp");
             if (StringUtils.isNotBlank(popBeforeSmtpString)) {
-                Mail.popBeforeSmtp = popBeforeSmtpString.equalsIgnoreCase("true");
+                Mail.popBeforeSmtp = "true".equalsIgnoreCase(popBeforeSmtpString);
             }
 
             Mail.charset = (String) config.get("charset");

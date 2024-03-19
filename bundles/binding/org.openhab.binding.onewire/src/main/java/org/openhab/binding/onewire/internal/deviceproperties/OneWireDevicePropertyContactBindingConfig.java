@@ -62,7 +62,7 @@ public class OneWireDevicePropertyContactBindingConfig extends AbstractOneWireDe
         Type lvType = UnDefType.UNDEF;
 
         if (pvReadValue != null) {
-            lvType = pvReadValue.trim().equals("1") ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
+            lvType = "1".equals(pvReadValue.trim()) ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
         }
 
         return lvType;

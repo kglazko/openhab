@@ -725,7 +725,7 @@ public class ConfigurationHandler {
     private void fillupConfig(OHTFDevice<?, ?> ohtfDevice, Map<String, String> deviceConfig)
             throws ConfigurationException {
         String uid = deviceConfig.get(ConfigKey.uid.name());
-        if (uid == null || uid.equals("")) {
+        if (uid == null || "".equals(uid)) {
             // das kommt hier gar nie an
             logger.error("===== uid missing");
             throw new ConfigurationException(deviceConfig.toString(),
@@ -780,19 +780,19 @@ public class ConfigurationHandler {
                                 feature.getEType().getInstanceClassName());
                         logger.debug("configuring feature: {} for uid {} subid {}", feature.getName(), uid, subid);
                         String className = feature.getEType().getInstanceClassName();
-                        if (className.equals("int") || className.equals("java.lang.Integer")) {
+                        if ("int".equals(className) || "java.lang.Integer".equals(className)) {
                             tfConfig.eSet(feature, Integer.parseInt(deviceConfig.get(property)));
-                        } else if (className.equals("short") || className.equals("java.lang.Short")) {
+                        } else if ("short".equals(className) || "java.lang.Short".equals(className)) {
                             tfConfig.eSet(feature, Short.parseShort(deviceConfig.get(property)));
-                        } else if (className.equals("long") || className.equals("java.lang.Long")) {
+                        } else if ("long".equals(className) || "java.lang.Long".equals(className)) {
                             tfConfig.eSet(feature, Long.parseLong(deviceConfig.get(property)));
-                        } else if (className.equals("boolean") || className.equals("java.lang.Boolean")) {
+                        } else if ("boolean".equals(className) || "java.lang.Boolean".equals(className)) {
                             logger.debug("{} found boolean value", LoggerConstants.CONFIG);
                             tfConfig.eSet(feature, Boolean.parseBoolean(deviceConfig.get(property)));
-                        } else if (className.equals("java.lang.String")) {
+                        } else if ("java.lang.String".equals(className)) {
                             logger.debug("{} found String value", LoggerConstants.CONFIG);
                             tfConfig.eSet(feature, deviceConfig.get(property));
-                        } else if (className.equals("java.math.BigDecimal")) {
+                        } else if ("java.math.BigDecimal".equals(className)) {
                             logger.debug("{} found BigDecimal value", LoggerConstants.CONFIG);
                             tfConfig.eSet(feature, new BigDecimal(deviceConfig.get(property)));
                             // } else if (feature.getEType().getInstanceClassName().equals("EList")){

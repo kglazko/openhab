@@ -181,7 +181,7 @@ public class FolderObserver extends Thread implements ManagedService {
 			Enumeration keys = config.keys();
 			while (keys.hasMoreElements()) {
 				String foldername = (String) keys.nextElement();
-				if(foldername.equals("service.pid")) continue;
+				if("service.pid".equals(foldername)) continue;
 				String[] values = ((String) config.get(foldername)).split(",");
 				try {
 					Integer refreshValue = Integer.valueOf(values[0]);

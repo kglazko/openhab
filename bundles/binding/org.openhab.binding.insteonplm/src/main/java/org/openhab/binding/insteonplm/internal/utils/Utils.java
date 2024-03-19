@@ -80,7 +80,7 @@ public class Utils {
         }
 
         public static byte s_parseByte(String val) {
-            if (val != null && !val.trim().equals("")) {
+            if (val != null && !"".equals(val.trim())) {
                 return (byte) Utils.from0xHexString(val.trim());
             } else {
                 return 0x00;
@@ -88,7 +88,7 @@ public class Utils {
         }
 
         public static int s_parseInt(String val) {
-            if (val != null && !val.trim().equals("")) {
+            if (val != null && !"".equals(val.trim())) {
                 return Integer.parseInt(val);
             } else {
                 return 0x00;
@@ -96,7 +96,7 @@ public class Utils {
         }
 
         public static float s_parseFloat(String val) {
-            if (val != null && !val.trim().equals("")) {
+            if (val != null && !"".equals(val.trim())) {
                 return Float.parseFloat(val.trim());
             } else {
                 return 0;
@@ -104,7 +104,7 @@ public class Utils {
         }
 
         public static InsteonAddress s_parseAddress(String val) {
-            if (val != null && !val.trim().equals("")) {
+            if (val != null && !"".equals(val.trim())) {
                 return InsteonAddress.s_parseAddress(val.trim());
             } else {
                 return new InsteonAddress();

@@ -130,7 +130,7 @@ public class JdbcConfiguration {
             matcher.reset();
             matcher.find();
 
-            if (!matcher.group(1).equals("sqltype")) {
+            if (!"sqltype".equals(matcher.group(1))) {
                 continue;
             }
 
@@ -246,19 +246,19 @@ public class JdbcConfiguration {
             String warn = ""
                     + "\n\n\t!!!\n\tTo avoid this error, place a appropriate JDBC driver file for serviceName '{}' in addons directory.\n"
                     + "\tCopy missing JDBC-Driver-jar to your OpenHab/addons Folder.\n\t!!!\n" + "\tDOWNLOAD: \n";
-            if (serviceName.equals("derby")) {
+            if ("derby".equals(serviceName)) {
                 warn += "\tDerby:     version >= 10.11.1.1 from          http://mvnrepository.com/artifact/org.apache.derby/derby\n";
-            } else if (serviceName.equals("h2")) {
+            } else if ("h2".equals(serviceName)) {
                 warn += "\tH2:        version >= 1.4.189 from            http://mvnrepository.com/artifact/com.h2database/h2\n";
-            } else if (serviceName.equals("hsqldb")) {
+            } else if ("hsqldb".equals(serviceName)) {
                 warn += "\tHSQLDB:    version >= 2.3.3 from              http://mvnrepository.com/artifact/org.hsqldb/hsqldb\n";
-            } else if (serviceName.equals("mariadb")) {
+            } else if ("mariadb".equals(serviceName)) {
                 warn += "\tMariaDB:   version >= 1.2.0 from              http://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client\n";
-            } else if (serviceName.equals("mysql")) {
+            } else if ("mysql".equals(serviceName)) {
                 warn += "\tMySQL:     version >= 5.1.36 from             http://mvnrepository.com/artifact/mysql/mysql-connector-java\n";
-            } else if (serviceName.equals("postgresql")) {
+            } else if ("postgresql".equals(serviceName)) {
                 warn += "\tPostgreSQL:version >= 9.4-1201-jdbc41 from    http://mvnrepository.com/artifact/org.postgresql/postgresql\n";
-            } else if (serviceName.equals("sqlite")) {
+            } else if ("sqlite".equals(serviceName)) {
                 warn += "\tSQLite:    version >= 3.8.11.2 from           http://mvnrepository.com/artifact/org.xerial/sqlite-jdbc\n";
             }
             logger.warn(warn, serviceName);

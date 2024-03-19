@@ -256,11 +256,11 @@ public class Enigma2Binding extends AbstractActiveBinding<Enigma2BindingProvider
                     }
 
                     String option = keyElements[1];
-                    if (option.equals("hostname")) {
+                    if ("hostname".equals(option)) {
                         node.setHostName((String) config.get(key));
-                    } else if (option.equals("username")) {
+                    } else if ("username".equals(option)) {
                         node.setUserName((String) config.get(key));
-                    } else if (option.equals("password")) {
+                    } else if ("password".equals(option)) {
                         node.setPassword((String) config.get(key));
                     }
 

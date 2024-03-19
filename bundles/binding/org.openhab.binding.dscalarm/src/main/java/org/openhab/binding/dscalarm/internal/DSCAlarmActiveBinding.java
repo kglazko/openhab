@@ -215,7 +215,7 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 						case PANEL:
 							switch (dscAlarmBindingConfig.getDSCAlarmItemType()) {
 								case PANEL_CONNECTION:
-									if(command.toString().equals("0")) {
+									if("0".equals(command.toString())) {
 										closeConnection();
 										if(!connected) {
 											dscAlarmItemUpdate.setConnected(false);
@@ -273,23 +273,23 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 							partitionId = dscAlarmBindingConfig.getPartitionId();
 							switch(dscAlarmBindingConfig.getDSCAlarmItemType()) {
 								case PARTITION_ARM_MODE:
-									if(command.toString().equals("0")) {
+									if("0".equals(command.toString())) {
 										if(api.sendCommand(APICode.PartitionDisarmControl, String.valueOf(partitionId))) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 0, "Partition Disarmed");
 										}
-									}else if(command.toString().equals("1")) {
+									}else if("1".equals(command.toString())) {
 										if(api.sendCommand(APICode.PartitionArmControlAway, String.valueOf(partitionId))) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 1, "Partition Armed (Away)");
 										}
-									}else if(command.toString().equals("2")) {
+									}else if("2".equals(command.toString())) {
 										if(api.sendCommand(APICode.PartitionArmControlStay, String.valueOf(partitionId))) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 2, "Partition Armed (Stay)");
 										}
-									}else if(command.toString().equals("3")) {
+									}else if("3".equals(command.toString())) {
 										if(api.sendCommand(APICode.PartitionArmControlZeroEntryDelay, String.valueOf(partitionId))) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 3, "Partition Armed (Zero Entry Delay)");
 										}
-									}else if(command.toString().equals("4")) {
+									}else if("4".equals(command.toString())) {
 										if(api.sendCommand(APICode.PartitionArmControlWithUserCode, String.valueOf(partitionId))) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 4, "Partition Armed (With User Code)");
 										}
@@ -307,12 +307,12 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 							zoneId = dscAlarmBindingConfig.getZoneId();
 							switch(dscAlarmBindingConfig.getDSCAlarmItemType()) {
 								case ZONE_BYPASS_MODE:
-									if(command.toString().equals("0")) {
+									if("0".equals(command.toString())) {
 										String data = String.valueOf(partitionId) + "*1" + String.format("%02d", zoneId) + "#";
 										if(api.sendCommand(APICode.KeySequence, data)) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 0, "Zone Armed");
 										}
-									}else if(command.toString().equals("1")) {
+									}else if("1".equals(command.toString())) {
 										String data = String.valueOf(partitionId) + "*1" + String.format("%02d", zoneId) + "#";
 										if(api.sendCommand(APICode.KeySequence, data)) {
 											dscAlarmItemUpdate.updateDeviceProperties(item, dscAlarmBindingConfig, 1, "Zone Bypassed");
@@ -334,7 +334,7 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 				else {
 					if(dscAlarmDeviceType == DSCAlarmDeviceType.PANEL) {
 						if(dscAlarmBindingConfig.getDSCAlarmItemType() == DSCAlarmItemType.PANEL_CONNECTION) {
-							if(command.toString().equals("1")) {
+							if("1".equals(command.toString())) {
 								if (api != null) {
 									openConnection();
 									if(connected){
@@ -379,9 +379,9 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 
 			String deviceType = null;
 			if(StringUtils.isNotBlank((String) config.get("deviceType"))) {
-				if(deviceType.equals("it100")) {
+				if("it100".equals(deviceType)) {
 					connectorType = DSCAlarmConnectorType.IT100;
-				} else if(deviceType.equals("envisalink")) {
+				} else if("envisalink".equals(deviceType)) {
 					connectorType = DSCAlarmConnectorType.ENVISALINK;
 				} else {
 					logger.error("updated(): Device type not configured correctly!");
@@ -965,7 +965,7 @@ public class DSCAlarmActiveBinding extends AbstractActiveBinding<DSCAlarmBinding
 		switch(apiCode) {
 			case CommandAcknowledge: /*500*/
 				dscAlarmItemUpdate.setConnected(true);
-				if(apiData.equals("000")) {
+				if("000".equals(apiData)) {
 					dscAlarmItemType = DSCAlarmItemType.PANEL_CONNECTION;
 				}
 

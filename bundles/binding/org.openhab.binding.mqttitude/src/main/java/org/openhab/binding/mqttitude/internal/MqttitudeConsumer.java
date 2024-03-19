@@ -118,7 +118,7 @@ public class MqttitudeConsumer implements MqttMessageConsumer {
         if (StringUtils.isEmpty(type)) {
             return;
         }
-        if (!type.equals("location") && !type.equals("transition")) {
+        if (!"location".equals(type) && !"transition".equals(type)) {
             return;
         }
 
@@ -187,7 +187,7 @@ public class MqttitudeConsumer implements MqttMessageConsumer {
                     continue;
                 }
 
-                if (event.equals("leave")) {
+                if ("leave".equals(event)) {
                     logger.debug("{} has left region {}", itemConfig.getItemName(), itemConfig.getRegion());
                     eventPublisher.postUpdate(itemConfig.getItemName(), OnOffType.OFF);
                 } else {

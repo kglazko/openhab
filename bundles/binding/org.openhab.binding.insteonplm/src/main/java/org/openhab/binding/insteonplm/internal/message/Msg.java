@@ -496,7 +496,7 @@ public class Msg {
             fields.add(f);
         }
         for (Field f : fields) {
-            if (f.getName().equals("messageFlags")) {
+            if ("messageFlags".equals(f.getName())) {
                 byte b;
                 try {
                     b = f.getByte(m_data);

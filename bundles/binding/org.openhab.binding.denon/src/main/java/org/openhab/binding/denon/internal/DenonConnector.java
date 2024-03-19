@@ -8,6 +8,9 @@
  */
 package org.openhab.binding.denon.internal;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
+import static io.github.pixee.security.XMLInputFactorySecurity.hardenFactory;
 import java.beans.Introspector;
 import java.io.IOException;
 import java.io.InputStream;
@@ -311,20 +314,20 @@ public class DenonConnector {
 
             logger.debug("Command: {}, value: {}", command, value);
 
-            if (value.equals("ON") || value.equals("OFF")) {
+            if ("ON".equals(value) || "OFF".equals(value)) {
                 sendUpdate(command, OnOffType.valueOf(value));
-            } else if (value.equals("STANDBY")) {
+            } else if ("STANDBY".equals(value)) {
                 sendUpdate(command, OnOffType.OFF);
             } else if (StringUtils.isNumeric(value)) {
                 PercentType percent = new PercentType(fromDenonValue(value));
                 command = translateVolumeCommand(command);
                 sendUpdate(command, percent);
-            } else if (command.equals("SI")) {
+            } else if ("SI".equals(command)) {
                 sendUpdate(DenonProperty.INPUT.getCode(), new StringType(value));
                 sendUpdate(commandString, OnOffType.ON);
-            } else if (command.equals("MS")) {
+            } else if ("MS".equals(command)) {
                 sendUpdate(DenonProperty.SURROUND_MODE.getCode(), new StringType(value));
-            } else if (command.equals("NS")) {
+            } else if ("NS".equals(command)) {
                 processTitleCommand(command, value);
             }
         } else {
@@ -559,7 +562,7 @@ public class DenonConnector {
 
             if (StringUtils.isNotBlank(result)) {
                 JAXBContext jc = JAXBContext.newInstance(response);
-                XMLInputFactory xif = XMLInputFactory.newInstance();
+                XMLInputFactory xif = hardenFactory(XMLInputFactory.newInstance());
                 XMLStreamReader xsr = xif.createXMLStreamReader(IOUtils.toInputStream(result));
                 xsr = new PropertyRenamerDelegate(xsr);
 
@@ -603,7 +606,7 @@ public class DenonConnector {
 
     private String doHttpRequest(String method, String uri, String request) {
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(uri).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             connection.setRequestMethod(method);
             connection.setConnectTimeout(REQUEST_TIMEOUT_MS);
             connection.setReadTimeout(REQUEST_TIMEOUT_MS);

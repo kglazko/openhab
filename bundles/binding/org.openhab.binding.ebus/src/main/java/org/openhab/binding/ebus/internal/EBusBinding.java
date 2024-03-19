@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.ebus.internal;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -182,11 +184,11 @@ public class EBusBinding extends AbstractBinding<EBusBindingProvider>
                 configurationUrl = null;
 
                 // check for keyword custom to load custom configuration
-                if (elem.trim().equals("custom")) {
+                if ("custom".equals(elem.trim())) {
                     String parserUrl = (String) properties.get("parserUrl");
                     if (parserUrl != null) {
                         logger.debug("Load custom eBus Parser with url {}", parserUrl);
-                        configurationUrl = new URL(parserUrl);
+                        configurationUrl = Urls.create(parserUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     }
 
                 } else {

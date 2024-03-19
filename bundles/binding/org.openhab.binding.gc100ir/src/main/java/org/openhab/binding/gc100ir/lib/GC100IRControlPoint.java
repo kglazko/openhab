@@ -351,7 +351,7 @@ public class GC100IRControlPoint implements IGC100IRControlPoint {
         }
 
         try {
-            if (deviceType.equals(DEVICE_TYPE_IR)) {
+            if (DEVICE_TYPE_IR.equals(deviceType)) {
                 Socket socket = tcpIPSocket.getSocket();
 
                 if (socket == null) {
@@ -474,7 +474,7 @@ public class GC100IRControlPoint implements IGC100IRControlPoint {
                 response = new StringBuilder();
             }
 
-            if (response.toString().equals(END_LIST_DEVICES)) {
+            if (END_LIST_DEVICES.equals(response.toString())) {
                 break;
             }
         }
@@ -517,7 +517,7 @@ public class GC100IRControlPoint implements IGC100IRControlPoint {
         Map<String, String> gcProps = new HashMap<String, String>();
 
         while (st.hasMoreTokens()) {
-            if (st.nextToken().equals("device")) {
+            if ("device".equals(st.nextToken())) {
                 int m = Integer.parseInt(st.nextToken());
                 gcProps.put("module", String.valueOf(m));
 

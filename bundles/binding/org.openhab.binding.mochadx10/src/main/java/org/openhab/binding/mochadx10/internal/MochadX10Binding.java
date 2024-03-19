@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.mochadx10.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -191,7 +192,7 @@ public class MochadX10Binding extends AbstractBinding<MochadX10BindingProvider>i
             while (!interrupted()) {
                 try {
                     // Blocking read, reading messages coming from Mochad X10 host
-                    msg = in.readLine();
+                    msg = BoundedLineReader.readLine(in, 5_000_000);
                     if (msg != null) {
                         processIncomingMessage(msg);
                     } else {
@@ -416,7 +417,7 @@ public class MochadX10Binding extends AbstractBinding<MochadX10BindingProvider>i
                     commandStr = "off";
                 } else {
                     long dim_value = 0;
-                    if (deviceConfig.getDimMethod().equals("xdim")) {
+                    if ("xdim".equals(deviceConfig.getDimMethod())) {
                         // 100% maps to value (XDIM_LEVELS - 1) so we need to do scaling
                         dim_value = Math.round(
                                 ((PercentType) command).doubleValue() * (MochadX10Command.XDIM_LEVELS - 1) / 100);
@@ -459,7 +460,7 @@ public class MochadX10Binding extends AbstractBinding<MochadX10BindingProvider>i
         }
 
         try {
-            if (!commandStr.equals("none")) {
+            if (!"none".equals(commandStr)) {
                 out.writeBytes(tm + " " + address + " " + commandStr + "\n");
                 logger.debug(tm + " " + address + " " + commandStr);
                 out.flush();

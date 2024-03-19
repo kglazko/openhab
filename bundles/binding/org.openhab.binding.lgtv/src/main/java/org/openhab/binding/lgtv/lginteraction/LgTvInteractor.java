@@ -8,6 +8,9 @@
  */
 package org.openhab.binding.lgtv.lginteraction;
 
+import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -503,7 +506,7 @@ public class LgTvInteractor implements LgtvEventListener {
         String serverAddressString = conf_tv_url + "/" + command;
 
         try {
-            serverAddress = new URL(serverAddressString);
+            serverAddress = Urls.create(serverAddressString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
             // set up out communications stuff
             connection = null;
@@ -519,14 +522,14 @@ public class LgTvInteractor implements LgtvEventListener {
             connection.setUseCaches(false);
             connection.setReadTimeout(10000);
 
-            if (typ.equals("POST")) {
+            if ("POST".equals(typ)) {
                 connection.setDoOutput(true);
             }
             connection.setDoInput(true);
             connection.setRequestMethod(typ);
             connection.connect();
 
-            if (typ.equals("POST")) {
+            if ("POST".equals(typ)) {
                 wr = new OutputStreamWriter(connection.getOutputStream());
                 wr.write(s);
                 wr.flush();
@@ -536,7 +539,7 @@ public class LgTvInteractor implements LgtvEventListener {
             rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             sb = new StringBuilder();
 
-            while ((line = rd.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(rd, 5_000_000)) != null) {
                 sb.append(line + '\n');
             }
 

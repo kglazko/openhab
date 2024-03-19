@@ -220,9 +220,9 @@ public class SnmpGenericBindingProvider extends AbstractGenericBindingProvider i
                     SnmpBindingConfigElement newElement = new SnmpBindingConfigElement();
                     newElement.address = GenericAddress.parse("udp:" + inMatcher.group(1).toString() + "/161");
                     String version = inMatcher.group(2).toString();
-                    if (version.equals("v3")) {
+                    if ("v3".equals(version)) {
                         newElement.snmpVersion = SnmpConstants.version3;
-                    } else if (version.equals("v2c")) {
+                    } else if ("v2c".equals(version)) {
                         newElement.snmpVersion = SnmpConstants.version2c;
                     } else {
                         newElement.snmpVersion = SnmpConstants.version1;
@@ -262,9 +262,9 @@ public class SnmpGenericBindingProvider extends AbstractGenericBindingProvider i
                     String commandAsString = outMatcher.group(1).toString();
                     newElement.address = GenericAddress.parse("udp:" + outMatcher.group(2).toString() + "/161");
                     String version = inMatcher.group(3).toString();
-                    if (version.equals("v3")) {
+                    if ("v3".equals(version)) {
                         newElement.snmpVersion = SnmpConstants.version3;
-                    } else if (version.equals("v2c")) {
+                    } else if ("v2c".equals(version)) {
                         newElement.snmpVersion = SnmpConstants.version2c;
                     } else {
                         newElement.snmpVersion = SnmpConstants.version1;

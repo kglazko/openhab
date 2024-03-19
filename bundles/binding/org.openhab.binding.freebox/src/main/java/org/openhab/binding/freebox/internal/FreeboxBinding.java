@@ -316,7 +316,7 @@ public class FreeboxBinding extends AbstractActiveBinding<FreeboxBindingProvider
             logger.info("LanConfig: " + e.getMessage());
             mode = null;
         }
-        if ((mode != null) && !mode.equalsIgnoreCase("bridge")) {
+        if ((mode != null) && !"bridge".equalsIgnoreCase(mode)) {
             // Only when Freebox Revolution is not in bridge mode
             try {
 

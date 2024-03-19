@@ -109,7 +109,7 @@ public class IRtransBinding extends AbstractSocketChannelBinding<IRtransBindingP
          * @return true, if successful
          */
         private boolean matchRemote(IrCommand S) {
-            if (remote.equals("*") || S.remote.equals("*")) {
+            if ("*".equals(remote) || "*".equals(S.remote)) {
                 return true;
             } else {
                 if (S.remote.equals(remote)) {
@@ -128,7 +128,7 @@ public class IRtransBinding extends AbstractSocketChannelBinding<IRtransBindingP
          * @return true, if successful
          */
         private boolean matchCommand(IrCommand S) {
-            if (command.equals("*") || S.command.equals("*")) {
+            if ("*".equals(command) || "*".equals(S.command)) {
                 return true;
             } else {
                 if (S.command.equals(command)) {

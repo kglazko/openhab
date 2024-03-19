@@ -433,7 +433,7 @@ public class NetatmoWeatherBinding {
             final Module module = moduleMap.get(moduleId);
 
             for (String measurement : entry.getValue()) {
-                if (measurement.equals(WIND)) {
+                if (WIND.equals(measurement)) {
                     measurement = NetatmoMeasureType.WINDSTRENGTH.toString().toLowerCase();
                 }
                 message.append("\t" + mainDeviceMap.get(moduleId) + "#" + moduleId + "#" + measurement + " ("

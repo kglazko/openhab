@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.ipx800.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -434,8 +435,8 @@ public class Ipx800DeviceConnector extends Thread {
                         throw new IOException("Max keep alive attempts has been reached");
                     }
                     try {
-                        command = in.readLine();
-                        if (command.equals("0") || command.equals("1")) {
+                        command = BoundedLineReader.readLine(in, 5_000_000);
+                        if ("0".equals(command) || "1".equals(command)) {
                             logger.trace("Keepalive response ok");
                         } else {
                             logger.debug("Receiving {}", command);

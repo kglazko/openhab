@@ -417,7 +417,7 @@ public class Stick extends PlugwiseDevice implements SerialPortEventListener {
                 String payload = matcher.group(4);
                 String CRC = matcher.group(5);
 
-                if (protocolHeader.equals(PROTOCOL_HEADER)) {
+                if (PROTOCOL_HEADER.equals(protocolHeader)) {
                     String calculatedCRC = getCRCFromString(command + sequence + payload);
                     if (calculatedCRC.equals(CRC)) {
 
@@ -516,7 +516,7 @@ public class Stick extends PlugwiseDevice implements SerialPortEventListener {
                             case CIRCLEPLUS:
                                 CirclePlus circlePlus11 = (CirclePlus) getDeviceByMAC(
                                         ((AcknowledgeMessage) message).getCirclePlusMAC());
-                                if (!((AcknowledgeMessage) message).getCirclePlusMAC().equals("")
+                                if (!"".equals(((AcknowledgeMessage) message).getCirclePlusMAC())
                                         && circlePlus11 == null) {
                                     circlePlus11 = new CirclePlus(((AcknowledgeMessage) message).getCirclePlusMAC(),
                                             this);
@@ -595,7 +595,7 @@ public class Stick extends PlugwiseDevice implements SerialPortEventListener {
 
                         CirclePlus circlePlus = (CirclePlus) getDeviceByMAC(
                                 ((InitialiseResponseMessage) message).getCirclePlusMAC());
-                        if (!((InitialiseResponseMessage) message).getCirclePlusMAC().equals("")
+                        if (!"".equals(((InitialiseResponseMessage) message).getCirclePlusMAC())
                                 && circlePlus == null) {
                             circlePlus = new CirclePlus(((InitialiseResponseMessage) message).getCirclePlusMAC(), this);
                             plugwiseDeviceCache.add(circlePlus);

@@ -92,7 +92,7 @@ public class LcnGenericBindingProvider extends AbstractGenericBindingProvider im
                 }
                 Command cmd = openHabCmd == null
                         ? TypeParser.parseCommand(new StringItem("").getAcceptedCommandTypes(), "")
-                        : openHabCmd.equals("%i") ? new StringType("%i")
+                        : "%i".equals(openHabCmd) ? new StringType("%i")
                                 : TypeParser.parseCommand(item.getAcceptedCommandTypes(), openHabCmd);
                 bc.add(new LcnBindingConfig.Mapping(cmd, connId, lcnShort));
             }

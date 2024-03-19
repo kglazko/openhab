@@ -158,7 +158,7 @@ public class MyStromEcoPowerBinding extends AbstractActiveBinding<MyStromEcoPowe
 
                     if (device != null) {
                         if (provider.getIsSwitch(itemName)) {
-                            State state = device.state.equals("on") ? OnOffType.ON : OnOffType.OFF;
+                            State state = "on".equals(device.state) ? OnOffType.ON : OnOffType.OFF;
                             eventPublisher.postUpdate(itemName, state);
                         }
 
@@ -205,7 +205,7 @@ public class MyStromEcoPowerBinding extends AbstractActiveBinding<MyStromEcoPowe
                             boolean onOff = OnOffType.ON.equals(command);
                             logger.debug("command '{}' transformed to '{}'", command, onOff ? "on" : "off");
 
-                            boolean actualState = this.mystromClient.getDeviceInfo(deviceId).state.equals("on");
+                            boolean actualState = "on".equals(this.mystromClient.getDeviceInfo(deviceId).state);
                             if (onOff == actualState) {
                                 // mystrom state is the same, may be due to
                                 // change state on/off too
@@ -354,7 +354,7 @@ public class MyStromEcoPowerBinding extends AbstractActiveBinding<MyStromEcoPowe
         for (MystromDevice mystromDevice : devices) {
             this.devicesMap.put(mystromDevice.name, mystromDevice.id);
 
-            if (mystromDevice.type.equals("mst")) {
+            if ("mst".equals(mystromDevice.type)) {
                 this.masterDevice = mystromDevice;
             }
 

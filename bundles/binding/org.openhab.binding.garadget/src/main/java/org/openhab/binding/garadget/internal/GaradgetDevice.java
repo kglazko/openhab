@@ -79,27 +79,27 @@ public class GaradgetDevice extends AbstractDevice {
             final String status = getVar(varName).toString();
             for (Class<? extends State> type : subscriber.getAcceptedDataTypes()) {
                 if (OpenClosedType.class == type) {
-                    if (status.equals("open")) {
+                    if ("open".equals(status)) {
                         return OpenClosedType.OPEN;
-                    } else if (status.equals("closed")) {
+                    } else if ("closed".equals(status)) {
                         return OpenClosedType.CLOSED;
                     }
                 } else if (UpDownType.class == type) {
-                    if (status.equals("open")) {
+                    if ("open".equals(status)) {
                         return UpDownType.UP;
-                    } else if (status.equals("closed")) {
+                    } else if ("closed".equals(status)) {
                         return UpDownType.DOWN;
                     }
                 } else if (OnOffType.class == type) {
-                    if (status.equals("open")) {
+                    if ("open".equals(status)) {
                         return OnOffType.ON;
-                    } else if (status.equals("closed")) {
+                    } else if ("closed".equals(status)) {
                         return OnOffType.OFF;
                     }
                 } else if (PercentType.class == type) {
-                    if (status.equals("open")) {
+                    if ("open".equals(status)) {
                         return PercentType.ZERO;
-                    } else if (status.equals("closed")) {
+                    } else if ("closed".equals(status)) {
                         return PercentType.HUNDRED;
                     } else {
                         return PercentType.valueOf("50");

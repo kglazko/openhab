@@ -30,13 +30,13 @@ public class PifaceBindingConfig implements BindingConfig {
         WATCHDOG;
 
         public static BindingType parse(String type) {
-            if (type.equals("IN")) {
+            if ("IN".equals(type)) {
                 return BindingType.IN;
             }
-            if (type.equals("OUT")) {
+            if ("OUT".equals(type)) {
                 return BindingType.OUT;
             }
-            if (type.equals("WATCHDOG")) {
+            if ("WATCHDOG".equals(type)) {
                 return BindingType.WATCHDOG;
             }
 

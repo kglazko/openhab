@@ -267,7 +267,7 @@ public abstract class MiosBindingConfig implements BindingConfig {
     private TransformationService getInTransformationService() {
         String name = getInTransformName();
 
-        if (name == null || name.equals("")) {
+        if (name == null || "".equals(name)) {
             return null;
         }
 
@@ -417,7 +417,7 @@ public abstract class MiosBindingConfig implements BindingConfig {
     private TransformationService getOutTransformationService() {
         String name = getOutTransformName();
 
-        if (name == null || name.equals("")) {
+        if (name == null || "".equals(name)) {
             return null;
         }
 

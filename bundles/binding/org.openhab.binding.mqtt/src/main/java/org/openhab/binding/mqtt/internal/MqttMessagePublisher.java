@@ -101,7 +101,7 @@ public class MqttMessagePublisher extends AbstractMqttMessagePubSub implements M
         if (getMessageType().equals(MessageType.COMMAND)) {
             return false;
         }
-        if (getTrigger().equals("*")) {
+        if ("*".equals(getTrigger())) {
             return true;
         }
 
@@ -119,7 +119,7 @@ public class MqttMessagePublisher extends AbstractMqttMessagePubSub implements M
         if (getMessageType().equals(MessageType.STATE)) {
             return false;
         }
-        if (getTrigger().equals("*")) {
+        if ("*".equals(getTrigger())) {
             return true;
         }
 

@@ -148,9 +148,9 @@ abstract class ProtocolGenericBindingProvider extends AbstractGenericBindingProv
                     protocolCommand = statusMatcher.group(4) != null ? statusMatcher.group(4) : statusMatcher.group(5);
                 }
 
-                if (direction.equals(">")) {
+                if (">".equals(direction)) {
                     directionType = Direction.OUT;
-                } else if (direction.equals("<")) {
+                } else if ("<".equals(direction)) {
                     directionType = Direction.IN;
                 }
 

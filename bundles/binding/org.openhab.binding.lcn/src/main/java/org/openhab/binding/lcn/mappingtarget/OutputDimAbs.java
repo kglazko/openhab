@@ -95,7 +95,7 @@ public class OutputDimAbs extends TargetWithLcnAddr {
                     case "ON":
                     case "OFF":
                         if ((matcher = PATTERN_ONOFF.matcher(header.getRestInput())).matches()) {
-                            int outputId = matcher.group("outputId").equalsIgnoreCase("ALL") ? -1
+                            int outputId = "ALL".equalsIgnoreCase(matcher.group("outputId")) ? -1
                                     : Integer.parseInt(matcher.group("outputId")) - 1;
                             double value = header.getCmd().equalsIgnoreCase("ON") ? 100 : 0;
                             double ramp = 0;
@@ -111,7 +111,7 @@ public class OutputDimAbs extends TargetWithLcnAddr {
                         break;
                     case "DIM":
                         if ((matcher = PATTERN_DIM.matcher(header.getRestInput())).matches()) {
-                            int outputId = matcher.group("outputId").equalsIgnoreCase("ALL") ? -1
+                            int outputId = "ALL".equalsIgnoreCase(matcher.group("outputId")) ? -1
                                     : Integer.parseInt(matcher.group("outputId")) - 1;
                             double value = NumberFormat.getInstance(Locale.GERMANY).parse(matcher.group("value"))
                                     .doubleValue();
@@ -125,7 +125,7 @@ public class OutputDimAbs extends TargetWithLcnAddr {
                             }
                             return new OutputDimAbs(header.getAddr(), outputId, value, (int) (ramp * 1000));
                         } else if ((matcher = PATTERN_DIMI.matcher(header.getRestInput())).matches()) {
-                            int outputId = matcher.group("outputId").equalsIgnoreCase("ALL") ? -1
+                            int outputId = "ALL".equalsIgnoreCase(matcher.group("outputId")) ? -1
                                     : Integer.parseInt(matcher.group("outputId")) - 1;
                             double ramp = 0;
                             if (matcher.group("ramp") != null) { // Optional

@@ -67,7 +67,7 @@ public class PebbleActionService implements ActionService {
             String[] parts = key.split("\\.");
             if (parts.length == 2) {
                 String name = parts[0].trim();
-                if (!StringUtils.isBlank(name) && !name.equals("component") && !name.equals("service")) {
+                if (!StringUtils.isBlank(name) && !"component".equals(name) && !"service".equals(name)) {
                     String property = parts[1].trim();
 
                     PebbleInstance instance = Pebble.getInstance(name);
@@ -75,7 +75,7 @@ public class PebbleActionService implements ActionService {
                         instance = new PebbleInstance(name);
                     }
 
-                    if (property.equals("token")) {
+                    if ("token".equals(property)) {
                         instance.setToken(value);
                     }
 

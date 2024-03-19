@@ -116,7 +116,7 @@ public class VarRel extends TargetWithLcnAddr {
                     case "SETPOINT_SUB": // "SETPOINT_REL" inverted
                         if ((matcher = PATTERN_SETPOINT_REL.matcher(header.getRestInput())).matches()) {
                             LcnDefs.RelVarRef targetLcnType = (matcher.group("ref") != null
-                                    && matcher.group("ref").equalsIgnoreCase("PROG")) ? RelVarRef.PROG
+                                    && "PROG".equalsIgnoreCase(matcher.group("ref"))) ? RelVarRef.PROG
                                             : RelVarRef.CURRENT;
                             double value = NumberFormat.getInstance(Locale.GERMANY).parse(matcher.group("value"))
                                     .doubleValue();
@@ -138,7 +138,7 @@ public class VarRel extends TargetWithLcnAddr {
                     case "THRESHOLD_SUB_OLD": // "THRESHOLD_REL_OLD" inverted
                         if ((matcher = PATTERN_THRS_REL.matcher(header.getRestInput())).matches()) {
                             LcnDefs.RelVarRef targetLcnType = (matcher.group("ref") != null
-                                    && matcher.group("ref").equalsIgnoreCase("PROG")) ? RelVarRef.PROG
+                                    && "PROG".equalsIgnoreCase(matcher.group("ref"))) ? RelVarRef.PROG
                                             : RelVarRef.CURRENT;
                             double value = NumberFormat.getInstance(Locale.GERMANY).parse(matcher.group("value"))
                                     .doubleValue();

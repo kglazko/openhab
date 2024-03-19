@@ -111,13 +111,13 @@ public class EBusJsonConfTool {
                         t = (String) map.get("type_hint");
                     }
 
-                    t = t.equalsIgnoreCase("bit") ? "Switch"
-                            : t.equalsIgnoreCase("script") ? "???" : t.equalsIgnoreCase("string") ? "Text" : "Number";
+                    t = "bit".equalsIgnoreCase(t) ? "Switch"
+                            : "script".equalsIgnoreCase(t) ? "???" : "string".equalsIgnoreCase(t) ? "Text" : "Number";
                     t = "``" + t + "``";
                     line.add(t);
 
                     t = (String) map.get("label");
-                    t = t == null || t.equals("") ? "" : t;
+                    t = t == null || "".equals(t) ? "" : t;
 
                     if (map.containsKey("mapping")) {
                         t += " - " + map.get("mapping").toString();

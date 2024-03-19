@@ -36,39 +36,39 @@ public class EBusCodecUtils {
         Number n = null;
         Number repVal = 0;
 
-        if (type.equals("data1b")) {
+        if ("data1b".equals(type)) {
             n = decodeDATA1b(data[0]);
             repVal = -128;
 
-        } else if (type.equals("data1c")) {
+        } else if ("data1c".equals(type)) {
             n = decodeDATA1c(data[0]);
             repVal = 255;
 
-        } else if (type.equals("data2b")) {
+        } else if ("data2b".equals(type)) {
             n = decodeDATA2b(data);
             repVal = -128;
 
-        } else if (type.equals("data2c")) {
+        } else if ("data2c".equals(type)) {
             n = decodeDATA2c(data);
             repVal = -2048;
 
-        } else if (type.equals("word") || type.equals("uint")) {
+        } else if ("word".equals(type) || "uint".equals(type)) {
             n = decodeWord(data);
             repVal = 65535;
 
-        } else if (type.equals("char")) {
+        } else if ("char".equals(type)) {
             n = encodeChar(data[0]);
             repVal = 255;
 
-        } else if (type.equals("int")) {
+        } else if ("int".equals(type)) {
             n = decodeInt(data);
             repVal = 32768;
 
-        } else if (type.equals("byte") || type.equals("uchar")) {
+        } else if ("byte".equals(type) || "uchar".equals(type)) {
             n = decodeUChar(data[0]);
             repVal = 255;
 
-        } else if (type.equals("bcd")) {
+        } else if ("bcd".equals(type)) {
             n = decodeBCD(data[0]);
             repVal = 255;
 
@@ -107,31 +107,31 @@ public class EBusCodecUtils {
 
             Number n = (Number) value;
 
-            if (type.equals("data1b")) {
+            if ("data1b".equals(type)) {
                 return new byte[] { encodeDATA1b(n.byteValue()) };
 
-            } else if (type.equals("data1c")) {
+            } else if ("data1c".equals(type)) {
                 return new byte[] { encodeDATA1c(n.floatValue()) };
 
-            } else if (type.equals("data2b")) {
+            } else if ("data2b".equals(type)) {
                 return encodeDATA2b(n.floatValue());
 
-            } else if (type.equals("data2c")) {
+            } else if ("data2c".equals(type)) {
                 return encodeDATA2c(n.floatValue());
 
-            } else if (type.equals("word") || type.equals("uint")) {
+            } else if ("word".equals(type) || "uint".equals(type)) {
                 return encodeWord(n.shortValue());
 
-            } else if (type.equals("int")) {
+            } else if ("int".equals(type)) {
                 return encodeInt(n.shortValue());
 
-            } else if (type.equals("byte") || type.equals("uchar")) {
+            } else if ("byte".equals(type) || "uchar".equals(type)) {
                 return new byte[] { encodeUChar(n.byteValue()) };
 
-            } else if (type.equals("char")) {
+            } else if ("char".equals(type)) {
                 return new byte[] { encodeChar(n.byteValue()) };
 
-            } else if (type.equals("bcd")) {
+            } else if ("bcd".equals(type)) {
                 return new byte[] { encodeBCD(n.byteValue()) };
             }
         }

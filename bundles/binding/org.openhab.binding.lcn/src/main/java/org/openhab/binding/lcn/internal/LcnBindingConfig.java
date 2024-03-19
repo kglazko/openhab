@@ -161,7 +161,7 @@ class LcnBindingConfig implements BindingConfig {
         for (Mapping mapping : this.mappings) {
             boolean ok = false;
             if (mapping.getOpenHabCmd() instanceof StringType) {
-                if (mapping.getOpenHabCmd().toString().equals("%i") && cmd instanceof DecimalType) {
+                if ("%i".equals(mapping.getOpenHabCmd().toString()) && cmd instanceof DecimalType) {
                     ok = true;
                 }
             }

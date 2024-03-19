@@ -393,7 +393,7 @@ public class EpsonProjectorDevice {
         response = response.replace("\r:", "");
         logger.debug("Response: '{}'", response);
 
-        if (response.equals("ERR")) {
+        if ("ERR".equals(response)) {
             throw new EpsonProjectorException("Error response received");
         }
 
@@ -417,7 +417,7 @@ public class EpsonProjectorDevice {
 
         String response = sendQuery(query, timeout);
 
-        if (response != null && !response.equals("")) {
+        if (response != null && !"".equals(response)) {
 
             try {
                 String[] pieces = response.split("=");

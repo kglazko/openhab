@@ -75,7 +75,7 @@ public class KoubachiGenericBindingProvider extends AbstractGenericBindingProvid
         if (configParts.length < 3 || configParts.length > 4) {
             throw new BindingConfigParseException(
                     "A Koubachi binding configuration for a property must consist of three or four parts - please verify your *.items file");
-        } else if (configParts[2].equals("action") && configParts.length != 4) {
+        } else if ("action".equals(configParts[2]) && configParts.length != 4) {
             throw new BindingConfigParseException(
                     "A Koubachi binding configuration for an action  must consist of four parts - please verify your *.items file");
         }

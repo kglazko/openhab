@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.wago.internal;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.URL;
@@ -95,8 +97,7 @@ public class FBCoupler {
 
     public void setup() {
         try {
-            URL url = new URL(
-                    "ftp://" + username + ":" + password + "@" + ip + ":" + ftpPort + "/etc/EA-config.xml;type=i");
+            URL url = Urls.create("ftp://" + username + ":" + password + "@" + ip + ":" + ftpPort + "/etc/EA-config.xml;type=i", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             URLConnection urlc = url.openConnection();
             InputStream is = urlc.getInputStream();
 
@@ -120,11 +121,11 @@ public class FBCoupler {
                 int DOOffset = DOStart;
                 // int IROffset = IRStart;
                 int OROffset = ORStart;
-                if (type.equals("DO")) {
+                if ("DO".equals(type)) {
                     modules[i] = new DOModule(article, DOOffset, channelcount);
                     DOOffset += channelcount;
-                } else if (type.equals("COMPLEX")) {
-                    if (article.equals("750-511/000-000")) { // PWM-Module
+                } else if ("COMPLEX".equals(type)) {
+                    if ("750-511/000-000".equals(article)) { // PWM-Module
                         modules[i] = new PWMModule(article, OROffset);
                         OROffset += 4; // 4 registers for 2 outputs
                     }

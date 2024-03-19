@@ -409,13 +409,13 @@ public class XbmcConnector {
     public void applicationSetVolume(String volume) {
         final ApplicationSetVolume applicationsetvolume = new ApplicationSetVolume(client, httpUri);
 
-        if (volume.equals("ON")) {
+        if ("ON".equals(volume)) {
             this.volume = new BigDecimal(100);
-        } else if (volume.equals("OFF")) {
+        } else if ("OFF".equals(volume)) {
             this.volume = new BigDecimal(0);
-        } else if (volume.equals("DECREASE")) {
+        } else if ("DECREASE".equals(volume)) {
             this.volume = this.volume.subtract(VOLUMESTEP);
-        } else if (volume.equals("INCREASE")) {
+        } else if ("INCREASE".equals(volume)) {
             this.volume = this.volume.add(VOLUMESTEP);
         } else {
             try {
@@ -592,7 +592,7 @@ public class XbmcConnector {
                     // now update each of the openHAB items for each property
                     for (String property : properties) {
                         String value = item.getPropertyValue(property);
-                        if (property.equals("Player.Fanart")) {
+                        if ("Player.Fanart".equals(property)) {
                             updateFanartUrl(property, value);
                         } else {
                             updateProperty(property, value);
@@ -676,9 +676,9 @@ public class XbmcConnector {
             for (String property : watches.values()) {
                 if (properties.contains(property)) {
                     continue;
-                } else if (property.equals("Player.Label")) {
+                } else if ("Player.Label".equals(property)) {
                     properties.add(property);
-                } else if (property.equals("Player.Title")) {
+                } else if ("Player.Title".equals(property)) {
                     properties.add(property);
                 }
             }
@@ -687,7 +687,7 @@ public class XbmcConnector {
                 if (!property.startsWith("Player.")) {
                     continue;
                 }
-                if (property.equals("Player.State")) {
+                if ("Player.State".equals(property)) {
                     continue;
                 }
                 if (properties.contains(property)) {

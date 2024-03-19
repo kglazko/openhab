@@ -117,7 +117,7 @@ public class CirclePlus extends Circle {
             switch (message.getType()) {
                 case DEVICE_ROLECALL_RESPONSE:
                     if (((RoleCallResponseMessage) message).getNodeID() < 63
-                            && !((RoleCallResponseMessage) message).getNodeMAC().equals("FFFFFFFFFFFFFFFF")) {
+                            && !"FFFFFFFFFFFFFFFF".equals(((RoleCallResponseMessage) message).getNodeMAC())) {
                         // add e new node
                         Circle newCircle1 = (Circle) stick
                                 .getDeviceByMAC(((RoleCallResponseMessage) message).getNodeMAC());

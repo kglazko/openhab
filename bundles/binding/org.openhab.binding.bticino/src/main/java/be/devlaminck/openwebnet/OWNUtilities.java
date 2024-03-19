@@ -56,7 +56,7 @@ public class OWNUtilities {
 
     public static String convertTemperature(String temperature) {
         String temp = "";
-        if (!temperature.substring(0, 1).equalsIgnoreCase("0")) {
+        if (!"0".equalsIgnoreCase(temperature.substring(0, 1))) {
             temp += "-";
         }
         temp += temperature.substring(1, 3);

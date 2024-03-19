@@ -206,7 +206,7 @@ class SonosZonePlayer {
             // or are things we want to store for further reference
 
             for (String stateVariable : values.keySet()) {
-                if (stateVariable.equals("LastChange") && service.getServiceType().getType().equals("AVTransport")) {
+                if ("LastChange".equals(stateVariable) && service.getServiceType().getType().equals("AVTransport")) {
                     try {
                         parsedValues = SonosXMLParser.getAVTransportFromXML(values.get(stateVariable).toString());
                         for (String someValue : parsedValues.keySet()) {
@@ -220,7 +220,7 @@ class SonosZonePlayer {
                                 values.get(stateVariable).toString());
                     }
 
-                } else if (stateVariable.equals("LastChange")
+                } else if ("LastChange".equals(stateVariable)
                         && service.getServiceType().getType().equals("RenderingControl")) {
                     try {
                         parsedValues = SonosXMLParser.getRenderingControlFromXML(values.get(stateVariable).toString());
@@ -383,7 +383,7 @@ class SonosZonePlayer {
                  * If this is a playlist we need to treat it as such
                  */
                 if (theEntry.getResourceMetaData() != null
-                        && theEntry.getResourceMetaData().getUpnpClass().equals("object.container.playlistContainer")) {
+                        && "object.container.playlistContainer".equals(theEntry.getResourceMetaData().getUpnpClass())) {
                     coordinator.removeAllTracksFromQueue();
                     coordinator.addURIToQueue(theEntry);
                     coordinator.setCurrentURI("x-rincon-queue:" + udn.getIdentifierString() + "#0", "");
@@ -600,11 +600,11 @@ class SonosZonePlayer {
             try {
                 invocation.setInput("Channel", "Master");
 
-                if (string.equals("ON") || string.equals("OPEN") || string.equals("UP")) {
+                if ("ON".equals(string) || "OPEN".equals(string) || "UP".equals(string)) {
                     invocation.setInput("DesiredMute", "True");
                 } else
 
-                if (string.equals("OFF") || string.equals("CLOSED") || string.equals("DOWN")) {
+                if ("OFF".equals(string) || "CLOSED".equals(string) || "DOWN".equals(string)) {
                     invocation.setInput("DesiredMute", "False");
                 } else {
                     return false;
@@ -644,15 +644,15 @@ class SonosZonePlayer {
 
             try {
                 String newValue = value;
-                if (value.equals("INCREASE")) {
+                if ("INCREASE".equals(value)) {
                     int i = Integer.valueOf(this.getVolume());
                     newValue = String.valueOf(Math.min(100, i + 1));
-                } else if (value.equals("DECREASE")) {
+                } else if ("DECREASE".equals(value)) {
                     int i = Integer.valueOf(this.getVolume());
                     newValue = String.valueOf(Math.max(0, i - 1));
-                } else if (value.equals("ON")) {
+                } else if ("ON".equals(value)) {
                     newValue = "100";
-                } else if (value.equals("OFF")) {
+                } else if ("OFF".equals(value)) {
                     newValue = "0";
                 } else {
                     newValue = value;
@@ -848,11 +848,11 @@ class SonosZonePlayer {
             ActionInvocation invocation = new ActionInvocation(action);
 
             try {
-                if (string.equals("ON") || string.equals("OPEN") || string.equals("UP")) {
+                if ("ON".equals(string) || "OPEN".equals(string) || "UP".equals(string)) {
                     invocation.setInput("DesiredLEDState", "On");
                 } else
 
-                if (string.equals("OFF") || string.equals("CLOSED") || string.equals("DOWN")) {
+                if ("OFF".equals(string) || "CLOSED".equals(string) || "DOWN".equals(string)) {
                     invocation.setInput("DesiredLEDState", "Off");
                 } else {
                     return false;
@@ -1232,7 +1232,7 @@ class SonosZonePlayer {
                             artist = " ";
                             resultString = title;
                         } else if (!currentTrack.getResource().contains("x-sonosapi-stream")) {
-                            if (currentTrack.getAlbumArtist().equals("")) {
+                            if ("".equals(currentTrack.getAlbumArtist())) {
                                 resultString = currentTrack.getCreator() + " - " + currentTrack.getAlbum() + " - "
                                         + currentTrack.getTitle();
                                 artist = currentTrack.getCreator();
@@ -1245,11 +1245,11 @@ class SonosZonePlayer {
                             album = currentTrack.getAlbum();
                             title = currentTrack.getTitle();
 
-                            if (album.equals("")) {
+                            if ("".equals(album)) {
                                 album = " ";
                             }
 
-                            if (artist.equals("")) {
+                            if ("".equals(artist)) {
                                 artist = " ";
                             }
                         }
@@ -1599,11 +1599,11 @@ class SonosZonePlayer {
     }
 
     public boolean setAlarm(String alarmSwitch) {
-        if (alarmSwitch.equals("ON") || alarmSwitch.equals("OPEN") || alarmSwitch.equals("UP")) {
+        if ("ON".equals(alarmSwitch) || "OPEN".equals(alarmSwitch) || "UP".equals(alarmSwitch)) {
             return setAlarm(true);
         } else
 
-        if (alarmSwitch.equals("OFF") || alarmSwitch.equals("CLOSED") || alarmSwitch.equals("DOWN")) {
+        if ("OFF".equals(alarmSwitch) || "CLOSED".equals(alarmSwitch) || "DOWN".equals(alarmSwitch)) {
             return setAlarm(false);
         } else {
             return false;
@@ -1974,11 +1974,11 @@ class SonosZonePlayer {
                             setPosition(savedState.relTime);
                         }
 
-                        if (savedState.transportState.equals("PLAYING")) {
+                        if ("PLAYING".equals(savedState.transportState)) {
                             play();
-                        } else if (savedState.transportState.equals("STOPPED")) {
+                        } else if ("STOPPED".equals(savedState.transportState)) {
                             stop();
-                        } else if (savedState.transportState.equals("PAUSED_PLAYBACK")) {
+                        } else if ("PAUSED_PLAYBACK".equals(savedState.transportState)) {
                             pause();
                         }
                     }

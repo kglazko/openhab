@@ -299,13 +299,13 @@ public class MyOHClient {
             exchange.setURI(requestUri);
             exchange.setRequestHeaders(requestHeadersJson);
             exchange.setRequestHeader("X-Forwarded-Proto", "https");
-            if (requestMethod.equals("GET")) {
+            if ("GET".equals(requestMethod)) {
                 exchange.setMethod("GET");
-            } else if (requestMethod.equals("POST")) {
+            } else if ("POST".equals(requestMethod)) {
                 exchange.setMethod("POST");
                 Buffer requestContent = new ByteArrayBuffer(requestBody);
                 exchange.setRequestContent(requestContent);
-            } else if (requestMethod.equals("PUT")) {
+            } else if ("PUT".equals(requestMethod)) {
                 exchange.setMethod("PUT");
                 Buffer requestContent = new ByteArrayBuffer(requestBody);
                 exchange.setRequestContent(requestContent);
@@ -557,7 +557,7 @@ public class MyOHClient {
                 try {
                     headerValue = requestHeadersJson.getString(headerName);
                     logger.debug("Jetty set header " + headerName + " = " + headerValue);
-                    if (!headerName.equalsIgnoreCase("Content-Length")) {
+                    if (!"Content-Length".equalsIgnoreCase(headerName)) {
                         this.setRequestHeader(headerName, headerValue);
                     }
                 } catch (JSONException e) {

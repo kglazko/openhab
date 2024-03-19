@@ -239,19 +239,19 @@ public class BluetoothBinding implements BluetoothEventHandler, BindingConfigRea
             entry.put(bindingConfig, item.getName());
             switchItems.put(context, entry);
         } else if (item instanceof StringItem) {
-            if (bindingConfig.equals("!")) {
+            if ("!".equals(bindingConfig)) {
                 authStringItems.put(context, item.getName());
-            } else if (bindingConfig.equals("?")) {
+            } else if ("?".equals(bindingConfig)) {
                 unauthStringItems.put(context, item.getName());
-            } else if (bindingConfig.equals("*")) {
+            } else if ("*".equals(bindingConfig)) {
                 allStringItems.put(context, item.getName());
             }
         } else if (item instanceof NumberItem) {
-            if (bindingConfig.equals("!")) {
+            if ("!".equals(bindingConfig)) {
                 authMeasurementItems.put(context, item.getName());
-            } else if (bindingConfig.equals("?")) {
+            } else if ("?".equals(bindingConfig)) {
                 unauthMeasurementItems.put(context, item.getName());
-            } else if (bindingConfig.equals("*")) {
+            } else if ("*".equals(bindingConfig)) {
                 allMeasurementItems.put(context, item.getName());
             }
         }

@@ -56,22 +56,22 @@ public class PowerBufferResponseMessage extends Message {
             MAC = matcher.group(1);
             datapoints = new Energy[4];
 
-            if (!matcher.group(2).equals("FFFFFFFF")) {
+            if (!"FFFFFFFF".equals(matcher.group(2))) {
                 datapoints[0] = new Energy(matcher.group(2), Long.parseLong(matcher.group(3), 16), 3600);
             } else {
                 datapoints[0] = null;
             }
-            if (!matcher.group(4).equals("FFFFFFFF")) {
+            if (!"FFFFFFFF".equals(matcher.group(4))) {
                 datapoints[1] = new Energy(matcher.group(2), Long.parseLong(matcher.group(5), 16), 3600);
             } else {
                 datapoints[1] = null;
             }
-            if (!matcher.group(6).equals("FFFFFFFF")) {
+            if (!"FFFFFFFF".equals(matcher.group(6))) {
                 datapoints[2] = new Energy(matcher.group(2), Long.parseLong(matcher.group(7), 16), 3600);
             } else {
                 datapoints[2] = null;
             }
-            if (!matcher.group(8).equals("FFFFFFFF")) {
+            if (!"FFFFFFFF".equals(matcher.group(8))) {
                 datapoints[3] = new Energy(matcher.group(2), Long.parseLong(matcher.group(9), 16), 3600);
             } else {
                 datapoints[3] = null;

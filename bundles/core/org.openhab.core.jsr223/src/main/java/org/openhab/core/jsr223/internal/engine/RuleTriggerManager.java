@@ -395,9 +395,9 @@ public class RuleTriggerManager {
 	private void createTimer(Rule rule, TimerTrigger trigger) throws SchedulerException {
 		String cronExpression = trigger.getCron();
 		if (cronExpression != null) {
-			if (cronExpression.equals("noon")) {
+			if ("noon".equals(cronExpression)) {
 				cronExpression = "0 0 12 * * ?";
-			} else if (cronExpression.equals("midnight")) {
+			} else if ("midnight".equals(cronExpression)) {
 				cronExpression = "0 0 0 * * ?";
 			}
 		} else {

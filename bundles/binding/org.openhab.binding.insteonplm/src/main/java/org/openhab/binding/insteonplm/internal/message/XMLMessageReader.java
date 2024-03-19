@@ -161,7 +161,7 @@ public class XMLMessageReader {
         for (Entry<Field, Object> e : values.entrySet()) {
             Field f = e.getKey();
             f.set(msg.getData(), e.getValue());
-            if (f.getName() != null && !f.getName().equals("")) {
+            if (f.getName() != null && !"".equals(f.getName())) {
                 msg.addField(f);
             }
         }

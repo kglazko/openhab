@@ -74,9 +74,9 @@ public class Circle extends PlugwiseDevice {
 
     public boolean setPowerState(String state) {
         if (state != null) {
-            if (state.equals("ON") || state.equals("OPEN") || state.equals("UP")) {
+            if ("ON".equals(state) || "OPEN".equals(state) || "UP".equals(state)) {
                 return setPowerState(true);
-            } else if (state.equals("OFF") || state.equals("CLOSED") || state.equals("DOWN")) {
+            } else if ("OFF".equals(state) || "CLOSED".equals(state) || "DOWN".equals(state)) {
                 return setPowerState(false);
             }
         }

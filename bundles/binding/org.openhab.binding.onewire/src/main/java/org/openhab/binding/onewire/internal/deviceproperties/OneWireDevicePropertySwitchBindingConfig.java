@@ -62,7 +62,7 @@ public class OneWireDevicePropertySwitchBindingConfig extends AbstractOneWireDev
         Type lvType = UnDefType.UNDEF;
 
         if (pvReadValue != null) {
-            lvType = pvReadValue.trim().equals("1") ? OnOffType.ON : OnOffType.OFF;
+            lvType = "1".equals(pvReadValue.trim()) ? OnOffType.ON : OnOffType.OFF;
         }
 
         return lvType;

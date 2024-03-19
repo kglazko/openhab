@@ -275,11 +275,11 @@ public class ModbusBinding extends AbstractActiveBinding<ModbusBindingProvider>i
 
                 ModbusSlave modbusSlave = modbusSlaves.get(slave);
                 if (modbusSlave == null) {
-                    if (matcher.group(1).equals(TCP_PREFIX)) {
+                    if (TCP_PREFIX.equals(matcher.group(1))) {
                         modbusSlave = new ModbusTcpSlave(slave);
-                    } else if (matcher.group(1).equals(UDP_PREFIX)) {
+                    } else if (UDP_PREFIX.equals(matcher.group(1))) {
                         modbusSlave = new ModbusUdpSlave(slave);
-                    } else if (matcher.group(1).equals(SERIAL_PREFIX)) {
+                    } else if (SERIAL_PREFIX.equals(matcher.group(1))) {
                         modbusSlave = new ModbusSerialSlave(slave);
                     } else {
                         throw new ConfigurationException(slave, "the given slave type '" + slave + "' is unknown");

@@ -89,9 +89,9 @@ public class AKM868GenericBindingProvider extends AbstractGenericBindingProvider
         for (String configElement : bindingConfigElements) {
             String assingment = "=";
             String assignments[] = configElement.split(assingment);
-            if (assignments[0].equalsIgnoreCase("id")) {
+            if ("id".equalsIgnoreCase(assignments[0])) {
                 id = assignments[1];
-            } else if (assignments[0].equalsIgnoreCase("channel")) {
+            } else if ("channel".equalsIgnoreCase(assignments[0])) {
                 channel = assignments[1];
             }
         }

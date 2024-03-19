@@ -130,7 +130,7 @@ public class FritzahaWebInterface {
         String response = createResponse(challenge);
         loginXml = HttpUtil.executeUrl("GET",
                 getURL("login_sid.lua",
-                        (!username.equals("") ? ("username=" + username + "&") : "") + "response=" + response),
+                        (!"".equals(username) ? ("username=" + username + "&") : "") + "response=" + response),
                 timeout);
         if (loginXml == null) {
             logger.error("FritzBox does not respond");

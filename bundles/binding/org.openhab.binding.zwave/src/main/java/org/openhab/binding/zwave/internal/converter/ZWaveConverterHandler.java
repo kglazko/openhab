@@ -197,7 +197,7 @@ public class ZWaveConverterHandler {
         if (commandClassName != null) {
 
             // this is a report item, handle it with the report info converter.
-            if (commandClassName.equalsIgnoreCase("info")) {
+            if ("info".equalsIgnoreCase(commandClassName)) {
                 infoConverter.executeRefresh(provider.getItem(itemName), node, bindingConfiguration.getEndpoint(),
                         bindingConfiguration.getArguments());
                 return;
@@ -295,11 +295,11 @@ public class ZWaveConverterHandler {
 
         if (commandClassName != null) {
             // this is a report item, handle it with the report info converter.
-            if (commandClassName.equalsIgnoreCase("info")) {
+            if ("info".equalsIgnoreCase(commandClassName)) {
                 return infoConverter.getRefreshInterval();
             }
 
-            if (node.getNodeId() == this.controller.getOwnNodeId() && commandClassName.equalsIgnoreCase("switch_all")) {
+            if (node.getNodeId() == this.controller.getOwnNodeId() && "switch_all".equalsIgnoreCase(commandClassName)) {
                 return 0;
             }
 
@@ -403,7 +403,7 @@ public class ZWaveConverterHandler {
 
         if (commandClassName != null) {
 
-            if (node.getNodeId() == this.controller.getOwnNodeId() && commandClassName.equalsIgnoreCase("switch_all")) {
+            if (node.getNodeId() == this.controller.getOwnNodeId() && "switch_all".equalsIgnoreCase(commandClassName)) {
                 commandClass = ZWaveCommandClass.getInstance(0x27, node, this.controller);
             } else {
                 commandClass = node.resolveCommandClass(CommandClass.getCommandClass(commandClassName),

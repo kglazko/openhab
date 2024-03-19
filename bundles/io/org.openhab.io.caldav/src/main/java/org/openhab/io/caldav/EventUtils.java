@@ -8,6 +8,7 @@
  */
 package org.openhab.io.caldav;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -56,7 +57,7 @@ public final class EventUtils {
             BufferedReader reader = new BufferedReader(new StringReader(event.getContent()));
 
             String line = null;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 Item item = itemIn;
                 line = line.trim();
 
@@ -96,7 +97,7 @@ public final class EventUtils {
                     continue;
                 }
 
-                if (line.substring(indexItemName + 1, indexItemName + 2).equals(":")) {
+                if (":".equals(line.substring(indexItemName + 1, indexItemName + 2))) {
                     log.error("invalid format for line: {}", line);
                 }
 

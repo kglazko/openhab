@@ -111,7 +111,7 @@ public class Enigma2Node {
     public String getOnOff() {
         String content = HttpUtil.executeUrl(GET, createUserPasswordHostnamePrefix() + SUFFIX_POWERSTATE, this.timeOut);
         content = XmlUtils.getContentOfElement(content, "e2instandby");
-        return content.equals("true") ? OnOffType.OFF.name() : OnOffType.ON.name();
+        return "true".equals(content) ? OnOffType.OFF.name() : OnOffType.ON.name();
     }
 
     /**
@@ -123,7 +123,7 @@ public class Enigma2Node {
     public String getMuteUnmute() {
         String content = HttpUtil.executeUrl(GET, createUserPasswordHostnamePrefix() + SUFFIX_VOLUME, this.timeOut);
         content = XmlUtils.getContentOfElement(content, "e2ismuted");
-        return content.toLowerCase().equals("True") ? OnOffType.ON.name() : OnOffType.OFF.name();
+        return "True".equals(content.toLowerCase()) ? OnOffType.ON.name() : OnOffType.OFF.name();
     }
 
     /**
@@ -135,7 +135,7 @@ public class Enigma2Node {
     public String getDownmix() {
         String content = HttpUtil.executeUrl(GET, createUserPasswordHostnamePrefix() + SUFFIX_DOWNMIX, this.timeOut);
         content = XmlUtils.getContentOfElement(content, "e2state");
-        return content.toLowerCase().equals("true") ? OnOffType.ON.name() : OnOffType.OFF.name();
+        return "true".equals(content.toLowerCase()) ? OnOffType.ON.name() : OnOffType.OFF.name();
     }
 
     /*

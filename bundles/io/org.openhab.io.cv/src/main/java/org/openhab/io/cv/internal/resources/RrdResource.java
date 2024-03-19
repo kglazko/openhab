@@ -140,7 +140,7 @@ public class RrdResource {
                     }
                 }
                 Object data = null;
-                if (persistenceService.getName().equals("rrd4j")) {
+                if ("rrd4j".equals(persistenceService.getName())) {
                     data = getRrdSeries(persistenceService, item, consilidationFunction, startTime, endTime,
                             resolution);
                 } else {

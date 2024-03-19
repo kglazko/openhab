@@ -130,11 +130,11 @@ public class XplGenericBindingProvider extends AbstractGenericBindingProvider im
         config.Message.setTarget(configParts[0]);
 
         // Parse type
-        if (configParts[1].equalsIgnoreCase("TRIGGER")) {
+        if ("TRIGGER".equalsIgnoreCase(configParts[1])) {
             config.Message.setType(xPL_MessageI.MessageType.TRIGGER);
-        } else if (configParts[1].equalsIgnoreCase("STATUS")) {
+        } else if ("STATUS".equalsIgnoreCase(configParts[1])) {
             config.Message.setType(xPL_MessageI.MessageType.STATUS);
-        } else if (configParts[1].equalsIgnoreCase("COMMAND")) {
+        } else if ("COMMAND".equalsIgnoreCase(configParts[1])) {
             config.Message.setType(xPL_MessageI.MessageType.COMMAND);
         } else {
             config.Message.setType(xPL_MessageI.MessageType.UNKNOWN);
@@ -152,7 +152,7 @@ public class XplGenericBindingProvider extends AbstractGenericBindingProvider im
             theName = configParts[pairPtr].substring(0, delimPtr);
             theValue = configParts[pairPtr].substring(delimPtr + 1);
             config.Message.addNamedValue(theName, theValue);
-            if (theValue.equalsIgnoreCase("#COMMAND") || theValue.equalsIgnoreCase("#CURRENT")) {
+            if ("#COMMAND".equalsIgnoreCase(theValue) || "#CURRENT".equalsIgnoreCase(theValue)) {
                 config.NamedParameter = new String(theName);
             }
         }

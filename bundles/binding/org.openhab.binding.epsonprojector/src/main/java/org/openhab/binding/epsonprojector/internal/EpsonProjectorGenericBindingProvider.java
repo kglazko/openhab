@@ -133,7 +133,7 @@ public class EpsonProjectorGenericBindingProvider extends AbstractGenericBinding
                         "Epson projector refresh interval must contain 1-2 parts separated by ','");
             }
 
-            if (refreshIntervalParts[0].trim().equals("ON")) {
+            if ("ON".equals(refreshIntervalParts[0].trim())) {
                 config.refreshInterval = Integer.valueOf(refreshIntervalParts[1].trim());
                 config.refreshOnlyWhenPowerOn = true;
                 return;

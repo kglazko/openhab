@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.fritzboxtr064.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.JobKey.jobKey;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -242,7 +243,7 @@ public class CallMonitor extends Thread {
                         logger.info("Connected to FritzBox on {}:{}", _ip, _port);
                         while (!_interrupted) {
                             try {
-                                String line = reader.readLine();
+                                String line = BoundedLineReader.readLine(reader, 5_000_000);
                                 if (line != null) {
                                     logger.debug("Received raw call string from fbox: {}", line);
                                     CallEvent ce = new CallEvent(line);
@@ -328,7 +329,7 @@ public class CallMonitor extends Thread {
                                 callerName);
                         externalInfo = ce.getExternalNo();
                     }
-                    if (ce.getCallType().equals("DISCONNECT")) {
+                    if ("DISCONNECT".equals(ce.getCallType())) {
                         // 1.12.05⌴12:00:10;DISCONNECT;0;5;
                         // reset states of callmonitor items to 0 for ALL items regardless of type
                         if (configString.startsWith("callmonitor_ringing")
@@ -336,19 +337,19 @@ public class CallMonitor extends Thread {
                                 || configString.startsWith("callmonitor_outgoing")) {
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.OFF : CallType.EMPTY;
                         }
-                    } else if (ce.getCallType().equals("RING")) { // first event when call is incoming
+                    } else if ("RING".equals(ce.getCallType())) { // first event when call is incoming
                         // 1.12.05⌴12:00:15;RING;0;5551234;5556789;SIP0;
                         if (configString.startsWith("callmonitor_ringing")) {
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON
                                     : new CallType(ce.getInternalNo(), externalInfo);
                         }
-                    } else if (ce.getCallType().equals("CONNECT")) { // when call is answered/running
+                    } else if ("CONNECT".equals(ce.getCallType())) { // when call is answered/running
                         // 1.12.05⌴12:00:05;CONNECT;0;0;0180537489269;
                         if (configString.startsWith("callmonitor_active")) { // only for "active" items
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON
                                     : new CallType(externalInfo, ce.getInternalNo());
                         }
-                    } else if (ce.getCallType().equals("CALL")) { // outgoing call
+                    } else if ("CALL".equals(ce.getCallType())) { // outgoing call
                         // 1.12.05⌴12:00:00;CALL;0;0;5557890;0180537489269;ISDN;
                         if (configString.startsWith("callmonitor_outgoing")) {
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON

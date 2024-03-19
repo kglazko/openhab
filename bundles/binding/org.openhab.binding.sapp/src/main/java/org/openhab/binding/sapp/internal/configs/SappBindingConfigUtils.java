@@ -34,11 +34,11 @@ public class SappBindingConfigUtils {
      */
     public static int maskWithSubAddress(String subAddress, int value) {
 
-        if (subAddress.equals(WORD_MASK_U) || subAddress.equals(WORD_MASK_S)) {
+        if (WORD_MASK_U.equals(subAddress) || WORD_MASK_S.equals(subAddress)) {
             return value & 0xFFFF;
-        } else if (subAddress.equals(LOW_MASK_U) || subAddress.equals(LOW_MASK_S)) {
+        } else if (LOW_MASK_U.equals(subAddress) || LOW_MASK_S.equals(subAddress)) {
             return (value & 0x00FF);
-        } else if (subAddress.equals(HIGH_MASK_U) || subAddress.equals(HIGH_MASK_S)) {
+        } else if (HIGH_MASK_U.equals(subAddress) || HIGH_MASK_S.equals(subAddress)) {
             return ((value >> 8) & 0x00FF);
         } else {
             int shift = Integer.parseInt(subAddress);
@@ -58,11 +58,11 @@ public class SappBindingConfigUtils {
      */
     public static int maskWithSubAddressAndSet(String subAddress, int newValue, int previousValue) {
 
-        if (subAddress.equals(WORD_MASK_U) || subAddress.equals(WORD_MASK_S)) {
+        if (WORD_MASK_U.equals(subAddress) || WORD_MASK_S.equals(subAddress)) {
             return newValue & 0xFFFF;
-        } else if (subAddress.equals(LOW_MASK_U) || subAddress.equals(LOW_MASK_S)) {
+        } else if (LOW_MASK_U.equals(subAddress) || LOW_MASK_S.equals(subAddress)) {
             return (newValue & 0x00FF) | (previousValue & 0xFF00);
-        } else if (subAddress.equals(HIGH_MASK_U) || subAddress.equals(HIGH_MASK_S)) {
+        } else if (HIGH_MASK_U.equals(subAddress) || HIGH_MASK_S.equals(subAddress)) {
             return ((newValue << 8) & 0xFF00) | (previousValue & 0x00FF);
         } else {
             int shift = Integer.parseInt(subAddress);

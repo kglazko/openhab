@@ -1036,7 +1036,7 @@ public class DigitalSTROMBinding extends AbstractActiveBinding<DigitalSTROMBindi
 
             String deviceCallStr = eventItem.getProperties().get(EventPropertyEnum.IS_DEVICE_CALL);
             if (deviceCallStr != null) {
-                isDeviceCall = deviceCallStr.equals("true");
+                isDeviceCall = "true".equals(deviceCallStr);
             }
 
             if (sceneId != -1) {

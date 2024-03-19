@@ -935,13 +935,13 @@ public class MBrickletRemoteSwitchImpl extends MinimalEObjectImpl.Container impl
     public void addSubDevice(String subId, String subDeviceType) {
         ModelFactory factory = ModelFactory.eINSTANCE;
         RemoteSwitch subDevice = null;
-        if (subDeviceType.equals("A")) {
+        if ("A".equals(subDeviceType)) {
             logger.debug("{} addSubDevice A for subId {}", LoggerConstants.TFINITSUB, subId);
             subDevice = factory.createRemoteSwitchA();
-        } else if (subDeviceType.equals("B")) {
+        } else if ("B".equals(subDeviceType)) {
             logger.debug("{} addSubDevice B for subId {}", LoggerConstants.TFINITSUB, subId);
             subDevice = factory.createRemoteSwitchB();
-        } else if (subDeviceType.equals("C")) {
+        } else if ("C".equals(subDeviceType)) {
             logger.debug("{} addSubDevice C for subId {}", LoggerConstants.TFINITSUB, subId);
             subDevice = factory.createRemoteSwitchC();
         } else {

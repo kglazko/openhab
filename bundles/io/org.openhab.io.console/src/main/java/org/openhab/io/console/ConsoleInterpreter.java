@@ -47,17 +47,17 @@ public class ConsoleInterpreter {
     static public void handleRequest(String[] args, Console console) {
         String arg = args[0];
         args = (String[]) ArrayUtils.remove(args, 0);
-        if (arg.equals("items")) {
+        if ("items".equals(arg)) {
             ConsoleInterpreter.handleItems(args, console);
-        } else if (arg.equals("send")) {
+        } else if ("send".equals(arg)) {
             ConsoleInterpreter.handleSend(args, console);
-        } else if (arg.equals("update")) {
+        } else if ("update".equals(arg)) {
             ConsoleInterpreter.handleUpdate(args, console);
-        } else if (arg.equals("status")) {
+        } else if ("status".equals(arg)) {
             ConsoleInterpreter.handleStatus(args, console);
-        } else if (arg.equals("say")) {
+        } else if ("say".equals(arg)) {
             ConsoleInterpreter.handleSay(args, console);
-        } else if (arg.equals(">")) {
+        } else if (">".equals(arg)) {
             ConsoleInterpreter.handleScript(args, console);
         } else {
             console.printUsage(getUsage());

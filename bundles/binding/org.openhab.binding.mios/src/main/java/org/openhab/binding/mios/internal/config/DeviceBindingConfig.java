@@ -406,7 +406,7 @@ public class DeviceBindingConfig extends MiosBindingConfig {
     private TransformationService getCommandTransformationService() {
         String name = getCommandTransformName();
 
-        if (name == null || name.equals("")) {
+        if (name == null || "".equals(name)) {
             return null;
         }
 

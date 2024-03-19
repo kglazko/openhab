@@ -108,7 +108,7 @@ class AnelUDPConnector {
             return Arrays.copyOfRange(packet.getData(), 0, packet.getLength() - 1);
 
         } catch (SocketException e) {
-            if (e.getMessage() != null && e.getMessage().equals("socket closed")) {
+            if (e.getMessage() != null && "socket closed".equals(e.getMessage())) {
                 return null; // happens during shutdown
             }
             throw new Exception(e);

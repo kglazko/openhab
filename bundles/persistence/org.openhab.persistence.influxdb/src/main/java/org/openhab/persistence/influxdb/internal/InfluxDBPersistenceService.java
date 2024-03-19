@@ -373,9 +373,9 @@ public class InfluxDBPersistenceService implements QueryablePersistenceService {
                         Integer valueColumn = null;
                         for (int i = 0; i < columns.size(); i++) {
                             String columnName = columns.get(i);
-                            if (columnName.equals(TIME_COLUMN_NAME)) {
+                            if (TIME_COLUMN_NAME.equals(columnName)) {
                                 timestampColumn = i;
-                            } else if (columnName.equals(VALUE_COLUMN_NAME)) {
+                            } else if (VALUE_COLUMN_NAME.equals(columnName)) {
                                 valueColumn = i;
                             }
                         }
@@ -511,7 +511,7 @@ public class InfluxDBPersistenceService implements QueryablePersistenceService {
                     return new PercentType(valueStr);
                 } else if (item instanceof SwitchItem) {
                     logger.debug("objectToState found a SwitchItem");
-                    return string2DigitalValue(valueStr).equals(DIGITAL_VALUE_OFF) ? OnOffType.OFF : OnOffType.ON;
+                    return DIGITAL_VALUE_OFF.equals(string2DigitalValue(valueStr)) ? OnOffType.OFF : OnOffType.ON;
                 } else if (item instanceof ContactItem) {
                     logger.debug("objectToState found a ContactItem");
                     return (string2DigitalValue(valueStr).equals(DIGITAL_VALUE_OFF)) ? OpenClosedType.CLOSED

@@ -335,13 +335,13 @@ public class APIMessage {
                         apiDescription = apiCodeReceived + ": Partition has been armed.";
                         partition = Integer.parseInt(apiMessage.substring(3, 4));
                         mode = apiMessage.substring(4);
-                        if (mode.equals("0")) {
+                        if ("0".equals(mode)) {
                             apiName += " (Away)";
-                        } else if (mode.equals("1")) {
+                        } else if ("1".equals(mode)) {
                             apiName += " (Stay)";
-                        } else if (mode.equals("2")) {
+                        } else if ("2".equals(mode)) {
                             apiName += " (ZEA)";
-                        } else if (mode.equals("3")) {
+                        } else if ("3".equals(mode)) {
                             apiName += " (ZES)";
                         }
                         apiMessageType = APIMessageType.PARTITION_EVENT;

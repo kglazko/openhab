@@ -73,7 +73,7 @@ public class OutputToggle extends TargetWithLcnAddr {
                 switch (header.getCmd().toUpperCase()) {
                     case "TOGGLE":
                         if ((matcher = PATTERN_TOGGLE.matcher(header.getRestInput())).matches()) {
-                            int outputId = matcher.group("outputId").equalsIgnoreCase("ALL") ? -1
+                            int outputId = "ALL".equalsIgnoreCase(matcher.group("outputId")) ? -1
                                     : Integer.parseInt(matcher.group("outputId")) - 1;
                             double ramp = 0;
                             if (matcher.group("ramp") != null) { // Optional

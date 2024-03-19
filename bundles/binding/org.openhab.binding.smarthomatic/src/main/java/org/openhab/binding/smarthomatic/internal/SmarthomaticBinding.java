@@ -222,7 +222,7 @@ public class SmarthomaticBinding extends AbstractActiveBinding<SmarthomaticBindi
                 String key = keys.nextElement();
                 StringTokenizer tokens = new StringTokenizer(key, ":");
 
-                if (tokens.nextToken().equals("device")) {
+                if ("device".equals(tokens.nextToken())) {
                     if (tokens.hasMoreElements()) {
                         dummy = tokens.nextToken();
                         int deviceID = Integer.parseInt(dummy);

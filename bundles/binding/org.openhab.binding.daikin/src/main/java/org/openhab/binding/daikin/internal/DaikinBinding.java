@@ -268,7 +268,7 @@ public class DaikinBinding extends AbstractActiveBinding<DaikinBindingProvider>i
                     continue;
                 }
 
-                if (key.equals(CONFIG_KEY_REFRESH)) {
+                if (CONFIG_KEY_REFRESH.equals(key)) {
                     refreshInterval = Long.parseLong(value);
                     continue;
                 }
@@ -280,10 +280,10 @@ public class DaikinBinding extends AbstractActiveBinding<DaikinBindingProvider>i
                     String connectionType = value.substring(0, index);
                     String host = value.substring(index + 1);
 
-                    if (connectionType.toUpperCase().equals("WIRELESS")) {
+                    if ("WIRELESS".equals(connectionType.toUpperCase())) {
                         IDaikin newHost = DaikinFactory.createWirelessDaikin(hostId, host, 0);
                         hosts.put(hostId, newHost);
-                    } else if (connectionType.toUpperCase().equals("WIRED")) {
+                    } else if ("WIRED".equals(connectionType.toUpperCase())) {
                         IDaikin newHost = DaikinFactory.createWiredDaikin(hostId, host, 0);
                         hosts.put(hostId, newHost);
                     } else {

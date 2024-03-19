@@ -178,10 +178,10 @@ public class FritzboxTr064Binding extends AbstractActiveBinding<FritzboxTr064Bin
                 if (itemType.isAssignableFrom(StringItem.class)) {
                     eventPublisher.postUpdate(itemName, new StringType(tr064result));
                 } else if (itemType.isAssignableFrom(ContactItem.class)) {
-                    State newState = tr064result.equals("1") ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
+                    State newState = "1".equals(tr064result) ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
                     eventPublisher.postUpdate(itemName, newState);
                 } else if (itemType.isAssignableFrom(SwitchItem.class)) {
-                    State newState = tr064result.equals("1") ? OnOffType.ON : OnOffType.OFF;
+                    State newState = "1".equals(tr064result) ? OnOffType.ON : OnOffType.OFF;
                     eventPublisher.postUpdate(itemName, newState);
                 } else if (itemType.isAssignableFrom(NumberItem.class)) { // number items e.g. TAM messages
                     // tr064 retrieves only Strings, trying to parse value returned

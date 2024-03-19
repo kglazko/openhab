@@ -123,7 +123,7 @@ public class ThermostatSummaryResponse extends ApiResponse {
 
             thermostatIdentifier = fields[0];
             thermostatName = fields[1];
-            connected = fields[2].equals("true");
+            connected = "true".equals(fields[2]);
             thermostatRevision = fields[3];
             alertsRevision = fields[4];
             runtimeRevision = fields[5];

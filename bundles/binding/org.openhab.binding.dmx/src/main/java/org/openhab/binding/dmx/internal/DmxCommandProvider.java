@@ -54,12 +54,12 @@ public class DmxCommandProvider implements CommandProvider {
 
             String cmd = intp.nextArgument();
 
-            if (cmd.equals("help")) {
+            if ("help".equals(cmd)) {
                 intp.println(getHelp());
                 return null;
             }
 
-            if (cmd.equals("status")) {
+            if ("status".equals(cmd)) {
                 DmxConnection conn = service.getConnection();
                 if (conn == null) {
                     intp.println("No dmx connection available.");
@@ -71,7 +71,7 @@ public class DmxCommandProvider implements CommandProvider {
                 return null;
             }
 
-            if (cmd.equals("mirror")) {
+            if ("mirror".equals(cmd)) {
                 String[] channels = intp.nextArgument().split(",");
                 int sourceChannel = Integer.parseInt(channels[0]);
                 for (int i = 1; i < channels.length; i++) {
@@ -83,16 +83,16 @@ public class DmxCommandProvider implements CommandProvider {
 
             int channelId = Integer.parseInt(intp.nextArgument());
 
-            if (cmd.equals("set")) {
+            if ("set".equals(cmd)) {
                 int value = Integer.parseInt(intp.nextArgument());
                 service.setChannelValue(channelId, value);
 
-            } else if (cmd.equals("get")) {
+            } else if ("get".equals(cmd)) {
 
                 int value = service.getChannelValue(channelId);
                 intp.println("Channel " + channelId + " = " + value);
 
-            } else if (cmd.equals("loop")) {
+            } else if ("loop".equals(cmd)) {
                 service.fadeChannel(channelId, 15000, 255, 15000, true);
                 service.fadeChannel(channelId, 15000, 0, 15000, false);
             } else {

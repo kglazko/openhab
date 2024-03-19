@@ -52,10 +52,10 @@ public class PlayerGetItem extends RpcCall {
     protected Map<String, Object> getParams() {
         List<String> paramProperties = new ArrayList<String>();
         for (String property : properties) {
-            if (property.equals("Player.Type")) {
+            if ("Player.Type".equals(property)) {
                 continue;
             }
-            if (property.equals("Player.Label")) {
+            if ("Player.Label".equals(property)) {
                 continue;
             }
             String paramProperty = getParamProperty(property);

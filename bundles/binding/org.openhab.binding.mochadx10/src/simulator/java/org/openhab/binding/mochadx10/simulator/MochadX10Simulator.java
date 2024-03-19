@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.mochadx10.simulator;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -113,7 +114,7 @@ public class MochadX10Simulator {
 			System.out.println("Receive Thread is started");
 			try {
 				while (!interrupted() && !stopThread) {
-					String incoming = in.readLine();
+					String incoming = BoundedLineReader.readLine(in, 5_000_000);
 					if (incoming != null) {
 						System.out.println("In: " + incoming);
 					}
@@ -175,9 +176,9 @@ public class MochadX10Simulator {
 
         connectToBinding();
         
-		while (!command.equals("exit")) {
-	        command = br.readLine();
-	        if (command.equals("break pipe")) {
+		while (!"exit".equals(command)) {
+	        command = BoundedLineReader.readLine(br, 5_000_000);
+	        if ("break pipe".equals(command)) {
 	        	disconnectFromBinding();
 	        	System.out.println("Broke pipe");
 	        	connectToBinding();

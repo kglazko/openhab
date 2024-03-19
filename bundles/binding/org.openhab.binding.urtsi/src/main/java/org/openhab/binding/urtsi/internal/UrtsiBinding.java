@@ -185,7 +185,7 @@ public class UrtsiBinding extends AbstractBinding<UrtsiBindingProvider>implement
                 logger.debug("Processing key '{}'", key);
                 // the config-key enumeration contains additional keys that we
                 // don't want to process here ...
-                if (!key.equals("service.pid") && !key.equals("component.name")) {
+                if (!"service.pid".equals(key) && !"component.name".equals(key)) {
 
                     Matcher matcher = EXTRACT_URTSI_CONFIG_PATTERN.matcher(key);
                     if (!matcher.matches()) {

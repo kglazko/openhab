@@ -133,7 +133,7 @@ public class WemoBinding extends AbstractActiveBinding<WemoBindingProvider>imple
 
                                 if (provider.getChannelType(itemName).equals(WemoChannelType.state)) {
                                     OnOffType binaryState = null;
-                                    binaryState = splitInsightParams[0].equals("0") ? OnOffType.OFF : OnOffType.ON;
+                                    binaryState = "0".equals(splitInsightParams[0]) ? OnOffType.OFF : OnOffType.ON;
                                     if (binaryState != null) {
                                         logger.trace("New InsightParam binaryState '{}' for device '{}' received",
                                                 binaryState, itemName);
@@ -261,10 +261,10 @@ public class WemoBinding extends AbstractActiveBinding<WemoBindingProvider>imple
 
                         if (state != null) {
                             if (provider.getUDN(itemName).toLowerCase().contains("motion")) {
-                                State newState = state.equals("0") ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
+                                State newState = "0".equals(state) ? OpenClosedType.OPEN : OpenClosedType.CLOSED;
                                 eventPublisher.postUpdate(itemName, newState);
                             } else {
-                                State itemState = state.equals("0") ? OnOffType.OFF : OnOffType.ON;
+                                State itemState = "0".equals(state) ? OnOffType.OFF : OnOffType.ON;
                                 eventPublisher.postUpdate(itemName, itemState);
                             }
                         }

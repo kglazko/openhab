@@ -116,15 +116,15 @@ public class MaxCulBindingConfigParser {
             throws BindingConfigParseException {
         cfg.setDeviceType(MaxCulDevice.UNKNOWN);
 
-        if (configPart.equals("RadiatorThermostat")) {
+        if ("RadiatorThermostat".equals(configPart)) {
             cfg.setDeviceType(MaxCulDevice.RADIATOR_THERMOSTAT);
-        } else if (configPart.equals("RadiatorThermostatPlus")) {
+        } else if ("RadiatorThermostatPlus".equals(configPart)) {
             cfg.setDeviceType(MaxCulDevice.RADIATOR_THERMOSTAT_PLUS);
-        } else if (configPart.equals("WallThermostat")) {
+        } else if ("WallThermostat".equals(configPart)) {
             cfg.setDeviceType(MaxCulDevice.WALL_THERMOSTAT);
-        } else if (configPart.equals("PushButton")) {
+        } else if ("PushButton".equals(configPart)) {
             cfg.setDeviceType(MaxCulDevice.PUSH_BUTTON);
-        } else if (configPart.equals("ShutterContact")) {
+        } else if ("ShutterContact".equals(configPart)) {
             cfg.setDeviceType(MaxCulDevice.SHUTTER_CONTACT);
         } else {
             throw new BindingConfigParseException(
@@ -137,7 +137,7 @@ public class MaxCulBindingConfigParser {
         String[] configPartArray = configParts.split("=");
         if (configPartArray.length == 2) {
             String configPart = configPartArray[1];
-            if (configPart.equals("thermostat")) {
+            if ("thermostat".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT
                         && cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT_PLUS
                         && cfg.getDeviceType() != MaxCulDevice.WALL_THERMOSTAT) {
@@ -146,7 +146,7 @@ public class MaxCulBindingConfigParser {
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.THERMOSTAT);
-            } else if (configPart.equals("temperature")) {
+            } else if ("temperature".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT
                         && cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT_PLUS
                         && cfg.getDeviceType() != MaxCulDevice.WALL_THERMOSTAT) {
@@ -155,16 +155,16 @@ public class MaxCulBindingConfigParser {
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.TEMPERATURE);
-            } else if (configPart.equals("battery")) {
+            } else if ("battery".equals(configPart)) {
                 cfg.setFeature(MaxCulFeature.BATTERY);
-            } else if (configPart.equals("displaySetting")) {
+            } else if ("displaySetting".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.WALL_THERMOSTAT) {
                     throw new BindingConfigParseException(
                             "Invalid device feature. Can only use 'displaySetting' on wall thermostats. This is a "
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.DISPLAYSETTING);
-            } else if (configPart.equals("mode")) {
+            } else if ("mode".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT
                         && cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT_PLUS
                         && cfg.getDeviceType() != MaxCulDevice.WALL_THERMOSTAT) {
@@ -173,21 +173,21 @@ public class MaxCulBindingConfigParser {
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.MODE);
-            } else if (configPart.equals("switch")) {
+            } else if ("switch".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.PUSH_BUTTON) {
                     throw new BindingConfigParseException(
                             "Invalid device feature. Can only use 'switch' on PushButton. This is a "
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.SWITCH);
-            } else if (configPart.equals("contact")) {
+            } else if ("contact".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.SHUTTER_CONTACT) {
                     throw new BindingConfigParseException(
                             "Invalid device feature. Can only use 'contact' on ShutterContact. This is a "
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.CONTACT);
-            } else if (configPart.equals("valvepos")) {
+            } else if ("valvepos".equals(configPart)) {
                 if (cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT
                         && cfg.getDeviceType() != MaxCulDevice.RADIATOR_THERMOSTAT_PLUS) {
                     throw new BindingConfigParseException(
@@ -195,7 +195,7 @@ public class MaxCulBindingConfigParser {
                                     + cfg.getDeviceType());
                 }
                 cfg.setFeature(MaxCulFeature.VALVE_POS);
-            } else if (configPart.equals("reset")) {
+            } else if ("reset".equals(configPart)) {
                 cfg.setFeature(MaxCulFeature.RESET);
             }
         }

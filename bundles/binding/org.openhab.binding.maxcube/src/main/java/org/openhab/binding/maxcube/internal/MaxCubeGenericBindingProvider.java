@@ -85,16 +85,16 @@ public class MaxCubeGenericBindingProvider extends AbstractGenericBindingProvide
 
         for (int i = 1; i < configParts.length; i++) {
             String[] bindingToken = configParts[i].split("=");
-            if (bindingToken[0].toLowerCase().equals("type")) {
-                if (bindingToken[1].toLowerCase().equals("valve")) {
+            if ("type".equals(bindingToken[0].toLowerCase())) {
+                if ("valve".equals(bindingToken[1].toLowerCase())) {
                     config.bindingType = BindingType.VALVE;
-                } else if (bindingToken[1].toLowerCase().equals("mode")) {
+                } else if ("mode".equals(bindingToken[1].toLowerCase())) {
                     config.bindingType = BindingType.MODE;
-                } else if (bindingToken[1].toLowerCase().equals("actual")) {
+                } else if ("actual".equals(bindingToken[1].toLowerCase())) {
                     config.bindingType = BindingType.ACTUAL;
-                } else if (bindingToken[1].toLowerCase().equals("battery")) {
+                } else if ("battery".equals(bindingToken[1].toLowerCase())) {
                     config.bindingType = BindingType.BATTERY;
-                } else if (bindingToken[1].toLowerCase().equals("connectionerror")) {
+                } else if ("connectionerror".equals(bindingToken[1].toLowerCase())) {
                     config.bindingType = BindingType.CONNECTION_ERROR;
                 }
             }

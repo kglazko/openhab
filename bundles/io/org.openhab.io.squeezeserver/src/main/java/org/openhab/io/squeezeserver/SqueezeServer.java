@@ -8,6 +8,7 @@
  */
 package org.openhab.io.squeezeserver;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -468,11 +469,11 @@ public class SqueezeServer implements ManagedService {
 
             if (serverMatcher.matches()) {
                 String serverConfig = serverMatcher.group(2);
-                if (serverConfig.equals("host") && StringUtils.isNotBlank(value)) {
+                if ("host".equals(serverConfig) && StringUtils.isNotBlank(value)) {
                     host = value;
-                } else if (serverConfig.equals("cliport") && StringUtils.isNotBlank(value)) {
+                } else if ("cliport".equals(serverConfig) && StringUtils.isNotBlank(value)) {
                     cliPort = Integer.valueOf(value);
-                } else if (serverConfig.equals("webport") && StringUtils.isNotBlank(value)) {
+                } else if ("webport".equals(serverConfig) && StringUtils.isNotBlank(value)) {
                     webPort = Integer.valueOf(value);
                 }
             } else if (playerMatcher.matches()) {
@@ -580,7 +581,7 @@ public class SqueezeServer implements ManagedService {
                 sendCommand("listen 1");
 
                 String message;
-                while (!terminate && (message = reader.readLine()) != null) {
+                while (!terminate && (message = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                     logger.debug("Message received: {}", message);
 
                     if (message.startsWith("listen 1")) {
@@ -679,22 +680,22 @@ public class SqueezeServer implements ManagedService {
             // get the message type
             String messageType = messageParts[1];
 
-            if (messageType.equals("status")) {
+            if ("status".equals(messageType)) {
                 handleStatusMessage(player, messageParts);
-            } else if (messageType.equals("playlist")) {
+            } else if ("playlist".equals(messageType)) {
                 handlePlaylistMessage(player, messageParts);
-            } else if (messageType.equals("prefset")) {
+            } else if ("prefset".equals(messageType)) {
                 handlePrefsetMessage(player, messageParts);
-            } else if (messageType.equals("ir")) {
+            } else if ("ir".equals(messageType)) {
                 player.setIrCode(messageParts[2]);
-            } else if (messageType.equals("power")) {
+            } else if ("power".equals(messageType)) {
                 // ignore these for now
                 // player.setPowered(messageParts[1].equals("1"));
-            } else if (messageType.equals("play") || messageType.equals("pause") || messageType.equals("stop")) {
+            } else if ("play".equals(messageType) || "pause".equals(messageType) || "stop".equals(messageType)) {
                 // ignore these for now
                 // player.setMode(Mode.valueOf(messageType));
             } else
-                if (messageType.equals("mixer") || messageType.equals("menustatus") || messageType.equals("button")) {
+                if ("mixer".equals(messageType) || "menustatus".equals(messageType) || "button".equals(messageType)) {
                 // ignore these for now
             } else {
                 logger.debug("Unhandled message type '{}'. Ignoring.", messageType);
@@ -794,11 +795,11 @@ public class SqueezeServer implements ManagedService {
         private void handlePlaylistMessage(SqueezePlayer player, String[] messageParts) {
             String action = messageParts[2];
 
-            if (action.equals("newsong")) {
+            if ("newsong".equals(action)) {
                 player.setMode(Mode.play);
-            } else if (action.equals("pause")) {
-                player.setMode(messageParts[3].equals("0") ? Mode.play : Mode.pause);
-            } else if (action.equals("stop")) {
+            } else if ("pause".equals(action)) {
+                player.setMode("0".equals(messageParts[3]) ? Mode.play : Mode.pause);
+            } else if ("stop".equals(action)) {
                 player.setMode(Mode.stop);
             }
         }
@@ -809,13 +810,13 @@ public class SqueezeServer implements ManagedService {
             }
 
             // server prefsets
-            if (messageParts[2].equals("server")) {
+            if ("server".equals(messageParts[2])) {
                 String function = messageParts[3];
                 String value = messageParts[4];
 
-                if (function.equals("power")) {
-                    player.setPowered(value.equals("1"));
-                } else if (function.equals("volume")) {
+                if ("power".equals(function)) {
+                    player.setPowered("1".equals(value));
+                } else if ("volume".equals(function)) {
                     player.setVolume(Integer.parseInt(value));
                 }
             }

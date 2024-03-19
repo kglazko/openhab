@@ -159,7 +159,7 @@ public class IRtransGenericBindingProvider extends AbstractGenericBindingProvide
                     irCommand = statusMatcher.group(5);
                 }
 
-                if (led.equals("*")) {
+                if ("*".equals(led)) {
                     ledType = Leds.ALL;
                 } else {
                     ledType = Leds.valueOf(led);

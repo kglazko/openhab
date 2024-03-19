@@ -124,9 +124,9 @@ public class OWServerGenericBindingProvider extends AbstractGenericBindingProvid
             String direction = matcher.group(1);
             String bindingConfigPart = matcher.group(2);
 
-            if (direction.equals("<")) {
+            if ("<".equals(direction)) {
                 config = parseInBindingConfig(item, bindingConfigPart, config);
-            } else if (direction.equals(">")) {
+            } else if (">".equals(direction)) {
                 // for future use
             } else {
                 throw new BindingConfigParseException(

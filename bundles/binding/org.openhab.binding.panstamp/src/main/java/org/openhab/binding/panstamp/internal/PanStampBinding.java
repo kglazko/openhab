@@ -172,7 +172,7 @@ public class PanStampBinding extends AbstractBinding<PanStampBindingProvider> {
                                             ep.getType(), PanStampConversions.toString(ep));
                             }
                             if (val != null) {
-                                if (!conf.getUnit().equals("")) {
+                                if (!"".equals(conf.getUnit())) {
                                     ep.setValue(conf.getUnit(), val);
                                 } else {
                                     ep.setValue(val);
@@ -450,7 +450,7 @@ public class PanStampBinding extends AbstractBinding<PanStampBindingProvider> {
         for (PanStampBindingConfig<?> conf : confs) {
             try {
                 State state;
-                if (!conf.getUnit().equals("")) {
+                if (!"".equals(conf.getUnit())) {
                     state = PanStampConversions.toState(ep, ep.getValue(conf.getUnit()));
                 } else {
                     state = PanStampConversions.toState(ep, ep.getValue());

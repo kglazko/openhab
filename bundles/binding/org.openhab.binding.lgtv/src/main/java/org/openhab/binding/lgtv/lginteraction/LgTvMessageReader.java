@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.lgtv.lginteraction;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -239,9 +240,9 @@ public class LgTvMessageReader extends HttpServlet {
 
         String devicename = req.getParameter("devicename");
         String value = req.getParameter("command");
-        if (value != null && !value.equals("")) {
+        if (value != null && !"".equals(value)) {
             res.setContentType("text/plain");
-            if (value.equals("geturl")) {
+            if ("geturl".equals(value)) {
 
                 if (bindingprovider != null && itemregistry != null) {
                     for (String itemName : bindingprovider.getItemNames()) {
@@ -253,7 +254,7 @@ public class LgTvMessageReader extends HttpServlet {
                             String deviceCmd = commandParts[1];
                             String deviceId = commandParts[0];
 
-                            if (deviceId.equals(devicename) && deviceCmd.equals("BROWSER_URL")) {
+                            if (deviceId.equals(devicename) && "BROWSER_URL".equals(deviceCmd)) {
                                 try {
                                     Item i = itemregistry.getItem(itemName);
                                     State state = i.getState();
@@ -328,7 +329,7 @@ public class LgTvMessageReader extends HttpServlet {
         rd = new BufferedReader(new InputStreamReader(req.getInputStream()));
         sb = new StringBuilder();
         String line;
-        while ((line = rd.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(rd, 5_000_000)) != null) {
             sb.append(line + '\n');
         }
 
@@ -367,7 +368,7 @@ public class LgTvMessageReader extends HttpServlet {
 
         String eventname = envel.getchannel().geteventname();
 
-        if (eventname.equals("ChannelChanged")) {
+        if ("ChannelChanged".equals(eventname)) {
 
             String name = "CHANNEL_CURRENTNAME=" + envel.getchannel().getchname();
             String number = "CHANNEL_CURRENTNUMBER=" + envel.getchannel().getmajor();
@@ -377,7 +378,7 @@ public class LgTvMessageReader extends HttpServlet {
             sendtohandlers(event, remoteaddr, number);
             sendtohandlers(event, remoteaddr, set);
 
-        } else if (eventname.equals("byebye")) {
+        } else if ("byebye".equals(eventname)) {
 
             sendtohandlers(event, remoteaddr, "BYEBYE_SEEN=1");
 

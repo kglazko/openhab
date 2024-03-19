@@ -98,7 +98,7 @@ public class PlugwiseBinding extends AbstractActiveBinding<PlugwiseBindingProvid
 
                 String plugwiseID = matcher.group(1);
 
-                if (plugwiseID.equals("stick")) {
+                if ("stick".equals(plugwiseID)) {
                     if (stick == null) {
 
                         String configKey = matcher.group(2);
@@ -147,7 +147,7 @@ public class PlugwiseBinding extends AbstractActiveBinding<PlugwiseBindingProvid
 
                     String plugwiseID = matcher.group(1);
 
-                    if (plugwiseID.equals("stick")) {
+                    if ("stick".equals(plugwiseID)) {
 
                         String configKey = matcher.group(2);
                         String value = (String) config.get(key);
@@ -168,7 +168,7 @@ public class PlugwiseBinding extends AbstractActiveBinding<PlugwiseBindingProvid
                     }
 
                     PlugwiseDevice device = stick.getDeviceByName(plugwiseID);
-                    if (device == null && !plugwiseID.equals("stick")) {
+                    if (device == null && !"stick".equals(plugwiseID)) {
 
                         String configKey = matcher.group(2);
                         String value = (String) config.get(key);
@@ -181,8 +181,8 @@ public class PlugwiseBinding extends AbstractActiveBinding<PlugwiseBindingProvid
                                     "the given configKey '" + configKey + "' is unknown");
                         }
 
-                        if (!MAC.equals("")) {
-                            if (plugwiseID.equals("circleplus")) {
+                        if (!"".equals(MAC)) {
+                            if ("circleplus".equals(plugwiseID)) {
                                 if (stick.getDeviceByMAC(MAC) == null) {
                                     device = new CirclePlus(MAC, stick);
                                     logger.info("Plugwise added Circle+ with MAC address: {}", MAC);

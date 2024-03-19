@@ -329,7 +329,7 @@ public class KNXConnection implements ManagedService {
 
             String readingIgnLocEv = (String) config.get("ignorelocalevents");
             if (StringUtils.isNotBlank(readingIgnLocEv)) {
-                sIgnoreLocalSourceEvents = readingIgnLocEv.equalsIgnoreCase("true");
+                sIgnoreLocalSourceEvents = "true".equalsIgnoreCase(readingIgnLocEv);
             }
 
             String connectionTypeString = (String) config.get("type");

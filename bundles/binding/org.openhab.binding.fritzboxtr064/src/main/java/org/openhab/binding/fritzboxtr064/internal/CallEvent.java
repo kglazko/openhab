@@ -124,14 +124,14 @@ public class CallEvent {
         this._timestamp = fields[0];
         this._callType = fields[1];
         this._id = fields[2];
-        if (this._callType.equals("RING")) {
+        if ("RING".equals(this._callType)) {
             this._externalNo = fields[3];
             this._internalNo = fields[4];
             this._connectionType = fields[5];
-        } else if (this._callType.equals("CONNECT")) {
+        } else if ("CONNECT".equals(this._callType)) {
             this._line = fields[3];
             this._externalNo = fields[4];
-        } else if (this._callType.equals("CALL")) {
+        } else if ("CALL".equals(this._callType)) {
             this._line = fields[3];
             this._internalNo = fields[4];
             this._externalNo = fields[5];

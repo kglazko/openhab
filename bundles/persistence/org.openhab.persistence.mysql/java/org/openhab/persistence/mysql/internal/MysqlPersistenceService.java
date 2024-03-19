@@ -137,7 +137,7 @@ public class MysqlPersistenceService implements QueryablePersistenceService {
             matcher.reset();
             matcher.find();
 
-            if (!matcher.group(1).equals("sqltype")) {
+            if (!"sqltype".equals(matcher.group(1))) {
                 continue;
             }
 

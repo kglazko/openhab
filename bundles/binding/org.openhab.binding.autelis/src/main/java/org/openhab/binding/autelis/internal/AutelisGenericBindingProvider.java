@@ -72,7 +72,7 @@ public class AutelisGenericBindingProvider extends AbstractGenericBindingProvide
     public void processBindingConfiguration(String context, Item item, String bindingConfig)
             throws BindingConfigParseException {
         // read values must contain a '.' like equipment.circuit1 or be lightcmd
-        if (bindingConfig.indexOf('.') < 0 && !bindingConfig.equalsIgnoreCase("lightscmd")) {
+        if (bindingConfig.indexOf('.') < 0 && !"lightscmd".equalsIgnoreCase(bindingConfig)) {
             logger.warn(
                     "Item {}'s configuration ({}) is not valid, please use the pattern 'parentType.childType' or lightscmd ",
                     item.getName(), bindingConfig);

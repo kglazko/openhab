@@ -147,12 +147,12 @@ public class OpenPathsBinding extends AbstractActiveBinding<OpenPathsBindingProv
 
                 String bindingLocationName = bindingParts.length > 1 ? bindingParts[1] : "";
                 if (bindingLocationName.startsWith("current")) {
-                    if (bindingLocationName.equals("currentLocation")) {
+                    if ("currentLocation".equals(bindingLocationName)) {
                         eventPublisher.postUpdate(itemName,
                                 new StringType("" + location.getLatitude() + ", " + location.getLongitude()));
-                    } else if (bindingLocationName.equals("currentLatitude")) {
+                    } else if ("currentLatitude".equals(bindingLocationName)) {
                         eventPublisher.postUpdate(itemName, new DecimalType(new BigDecimal(location.getLatitude())));
-                    } else if (bindingLocationName.equals("currentLongitude")) {
+                    } else if ("currentLongitude".equals(bindingLocationName)) {
                         eventPublisher.postUpdate(itemName, new DecimalType(new BigDecimal(location.getLongitude())));
                     } else {
                         logger.warn("unsupported Binding: " + bindingLocationName);
@@ -168,7 +168,7 @@ public class OpenPathsBinding extends AbstractActiveBinding<OpenPathsBindingProv
 
                 LocationBindingType bindingType = LocationBindingType.on;
                 if (bindingParts.length == 3) {
-                    if (bindingParts[2].equals("distance")) {
+                    if ("distance".equals(bindingParts[2])) {
                         bindingType = LocationBindingType.distance;
                     }
                 }
@@ -338,7 +338,7 @@ public class OpenPathsBinding extends AbstractActiveBinding<OpenPathsBindingProv
                             locations.put(name, loc);
                         }
                     }
-                } else if (key.endsWith("geofence") && !key.equals("geofence")) {
+                } else if (key.endsWith("geofence") && !"geofence".equals(key)) {
                     String[] keyParts = key.split("\\.");
                     if (keyParts.length != 2) {
                         throw new ConfigurationException(key, "Invalid OpenPaths user location geofence: " + key);
@@ -373,9 +373,9 @@ public class OpenPathsBinding extends AbstractActiveBinding<OpenPathsBindingProv
 
                     OpenPathsUser openPathsUser = openPathsUsers.get(name);
 
-                    if (configKey.equalsIgnoreCase("accesskey")) {
+                    if ("accesskey".equalsIgnoreCase(configKey)) {
                         openPathsUser.setAccessKey(value);
-                    } else if (configKey.equalsIgnoreCase("secretkey")) {
+                    } else if ("secretkey".equalsIgnoreCase(configKey)) {
                         openPathsUser.setSecretKey(value);
                     } else {
                         throw new ConfigurationException(key, "Unrecognised configuration parameter: " + configKey);

@@ -151,7 +151,7 @@ public class BenqProjectorBinding extends AbstractActiveBinding<BenqProjectorBin
             /* decide which transport to use - default is network */
             String modeString = (String) config.get("mode");
             if (StringUtils.isNotBlank(modeString)) {
-                if (modeString.equalsIgnoreCase("serial")) {
+                if ("serial".equalsIgnoreCase(modeString)) {
                     transport = new BenqProjectorSerialTransport();
                 } else {
                     /* default to network */

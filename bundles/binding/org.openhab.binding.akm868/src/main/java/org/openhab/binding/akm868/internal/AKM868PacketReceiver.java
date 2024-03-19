@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.akm868.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -85,7 +86,7 @@ public class AKM868PacketReceiver implements Runnable {
             try {
                 if (akmReader.ready()) {
                     logger.debug("Receiving data...");
-                    String line = akmReader.readLine();
+                    String line = BoundedLineReader.readLine(akmReader, 5_000_000);
                     logger.debug("Reading from socket: " + line);
                     String[] elements = line.split(deliminator);
                     if (elements.length > 5) {
@@ -95,18 +96,18 @@ public class AKM868PacketReceiver implements Runnable {
                     String action = elements[3];
                     String packetValid = elements[4];
 
-                    if (!packetValid.equalsIgnoreCase("OK")) {
+                    if (!"OK".equalsIgnoreCase(packetValid)) {
                         logger.debug("Packet not valid: " + line);
                         return;
                     }
 
-                    if (action.equals("1")) {
+                    if ("1".equals(action)) {
                         logger.debug("Found 1 => KeyPressedShort");
                         listener.publishKeyPressedShort(id);
 
                     }
 
-                    if (action.equals("5")) {
+                    if ("5".equals(action)) {
                         logger.debug("Found 5 => KeyPressedLong");
                         listener.publishKeyPressedLong(id);
 

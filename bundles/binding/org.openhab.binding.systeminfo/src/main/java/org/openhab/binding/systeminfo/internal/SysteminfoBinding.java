@@ -298,7 +298,7 @@ public class SysteminfoBinding extends AbstractActiveBinding<SysteminfoBindingPr
         ProcessFinder processFinder = new ProcessFinder(sigarImpl);
         String query;
 
-        if (processName.equals("$$")) {
+        if ("$$".equals(processName)) {
             pid = sigar.getPid();
             logger.debug("Return own pid {}", pid);
             return pid;

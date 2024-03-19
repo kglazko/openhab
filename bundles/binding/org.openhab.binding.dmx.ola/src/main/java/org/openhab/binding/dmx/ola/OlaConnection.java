@@ -80,7 +80,7 @@ public class OlaConnection implements DmxConnection {
     private void autoBind() {
 
         String autoBind = System.getProperty("net.opendmx.ola.autobind");
-        if (autoBind == null || !autoBind.equalsIgnoreCase("false")) {
+        if (autoBind == null || !"false".equalsIgnoreCase(autoBind)) {
             // bind default universe to all devices
             logger.info("Starting autobind for universe 0. To disable autobind use -Dnet.opendmx.ola.autobind=false");
             DeviceInfoReply devInfoReply = client.getDeviceInfo();

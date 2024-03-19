@@ -172,10 +172,10 @@ public class DenonBinding extends AbstractActiveBinding<DenonBindingProvider>imp
                     if (CONFIG_HOST.equals(option)) {
                         connection.setHost(value);
                     } else if (CONFIG_UPDATE_TYPE.equals(option)) {
-                        connection.setTelnet(value.equals(CONFIG_UPDATE_TYPE_TELNET));
-                        connection.setHttp(value.equals(CONFIG_UPDATE_TYPE_HTTP));
+                        connection.setTelnet(CONFIG_UPDATE_TYPE_TELNET.equals(value));
+                        connection.setHttp(CONFIG_UPDATE_TYPE_HTTP.equals(value));
 
-                        if (!value.equals(CONFIG_UPDATE_TYPE_TELNET) && !value.equals(CONFIG_UPDATE_TYPE_HTTP)) {
+                        if (!CONFIG_UPDATE_TYPE_TELNET.equals(value) && !CONFIG_UPDATE_TYPE_HTTP.equals(value)) {
                             logger.warn("Invalid connection type {} for instance {}, using default", value, instance);
                         }
                     }

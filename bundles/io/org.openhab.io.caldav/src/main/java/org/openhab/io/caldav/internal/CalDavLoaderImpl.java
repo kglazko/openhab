@@ -147,9 +147,9 @@ public class CalDavLoaderImpl extends AbstractActiveService implements ManagedSe
             while (iter.hasMoreElements()) {
                 String key = iter.nextElement();
                 log.trace("configuration parameter: " + key);
-                if (key.equals("service.pid")) {
+                if ("service.pid".equals(key)) {
                     continue;
-                } else if (key.equals(PROP_TIMEZONE)) {
+                } else if (PROP_TIMEZONE.equals(key)) {
                     log.debug("overriding default timezone {} with {}", defaultTimeZone, config.get(key));
                     defaultTimeZone = DateTimeZone.forID(config.get(key) + "");
                     if (defaultTimeZone == null) {
@@ -172,21 +172,21 @@ public class CalDavLoaderImpl extends AbstractActiveService implements ManagedSe
                 String value = config.get(key) + "";
 
                 calDavConfig.setKey(id);
-                if (paramKey.equals(PROP_USERNAME)) {
+                if (PROP_USERNAME.equals(paramKey)) {
                     calDavConfig.setUsername(value);
-                } else if (paramKey.equals(PROP_PASSWORD)) {
+                } else if (PROP_PASSWORD.equals(paramKey)) {
                     calDavConfig.setPassword(value);
-                } else if (paramKey.equals(PROP_URL)) {
+                } else if (PROP_URL.equals(paramKey)) {
                     calDavConfig.setUrl(value);
-                } else if (paramKey.equals(PROP_RELOAD_INTERVAL)) {
+                } else if (PROP_RELOAD_INTERVAL.equals(paramKey)) {
                     calDavConfig.setReloadMinutes(Integer.parseInt(value));
-                } else if (paramKey.equals(PROP_PRELOAD_TIME)) {
+                } else if (PROP_PRELOAD_TIME.equals(paramKey)) {
                     calDavConfig.setPreloadMinutes(Integer.parseInt(value));
-                } else if (paramKey.equals(PROP_HISTORIC_LOAD_TIME)) {
+                } else if (PROP_HISTORIC_LOAD_TIME.equals(paramKey)) {
                     calDavConfig.setHistoricLoadMinutes(Integer.parseInt(value));
-                } else if (paramKey.equals(PROP_LAST_MODIFIED_TIMESTAMP_VALID)) {
+                } else if (PROP_LAST_MODIFIED_TIMESTAMP_VALID.equals(paramKey)) {
                     calDavConfig.setLastModifiedFileTimeStampValid(BooleanUtils.toBoolean(value));
-                } else if (paramKey.equals(PROP_DISABLE_CERTIFICATE_VERIFICATION)) {
+                } else if (PROP_DISABLE_CERTIFICATE_VERIFICATION.equals(paramKey)) {
                     calDavConfig.setDisableCertificateVerification(BooleanUtils.toBoolean(value));
                 }
             }

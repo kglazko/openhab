@@ -44,11 +44,11 @@ public class Xpl {
         theMessage.setTarget(targetIdentifier);
 
         // Parse type
-        if (msgType.equalsIgnoreCase("TRIGGER")) {
+        if ("TRIGGER".equalsIgnoreCase(msgType)) {
             theMessage.setType(xPL_MessageI.MessageType.TRIGGER);
-        } else if (msgType.equalsIgnoreCase("STATUS")) {
+        } else if ("STATUS".equalsIgnoreCase(msgType)) {
             theMessage.setType(xPL_MessageI.MessageType.STATUS);
-        } else if (msgType.equalsIgnoreCase("COMMAND")) {
+        } else if ("COMMAND".equalsIgnoreCase(msgType)) {
             theMessage.setType(xPL_MessageI.MessageType.COMMAND);
         } else {
             logger.error("Invalid message type");

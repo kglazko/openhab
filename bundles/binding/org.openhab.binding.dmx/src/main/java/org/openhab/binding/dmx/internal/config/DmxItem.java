@@ -100,7 +100,7 @@ public abstract class DmxItem implements BindingConfig, DmxStatusUpdateListener 
                 String cmd = cmdString.substring(0, cmdString.indexOf('['));
                 String cmdValue = cmdString.substring(cmdString.indexOf('[') + 1, cmdString.lastIndexOf(']'));
 
-                if (cmd.equals("CHANNEL")) {
+                if ("CHANNEL".equals(cmd)) {
                     parseChannelConfig(cmdValue);
 
                 } else {

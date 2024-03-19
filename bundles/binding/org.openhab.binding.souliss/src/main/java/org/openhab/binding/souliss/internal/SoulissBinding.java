@@ -84,30 +84,30 @@ public class SoulissBinding<E> extends AbstractActiveBinding<SoulissBindingProvi
             while (enumConfig.hasMoreElements()) {
                 String sName = enumConfig.nextElement();
                 logger.info("PARAMETER: {} = {}", sName, config.get(sName));
-                if (sName.equals("IP_LAN")) {
+                if ("IP_LAN".equals(sName)) {
                     SoulissNetworkParameter.IPAddressOnLAN = (String) config.get(sName);
-                } else if (sName.equals("REFRESH_DBSTRUCT_TIME")) {
+                } else if ("REFRESH_DBSTRUCT_TIME".equals(sName)) {
                     SoulissNetworkParameter.REFRESH_DBSTRUCT_TIME = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("REFRESH_SUBSCRIPTION_TIME")) {
+                } else if ("REFRESH_SUBSCRIPTION_TIME".equals(sName)) {
                     SoulissNetworkParameter.REFRESH_SUBSCRIPTION_TIME = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("REFRESH_HEALTY_TIME")) {
+                } else if ("REFRESH_HEALTY_TIME".equals(sName)) {
                     SoulissNetworkParameter.REFRESH_HEALTY_TIME = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("REFRESH_MONITOR_TIME")) {
+                } else if ("REFRESH_MONITOR_TIME".equals(sName)) {
                     SoulissNetworkParameter.REFRESH_MONITOR_TIME = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("SEND_DELAY")) {
+                } else if ("SEND_DELAY".equals(sName)) {
                     SoulissNetworkParameter.SEND_DELAY = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("SEND_MIN_DELAY")) {
+                } else if ("SEND_MIN_DELAY".equals(sName)) {
                     SoulissNetworkParameter.SEND_MIN_DELAY = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("SECURE_SEND_TIMEOUT_TO_REQUEUE")) {
+                } else if ("SECURE_SEND_TIMEOUT_TO_REQUEUE".equals(sName)) {
                     SoulissNetworkParameter.SECURE_SEND_TIMEOUT_TO_REQUEUE = Long.parseLong((String) config.get(sName));
-                } else if (sName.equals("SECURE_SEND_TIMEOUT_TO_REMOVE_PACKET")) {
+                } else if ("SECURE_SEND_TIMEOUT_TO_REMOVE_PACKET".equals(sName)) {
                     SoulissNetworkParameter.SECURE_SEND_TIMEOUT_TO_REMOVE_PACKET = Long
                             .parseLong((String) config.get(sName));
-                } else if (sName.equals("USER_INDEX")) {
+                } else if ("USER_INDEX".equals(sName)) {
                     SoulissNetworkParameter.UserIndex = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("NODE_INDEX")) {
+                } else if ("NODE_INDEX".equals(sName)) {
                     SoulissNetworkParameter.NodeIndex = Integer.parseInt((String) config.get(sName));
-                } else if (sName.equals("SERVERPORT")) {
+                } else if ("SERVERPORT".equals(sName)) {
                     if (config.get(sName).equals("")) {
                         SoulissNetworkParameter.serverPort = null;
                     } else {

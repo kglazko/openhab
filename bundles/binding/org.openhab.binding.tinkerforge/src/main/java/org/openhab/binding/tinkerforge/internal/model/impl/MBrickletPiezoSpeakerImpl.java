@@ -824,7 +824,7 @@ public class MBrickletPiezoSpeakerImpl extends MinimalEObjectImpl.Container impl
                     logger.error("mode is missing");
                     return;
                 }
-                if (modestr.toLowerCase().equals(BEEP)) {
+                if (BEEP.equals(modestr.toLowerCase())) {
                     mode = Mode.BEEP;
                     durations = getDurations(Tools.getStringOpt(DURATIONS, opts));
                     frequencies = getFrequencies(Tools.getStringOpt(FREQUENCIES, opts));
@@ -839,7 +839,7 @@ public class MBrickletPiezoSpeakerImpl extends MinimalEObjectImpl.Container impl
                                 frequencies.length, durations.length);
                         return;
                     }
-                } else if (modestr.toLowerCase().equals(MORSE)) {
+                } else if (MORSE.equals(modestr.toLowerCase())) {
                     mode = Mode.MORSE;
                     frequencies = getFrequencies(Tools.getStringOpt(FREQUENCIES, opts));
                     morseCodes = getMorseCodes(Tools.getStringOpt(MORSECODES, opts));

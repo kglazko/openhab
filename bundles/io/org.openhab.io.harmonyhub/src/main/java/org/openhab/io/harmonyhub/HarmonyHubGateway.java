@@ -156,9 +156,9 @@ public class HarmonyHubGateway implements ManagedService {
                     hostConfig = new HostConfig();
                     hostConfigs.put(qualifier, hostConfig);
                 }
-                if (configKey.equals("host")) {
+                if ("host".equals(configKey)) {
                     hostConfig.setHost(value);
-                } else if (configKey.equals("username")) {
+                } else if ("username".equals(configKey)) {
                     hostConfig.setUsername(value);
                 } else {
                     hostConfig.setPassword(value);

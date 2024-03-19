@@ -139,7 +139,7 @@ public class AKM868Binding extends AbstractActiveBinding<AKM868BindingProvider>
         for (AKM868BindingProvider provider : providers) {
             for (String itemName : provider.getItemNames()) {
 
-                if (provider.getId(itemName).equals(id) && provider.getChannel(itemName).equals("0")) {
+                if (provider.getId(itemName).equals(id) && "0".equals(provider.getChannel(itemName))) {
                     logger.debug("Publishing state for {} - state: {} ", itemName, provider.getId(itemName));
                     eventPublisher.postUpdate(itemName, isPresent == true ? OnOffType.ON : OnOffType.OFF);
                 }
@@ -155,7 +155,7 @@ public class AKM868Binding extends AbstractActiveBinding<AKM868BindingProvider>
         for (AKM868BindingProvider provider : providers) {
             for (String itemName : provider.getItemNames()) {
 
-                if (provider.getId(itemName).equals(id) && provider.getChannel(itemName).equals("1")) {
+                if (provider.getId(itemName).equals(id) && "1".equals(provider.getChannel(itemName))) {
                     logger.debug("Publishing state for {} -state: ON", itemName);
                     eventPublisher.postUpdate(itemName, OnOffType.ON);
                 }
@@ -170,7 +170,7 @@ public class AKM868Binding extends AbstractActiveBinding<AKM868BindingProvider>
         for (AKM868BindingProvider provider : providers) {
             for (String itemName : provider.getItemNames()) {
 
-                if (provider.getId(itemName).equals(id) && provider.getChannel(itemName).equals("5")) {
+                if (provider.getId(itemName).equals(id) && "5".equals(provider.getChannel(itemName))) {
                     logger.debug("Publishing state for {} -state: ON", itemName);
                     eventPublisher.postUpdate(itemName, OnOffType.ON);
                 }

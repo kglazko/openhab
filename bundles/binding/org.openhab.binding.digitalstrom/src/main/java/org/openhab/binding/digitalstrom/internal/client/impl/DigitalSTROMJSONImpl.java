@@ -763,7 +763,7 @@ public class DigitalSTROMJSONImpl implements DigitalSTROMAPI {
 
     @Override
     public boolean subscribeEvent(String token, String name, int subscriptionID, int connectTimeout, int readTimeout) {
-        if (name != null && !name.trim().equals("") && withParameterSubscriptionID(subscriptionID)) {
+        if (name != null && !"".equals(name.trim()) && withParameterSubscriptionID(subscriptionID)) {
             String response = null;
 
             response = transport.execute(
@@ -783,7 +783,7 @@ public class DigitalSTROMJSONImpl implements DigitalSTROMAPI {
     @Override
     public boolean unsubscribeEvent(String token, String name, int subscriptionID, int connectTimeout,
             int readTimeout) {
-        if (name != null && !name.trim().equals("") && withParameterSubscriptionID(subscriptionID)) {
+        if (name != null && !"".equals(name.trim()) && withParameterSubscriptionID(subscriptionID)) {
             String response = null;
 
             response = transport.execute(
@@ -1001,7 +1001,7 @@ public class DigitalSTROMJSONImpl implements DigitalSTROMAPI {
 
     @Override
     public String loginApplication(String loginToken) {
-        if (loginToken != null && !loginToken.trim().equals("")) {
+        if (loginToken != null && !"".equals(loginToken.trim())) {
             String response = null;
 
             response = transport.execute(JSONRequestConstants.JSON_SYSTEM_LOGIN_APPLICATION + loginToken);

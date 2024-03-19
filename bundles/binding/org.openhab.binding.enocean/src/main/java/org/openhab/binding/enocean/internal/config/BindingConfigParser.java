@@ -60,28 +60,28 @@ public class BindingConfigParser<TYPE extends BindingConfig> {
     }
 
     private String removeLastBrakets(String configLine) {
-        if (configLine.substring(configLine.length() - 1).equals("}")) {
+        if ("}".equals(configLine.substring(configLine.length() - 1))) {
             return configLine.substring(0, configLine.length() - 1);
         }
         return configLine;
     }
 
     private String removeFirstBrakets(String configLine) {
-        if (configLine.substring(0, 1).equals("{")) {
+        if ("{".equals(configLine.substring(0, 1))) {
             return configLine.substring(1);
         }
         return configLine;
     }
 
     private String removeLastQuotes(String value) {
-        if (value.substring(value.length() - 1).equals("\"")) {
+        if ("\"".equals(value.substring(value.length() - 1))) {
             return value.substring(0, value.length() - 1);
         }
         return value;
     }
 
     private String removeFirstQuotes(String value) {
-        if (value.substring(0, 1).equals("\"")) {
+        if ("\"".equals(value.substring(0, 1))) {
             return value.substring(1);
         }
         return value;

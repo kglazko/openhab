@@ -240,9 +240,9 @@ public class SallegraBinding extends AbstractActiveBinding<SallegraBindingProvid
                     }
 
                     String option = keyElements[1];
-                    if (option.equals("password")) {
+                    if ("password".equals(option)) {
                         node.setPassword((String) config.get(key));
-                    } else if (option.equals("hostname")) {
+                    } else if ("hostname".equals(option)) {
                         node.setHostName((String) config.get(key));
                     }
                 }

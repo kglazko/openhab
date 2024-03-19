@@ -26,9 +26,9 @@ public class TypeGuessAdapter extends XmlAdapter<String, Object> {
         if (value == null || "".equals(value)) {
             return null;
         }
-        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("on")) {
+        if ("true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value)) {
             return (Boolean.TRUE);
-        } else if (value.equalsIgnoreCase("false") || value.equalsIgnoreCase("off")) {
+        } else if ("false".equalsIgnoreCase(value) || "off".equalsIgnoreCase(value)) {
             return (Boolean.FALSE);
         } else if (value.matches("(-|\\+)?[0-9]+")) {
             return (Integer.valueOf(value));

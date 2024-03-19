@@ -42,7 +42,7 @@ public class JSONResponseHandler {
     }
 
     public JSONObject toJSONObject(String jsonResponse) {
-        if (jsonResponse != null && !jsonResponse.trim().equals("")) {
+        if (jsonResponse != null && !"".equals(jsonResponse.trim())) {
             try {
                 return (JSONObject) new JSONParser().parse(jsonResponse);
             } catch (ParseException e) {

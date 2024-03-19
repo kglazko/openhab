@@ -319,7 +319,7 @@ public class SamsungAcBinding extends AbstractActiveBinding<SamsungAcBindingProv
             case AC_FUN_POWER:
             case AC_ADD_SPI:
             case AC_ADD_AUTOCLEAN:
-                postUpdate(item, value.toUpperCase().equals("ON") ? OnOffType.ON : OnOffType.OFF);
+                postUpdate(item, "ON".equals(value.toUpperCase()) ? OnOffType.ON : OnOffType.OFF);
                 break;
             case AC_FUN_COMODE:
                 postUpdate(item, DecimalType.valueOf(Integer.toString(ConvenientModeEnum.valueOf(value).value)));

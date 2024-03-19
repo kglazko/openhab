@@ -484,7 +484,7 @@ public class InfluxDBPersistenceService implements QueryablePersistenceService {
         } else if (item instanceof DimmerItem) {
           return new PercentType(valueStr);
         } else if (item instanceof SwitchItem) {
-          return string2DigitalValue(valueStr).equals(DIGITAL_VALUE_OFF)
+          return DIGITAL_VALUE_OFF.equals(string2DigitalValue(valueStr))
             ? OnOffType.OFF
             : OnOffType.ON;
         } else if (item instanceof ContactItem) {

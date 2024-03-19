@@ -112,7 +112,7 @@ public class MqttEventBusBinding extends AbstractBinding<MqttBindingProvider>imp
         String[] actualParts = actualTopic.split("/");
 
         for (int i = 0; i < definitionParts.length; i++) {
-            if (definitionParts[i].equalsIgnoreCase("+")) {
+            if ("+".equalsIgnoreCase(definitionParts[i])) {
                 itemName = actualParts[i];
                 break;
             }

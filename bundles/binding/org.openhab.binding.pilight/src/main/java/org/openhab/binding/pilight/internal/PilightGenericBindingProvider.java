@@ -103,7 +103,7 @@ public class PilightGenericBindingProvider extends AbstractGenericBindingProvide
                     String[] kv = pair.split("=");
                     String key = kv[0];
                     String value = kv[1];
-                    if (key.equals("property")) {
+                    if ("property".equals(key)) {
                         config.setProperty(value);
                     }
                 }

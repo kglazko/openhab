@@ -307,7 +307,7 @@ public class AutelisBinding extends AbstractActiveBinding<AutelisBindingProvider
             if (m.find() && m.groupCount() > 1) {
                 String type = m.group(1);
                 String name = m.group(2);
-                if (type.equals(AUTELIS_TYPES_EQUIP)) {
+                if (AUTELIS_TYPES_EQUIP.equals(type)) {
                     String cmd = AUTELIS_CMD_VALUE;
                     int value;
                     if (command == OnOffType.OFF) {
@@ -327,7 +327,7 @@ public class AutelisBinding extends AbstractActiveBinding<AutelisBindingProvider
                     String response = HttpUtil.executeUrl("GET",
                             baseURL + "/set.cgi?name=" + name + "&" + cmd + "=" + value, TIMEOUT);
                     logger.trace("equipment set {} {} {} : result {}", name, cmd, value, response);
-                } else if (type.equals(AUTELIS_TYPES_TEMP)) {
+                } else if (AUTELIS_TYPES_TEMP.equals(type)) {
                     String value;
                     if (command == IncreaseDecreaseType.INCREASE) {
                         value = AUTELIS_CMD_UP;
@@ -352,7 +352,7 @@ public class AutelisBinding extends AbstractActiveBinding<AutelisBindingProvider
                             baseURL + "/set.cgi?wait=1&name=" + name + "&" + cmd + "=" + value, TIMEOUT);
                     logger.trace("temp set {} {} : result {}", cmd, value, response);
                 }
-            } else if (config.equals(AUTELIS_TYPES_LIGHTS)) {
+            } else if (AUTELIS_TYPES_LIGHTS.equals(config)) {
                 /*
                  * lighting command
                  * possible values, but we will let anything through.

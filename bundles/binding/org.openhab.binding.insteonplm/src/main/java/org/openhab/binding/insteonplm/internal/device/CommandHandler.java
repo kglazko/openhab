@@ -687,12 +687,12 @@ public abstract class CommandHandler {
             }
             try {
                 if (cmd == OnOffType.ON) {
-                    if (cmdParam.equals("reset")) {
+                    if ("reset".equals(cmdParam)) {
                         Msg m = dev.makeStandardMessage((byte) 0x0f, (byte) 0x80, (byte) 0x00);
                         dev.enqueueMessage(m, m_feature);
                         logger.info("{}: sent reset msg to power meter {}", nm(), dev.getAddress());
                         m_feature.publish(OnOffType.OFF, StateChangeType.ALWAYS, "cmd", "reset");
-                    } else if (cmdParam.equals("update")) {
+                    } else if ("update".equals(cmdParam)) {
                         Msg m = dev.makeStandardMessage((byte) 0x0f, (byte) 0x82, (byte) 0x00);
                         dev.enqueueMessage(m, m_feature);
                         logger.info("{}: sent update msg to power meter {}", nm(), dev.getAddress());

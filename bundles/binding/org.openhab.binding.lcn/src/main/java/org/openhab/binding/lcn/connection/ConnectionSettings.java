@@ -173,11 +173,11 @@ public class ConnectionSettings {
         try {
             String address = addressWithOptPort.contains(":") ? addressWithOptPort.split(":")[0] : addressWithOptPort;
             int port = addressWithOptPort.contains(":") ? Integer.parseInt(addressWithOptPort.split(":")[1]) : 4114;
-            LcnDefs.OutputPortDimMode dimMode = mode.equalsIgnoreCase("percent200")
-                    || mode.equalsIgnoreCase("native200") ? LcnDefs.OutputPortDimMode.STEPS200
+            LcnDefs.OutputPortDimMode dimMode = "percent200".equalsIgnoreCase(mode)
+                    || "native200".equalsIgnoreCase(mode) ? LcnDefs.OutputPortDimMode.STEPS200
                             : LcnDefs.OutputPortDimMode.STEPS50;
-            LcnDefs.OutputPortStatusMode statusMode = mode.equalsIgnoreCase("percent50")
-                    || mode.equalsIgnoreCase("percent200") ? LcnDefs.OutputPortStatusMode.PERCENT
+            LcnDefs.OutputPortStatusMode statusMode = "percent50".equalsIgnoreCase(mode)
+                    || "percent200".equalsIgnoreCase(mode) ? LcnDefs.OutputPortStatusMode.PERCENT
                             : LcnDefs.OutputPortStatusMode.NATIVE;
             int timeout = Integer.parseInt(dataRequestTimeout);
             return new ConnectionSettings(id, address, port, username, password, dimMode, statusMode, timeout);

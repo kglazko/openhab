@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.mystromecopower.internal.api;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -75,14 +77,14 @@ public class MystromClient implements IMystromClient {
         try {
             String url = API_URL + "auth?email=" + this.userName + "&password=" + this.password;
             HttpURLConnection httpURLConnection;
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpURLConnection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 
             InputStream inputStream = httpURLConnection.getInputStream();
             reader = new InputStreamReader(inputStream, "UTF-8");
             JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
             String status = jsonObject.get("status").getAsString();
-            if (!status.equals("ok")) {
+            if (!"ok".equals(status)) {
                 return false;
             }
             logger.debug("Logon successfull");
@@ -120,7 +122,7 @@ public class MystromClient implements IMystromClient {
         try {
             String url = API_URL + "devices" + "?authToken=" + this.authToken;
             HttpURLConnection httpURLConnection;
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpURLConnection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 
             httpURLConnection.connect();
 
@@ -136,7 +138,7 @@ public class MystromClient implements IMystromClient {
             JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
             String status = jsonObject.get("status").getAsString();
-            if (!status.equals("ok")) {
+            if (!"ok".equals(status)) {
                 logger.error("Error while getting devices: '{}'", status);
                 return new ArrayList<MystromDevice>();
             }
@@ -175,7 +177,7 @@ public class MystromClient implements IMystromClient {
         try {
             String url = API_URL + "device" + "?authToken=" + this.authToken + "&id=" + deviceId;
             HttpURLConnection httpURLConnection;
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpURLConnection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 
             httpURLConnection.connect();
 
@@ -191,7 +193,7 @@ public class MystromClient implements IMystromClient {
             JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
             String status = jsonObject.get("status").getAsString();
-            if (!status.equals("ok")) {
+            if (!"ok".equals(status)) {
                 logger.error("Error while getting device info id: '{}' status '{}'", deviceId, status);
                 return null;
             }
@@ -229,14 +231,14 @@ public class MystromClient implements IMystromClient {
             String url = API_URL + "device/switch" + "?authToken=" + this.authToken + "&id=" + deviceId + "&on="
                     + newStateIsOn.toString();
             HttpURLConnection httpURLConnection;
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpURLConnection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 
             InputStream inputStream = httpURLConnection.getInputStream();
             reader = new InputStreamReader(inputStream, "UTF-8");
             JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
             String status = jsonObject.get("status").getAsString();
-            if (!status.equals("ok")) {
+            if (!"ok".equals(status)) {
                 String error = jsonObject.get("error").getAsString();
                 logger.error("Unable to switch state for device '{}' error '{}'", deviceId, error);
                 return false;
@@ -268,14 +270,14 @@ public class MystromClient implements IMystromClient {
         try {
             String url = API_URL + "device/restart" + "?authToken=" + this.authToken + "&id=" + deviceId;
             HttpURLConnection httpURLConnection;
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpURLConnection = (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 
             InputStream inputStream = httpURLConnection.getInputStream();
             reader = new InputStreamReader(inputStream, "UTF-8");
             JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
             String status = jsonObject.get("status").getAsString();
-            if (!status.equals("ok")) {
+            if (!"ok".equals(status)) {
                 String error = jsonObject.get("error").getAsString();
                 logger.error("Unable to restart master device '{}' error '{}'", deviceId, error);
             }

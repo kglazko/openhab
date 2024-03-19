@@ -28,7 +28,7 @@ public class Energy {
 
         if (logdate.length() == 8) {
 
-            if (!logdate.equals("FFFFFFFF")) {
+            if (!"FFFFFFFF".equals(logdate)) {
 
                 int year = 0;
                 int month = 0;

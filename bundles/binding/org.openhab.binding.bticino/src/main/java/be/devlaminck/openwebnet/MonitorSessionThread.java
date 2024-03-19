@@ -97,7 +97,7 @@ public class MonitorSessionThread extends Thread {
         }
 
         // Status request frame
-        if (frame.substring(0, 2).equalsIgnoreCase("*#")) {
+        if ("*#".equalsIgnoreCase(frame.substring(0, 2))) {
             // remove *# and ##
             frame = frame.substring(2, length - 2);
 
@@ -109,10 +109,10 @@ public class MonitorSessionThread extends Thread {
             objectName = who + "*" + where;
             event = new ProtocolRead(frame);
 
-            if (who.equalsIgnoreCase("1")) {
+            if ("1".equalsIgnoreCase(who)) {
                 objectClass = "Light";
                 objectName = who + "*" + where;
-                if (frameParts[2].equalsIgnoreCase("1")) {
+                if ("1".equalsIgnoreCase(frameParts[2])) {
                     String level = frameParts[3];
                     String speed = frameParts[4];
                     messageDescription = "Luminous intensity change";
@@ -123,7 +123,7 @@ public class MonitorSessionThread extends Thread {
                         event.addProperty("speed", speed);
                     }
                 }
-                if (frameParts[2].equalsIgnoreCase("2")) {
+                if ("2".equalsIgnoreCase(frameParts[2])) {
                     String hour = frameParts[3];
                     String min = frameParts[4];
                     String sec = frameParts[5];
@@ -140,14 +140,14 @@ public class MonitorSessionThread extends Thread {
                 }
             }
             // POWER MANAGEMENT
-            if (who.equalsIgnoreCase("3")) {
+            if ("3".equalsIgnoreCase(who)) {
                 objectClass = "Powermeter";
                 objectName = who + "*" + where;
                 String voltage = null;
                 String current = null;
                 String power = null;
                 String energy = null;
-                if (frameParts[3].equalsIgnoreCase("0")) {
+                if ("0".equalsIgnoreCase(frameParts[3])) {
                     voltage = frameParts[3];
                     current = frameParts[4];
                     power = frameParts[5];
@@ -166,28 +166,28 @@ public class MonitorSessionThread extends Thread {
                         event.addProperty("energy", energy);
                     }
                 }
-                if (frameParts[3].equalsIgnoreCase("1")) {
+                if ("1".equalsIgnoreCase(frameParts[3])) {
                     voltage = frameParts[3];
                     if (voltage != null) {
                         event.addProperty("voltage", voltage);
                     }
                     messageDescription = "Voltage status";
                 }
-                if (frameParts[3].equalsIgnoreCase("2")) {
+                if ("2".equalsIgnoreCase(frameParts[3])) {
                     current = frameParts[3];
                     if (current != null) {
                         event.addProperty("current", current);
                     }
                     messageDescription = "Current status";
                 }
-                if (frameParts[3].equalsIgnoreCase("3")) {
+                if ("3".equalsIgnoreCase(frameParts[3])) {
                     power = frameParts[3];
                     if (power != null) {
                         event.addProperty("power", power);
                     }
                     messageDescription = "Power status";
                 }
-                if (frameParts[3].equalsIgnoreCase("4")) {
+                if ("4".equalsIgnoreCase(frameParts[3])) {
                     energy = frameParts[3];
                     if (energy != null) {
                         event.addProperty("energy", energy);
@@ -196,12 +196,12 @@ public class MonitorSessionThread extends Thread {
                 }
             }
             // TERMOREGULATION
-            if (who.equalsIgnoreCase("4")) {
+            if ("4".equalsIgnoreCase(who)) {
                 messageType = "thermoregulation";
                 objectClass = "Thermo";
                 objectName = who + "*" + where;
 
-                if (frameParts[2].equalsIgnoreCase("0")) {
+                if ("0".equalsIgnoreCase(frameParts[2])) {
                     String temperature = frameParts[3];
                     temperature = OWNUtilities.convertTemperature(temperature);
                     messageDescription = "Temperature value";
@@ -214,7 +214,7 @@ public class MonitorSessionThread extends Thread {
                 }
             }
             // GATEWAY CONTROL
-            if (who.equalsIgnoreCase("13")) {
+            if ("13".equalsIgnoreCase(who)) {
                 objectClass = "Gateway";
                 objectName = who;
 
@@ -229,7 +229,7 @@ public class MonitorSessionThread extends Thread {
                 String version = null;
                 String release = null;
                 String build = null;
-                if (frameParts[2].equalsIgnoreCase("0")) {
+                if ("0".equalsIgnoreCase(frameParts[2])) {
                     hour = frameParts[3];
                     minute = frameParts[4];
                     second = frameParts[5];
@@ -249,7 +249,7 @@ public class MonitorSessionThread extends Thread {
                         event.addProperty("timeZone", timeZone);
                     }
                 }
-                if (frameParts[2].equalsIgnoreCase("1")) {
+                if ("1".equalsIgnoreCase(frameParts[2])) {
                     dayWeek = OWNUtilities.dayName(frameParts[3]);
                     day = frameParts[4];
                     month = frameParts[5];
@@ -269,7 +269,7 @@ public class MonitorSessionThread extends Thread {
                         event.addProperty("year", year);
                     }
                 }
-                if (frameParts[2].equalsIgnoreCase("10")) {
+                if ("10".equalsIgnoreCase(frameParts[2])) {
                     String ip1 = frameParts[3];
                     String ip2 = frameParts[4];
                     String ip3 = frameParts[5];
@@ -278,7 +278,7 @@ public class MonitorSessionThread extends Thread {
                     messageDescription = "IP request";
                     event.addProperty("ip-address", ip1 + "." + ip2 + "." + ip3 + "." + ip4);
                 }
-                if (frameParts[2].equalsIgnoreCase("11")) {
+                if ("11".equalsIgnoreCase(frameParts[2])) {
                     String netmask1 = frameParts[3];
                     String netmask2 = frameParts[4];
                     String netmask3 = frameParts[5];
@@ -287,7 +287,7 @@ public class MonitorSessionThread extends Thread {
                     messageDescription = "Netmask request";
                     event.addProperty("netmask", netmask1 + "." + netmask2 + "." + netmask3 + "." + netmask4);
                 }
-                if (frameParts[2].equalsIgnoreCase("12")) {
+                if ("12".equalsIgnoreCase(frameParts[2])) {
                     String mac1 = frameParts[3];
                     String mac2 = frameParts[4];
                     String mac3 = frameParts[5];
@@ -299,13 +299,13 @@ public class MonitorSessionThread extends Thread {
                     event.addProperty("mac-address",
                             mac1 + ":" + mac2 + ":" + mac3 + ":" + mac4 + ":" + mac5 + ":" + mac6);
                 }
-                if (frameParts[2].equalsIgnoreCase("15")) {
+                if ("15".equalsIgnoreCase(frameParts[2])) {
                     String model = OWNUtilities.gatewayModel(frameParts[3]);
                     messageType = "gatewayControl";
                     messageDescription = "Model request";
                     event.addProperty("model", model);
                 }
-                if (frameParts[2].equalsIgnoreCase("16")) {
+                if ("16".equalsIgnoreCase(frameParts[2])) {
                     version = frameParts[3];
                     release = frameParts[4];
                     build = frameParts[5];
@@ -313,7 +313,7 @@ public class MonitorSessionThread extends Thread {
                     messageDescription = "Firmware version request";
                     event.addProperty("firmware - version", version + "." + release + "." + build);
                 }
-                if (frameParts[2].equalsIgnoreCase("17")) {
+                if ("17".equalsIgnoreCase(frameParts[2])) {
                     String days = frameParts[3];
                     String hours = frameParts[4];
                     String minutes = frameParts[5];
@@ -322,7 +322,7 @@ public class MonitorSessionThread extends Thread {
                     messageDescription = "Uptime request";
                     event.addProperty("uptime ", days + "D:" + hours + "H:" + minutes + "m:" + seconds + "s");
                 }
-                if (frameParts[2].equalsIgnoreCase("22")) {
+                if ("22".equalsIgnoreCase(frameParts[2])) {
                     hour = frameParts[3];
                     minute = frameParts[4];
                     second = frameParts[5];
@@ -336,7 +336,7 @@ public class MonitorSessionThread extends Thread {
                     event.addProperty("date", weekDay + " " + day + "/" + month + "/" + year);
                     event.addProperty("time", hour + ":" + minute + ":" + second + " (" + timeZone + ")");
                 }
-                if (frameParts[2].equalsIgnoreCase("23")) {
+                if ("23".equalsIgnoreCase(frameParts[2])) {
                     version = frameParts[3];
                     release = frameParts[4];
                     build = frameParts[5];
@@ -344,7 +344,7 @@ public class MonitorSessionThread extends Thread {
                     messageDescription = "Kernel version request";
                     event.addProperty("kernel - version", version + "." + release + "." + build);
                 }
-                if (frameParts[2].equalsIgnoreCase("24")) {
+                if ("24".equalsIgnoreCase(frameParts[2])) {
                     version = frameParts[3];
                     release = frameParts[4];
                     build = frameParts[5];
@@ -354,7 +354,7 @@ public class MonitorSessionThread extends Thread {
                 }
             }
             // Basic and evolved CEN
-            if (who.equalsIgnoreCase("15")) {
+            if ("15".equalsIgnoreCase(who)) {
                 objectClass = "CEN_Basic_Evolved";
                 objectName = who + "*" + where;
                 what = frameParts[2];
@@ -369,15 +369,15 @@ public class MonitorSessionThread extends Thread {
                 } else if (what_parts.length == 2) {
                     // push button n
                     event.addProperty("push_button_n", what_parts[0]);
-                    if (what_parts[0].equalsIgnoreCase("1")) {
+                    if ("1".equalsIgnoreCase(what_parts[0])) {
                         // type of pressure
                         event.addProperty("pressure", "Virtual release after short pressure");
                     }
-                    if (what_parts[0].equalsIgnoreCase("2")) {
+                    if ("2".equalsIgnoreCase(what_parts[0])) {
                         // type of pressure
                         event.addProperty("pressure", "Virtual release after an extended pressure");
                     }
-                    if (what_parts[0].equalsIgnoreCase("3")) {
+                    if ("3".equalsIgnoreCase(what_parts[0])) {
                         // type of pressure
                         event.addProperty("pressure", "Virtual extended pressure");
                     }
@@ -669,13 +669,13 @@ public class MonitorSessionThread extends Thread {
                         messageDescription = "Virtual pressure";
 
                     } else if (what_parts.length == 2) {
-                        if (what_parts[0].equalsIgnoreCase("1")) {
+                        if ("1".equalsIgnoreCase(what_parts[0])) {
                             // type of pressure
                             messageDescription = "Virtual release after short pressure";
-                        } else if (what_parts[0].equalsIgnoreCase("2")) {
+                        } else if ("2".equalsIgnoreCase(what_parts[0])) {
                             // type of pressure
                             messageDescription = "Virtual release after an extended pressure";
-                        } else if (what_parts[0].equalsIgnoreCase("3")) {
+                        } else if ("3".equalsIgnoreCase(what_parts[0])) {
                             // type of pressure
                             messageDescription = "Virtual extended pressure";
                         }

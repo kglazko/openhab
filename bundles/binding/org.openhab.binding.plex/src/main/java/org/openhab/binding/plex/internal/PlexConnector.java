@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.plex.internal;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.apache.commons.lang.StringUtils.*;
 
 import java.io.IOException;
@@ -147,7 +149,7 @@ public class PlexConnector extends Thread {
         resolveServer();
 
         this.wsUri = String.format("%s://%s:%d/:/websockets/notifications",
-                connection.getUri().getScheme().equals("https") ? "wss" : "ws", connection.getUri().getHost(),
+                "https".equals(connection.getUri().getScheme()) ? "wss" : "ws", connection.getUri().getHost(),
                 connection.getUri().getPort());
         this.sessionsUrl = String.format("%s/status/sessions", connection.getUri().toString());
         this.clientsUrl = String.format("%s/clients", connection.getUri().toString());
@@ -543,7 +545,7 @@ public class PlexConnector extends Thread {
                  * Plex sends different kinds of status updates. We're only interested in 'now playing' updates.
                  */
                 String type = update.getType();
-                if (type.equals("playing") && update.getChildren().size() == 1) {
+                if ("playing".equals(type) && update.getChildren().size() == 1) {
                     Child child = update.getChildren().get(0);
                     if (!isBlank(child.getSessionKey())) {
                         String sessionKey = child.getSessionKey();
@@ -586,7 +588,7 @@ public class PlexConnector extends Thread {
 
     private <T> T doHttpRequest(String method, String uri, Map<String, String> parameters, Class<T> type) {
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(uri).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             connection.setRequestMethod(method);
             connection.setConnectTimeout(REQUEST_TIMEOUT_MS);
             connection.setReadTimeout(REQUEST_TIMEOUT_MS);

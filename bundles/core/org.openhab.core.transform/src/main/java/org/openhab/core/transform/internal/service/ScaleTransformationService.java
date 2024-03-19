@@ -8,6 +8,7 @@
  */
 package org.openhab.core.transform.internal.service;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -67,20 +68,20 @@ public class ScaleTransformationService extends LocalizableTransformationService
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
 		String strLine;
-		while ((strLine = br.readLine()) != null) {
+		while ((strLine = BoundedLineReader.readLine(br, 5_000_000)) != null) {
 			Matcher matcher = limits_pattern.matcher(strLine);
 			if (matcher.matches() && (matcher.groupCount()==5)) {
 				double minLimit = Double.parseDouble(matcher.group(2));
 				double maxLimit = Double.parseDouble(matcher.group(3));
 
 				// a bit of a trick to include/exclude limits of the segment
-				if (matcher.group(1).equals("]"))
+				if ("]".equals(matcher.group(1)))
 					minLimit = minLimit + 0.0000000001;
-				if (matcher.group(1).equals("["))
+				if ("[".equals(matcher.group(1)))
 					minLimit = minLimit - 0.0000000001;
-				if (matcher.group(4).equals("]"))
+				if ("]".equals(matcher.group(4)))
 					maxLimit = maxLimit + 0.0000000001;
-				if (matcher.group(4).equals("["))
+				if ("[".equals(matcher.group(4)))
 					maxLimit = maxLimit - 0.0000000001;
 
 				if ((minLimit < value) && (value < maxLimit)) {

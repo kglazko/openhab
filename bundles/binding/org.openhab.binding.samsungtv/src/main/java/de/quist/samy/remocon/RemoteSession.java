@@ -75,11 +75,11 @@ public class RemoteSession {
             throws IOException, ConnectionDeniedException, TimeoutException {
         RemoteSession session = new RemoteSession(applicationName, uniqueId, host, port);
         String result = session.initialize();
-        if (result.equals(ALLOWED)) {
+        if (ALLOWED.equals(result)) {
             return session;
-        } else if (result.equals(DENIED)) {
+        } else if (DENIED.equals(result)) {
             throw new ConnectionDeniedException();
-        } else if (result.equals(TIMEOUT)) {
+        } else if (TIMEOUT.equals(result)) {
             throw new TimeoutException();
         } else {
             // for now we just assume to be connected

@@ -8,6 +8,9 @@
  */
 package org.openhab.binding.digitalstrom.internal.client.connection.transport;
 
+import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,14 +47,14 @@ public class HttpTransport {
     }
 
     public String execute(String request, int connectTimeout, int readTimeout) {
-        if (request != null && !request.trim().equals("")) {
+        if (request != null && !"".equals(request.trim())) {
 
             HttpURLConnection connection = null;
 
             StringBuilder response = new StringBuilder();
             BufferedReader in = null;
             try {
-                URL url = new URL(this.uri + request);
+                URL url = Urls.create(this.uri + request, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
                 connection = (HttpURLConnection) url.openConnection();
                 int responseCode = -1;
@@ -71,7 +74,7 @@ public class HttpTransport {
                         String inputLine = null;
                         in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-                        while ((inputLine = in.readLine()) != null) {
+                        while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                             response.append(inputLine);
                         }
 

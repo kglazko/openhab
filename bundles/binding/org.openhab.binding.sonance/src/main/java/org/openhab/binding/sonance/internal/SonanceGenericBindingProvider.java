@@ -68,13 +68,13 @@ public class SonanceGenericBindingProvider extends AbstractGenericBindingProvide
             config.group = configParts[3].trim();
         }
 
-        if (configParts[2].trim().equals("mute")) {
+        if ("mute".equals(configParts[2].trim())) {
             config.type = Type.MUTE;
         }
-        if (configParts[2].trim().equals("volume")) {
+        if ("volume".equals(configParts[2].trim())) {
             config.type = Type.VOLUME;
         }
-        if (configParts[2].trim().equals("power")) {
+        if ("power".equals(configParts[2].trim())) {
             config.type = Type.POWER;
         }
 

@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.fritzbox.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.JobKey.jobKey;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -429,7 +430,7 @@ public class FritzboxBinding extends AbstractActiveBinding<FritzboxBindingProvid
                         logger.info("Connected to FritzBox on {}:{}", ip, MONITOR_PORT);
                         while (!interrupted) {
                             try {
-                                String line = reader.readLine();
+                                String line = BoundedLineReader.readLine(reader, 5_000_000);
                                 if (line != null) {
                                     MonitorEvent event = parseMonitorEvent(line);
                                     processMonitorEvent(event);
@@ -470,14 +471,14 @@ public class FritzboxBinding extends AbstractActiveBinding<FritzboxBindingProvid
             event.eventType = sections[1];
             event.connectionId = sections[2];
 
-            if (event.eventType.equals("RING")) {
+            if ("RING".equals(event.eventType)) {
                 event.externalNo = sections[3];
                 event.internalNo = sections[4];
                 event.connectionType = sections[5];
-            } else if (event.eventType.equals("CONNECT")) {
+            } else if ("CONNECT".equals(event.eventType)) {
                 event.line = sections[3];
                 event.externalNo = sections[4];
-            } else if (event.eventType.equals("CALL")) {
+            } else if ("CALL".equals(event.eventType)) {
                 event.line = sections[3];
                 event.internalNo = sections[4];
                 event.externalNo = sections[5];
@@ -493,13 +494,13 @@ public class FritzboxBinding extends AbstractActiveBinding<FritzboxBindingProvid
          *            the event to process
          */
         private void processMonitorEvent(MonitorEvent event) {
-            if (event.eventType.equals("RING")) {
+            if ("RING".equals(event.eventType)) {
                 handleEventType(event, FritzboxBindingProvider.TYPE_INBOUND);
             }
-            if (event.eventType.equals("CALL")) {
+            if ("CALL".equals(event.eventType)) {
                 handleEventType(event, FritzboxBindingProvider.TYPE_OUTBOUND);
             }
-            if (event.eventType.equals("CONNECT") || event.eventType.equals("DISCONNECT")) {
+            if ("CONNECT".equals(event.eventType) || "DISCONNECT".equals(event.eventType)) {
                 handleEventType(event, FritzboxBindingProvider.TYPE_INBOUND);
                 handleEventType(event, FritzboxBindingProvider.TYPE_ACTIVE);
                 handleEventType(event, FritzboxBindingProvider.TYPE_OUTBOUND);
@@ -519,20 +520,20 @@ public class FritzboxBinding extends AbstractActiveBinding<FritzboxBindingProvid
                 for (String itemName : provider.getItemNamesForType(bindingType)) {
                     Class<? extends Item> itemType = provider.getItemType(itemName);
                     org.openhab.core.types.State state = null;
-                    if (event.eventType.equals("DISCONNECT")) {
+                    if ("DISCONNECT".equals(event.eventType)) {
                         state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.OFF : CallType.EMPTY;
-                    } else if (event.eventType.equals("CONNECT")) {
+                    } else if ("CONNECT".equals(event.eventType)) {
                         if (bindingType.equals(FritzboxBindingProvider.TYPE_ACTIVE)) {
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON
                                     : new CallType(event.externalNo, event.line);
                         } else {
                             state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.OFF : CallType.EMPTY;
                         }
-                    } else if (event.eventType.equals("RING")
+                    } else if ("RING".equals(event.eventType)
                             && bindingType.equals(FritzboxBindingProvider.TYPE_INBOUND)) {
                         state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON
                                 : new CallType(event.externalNo, event.internalNo);
-                    } else if (event.eventType.equals("CALL")
+                    } else if ("CALL".equals(event.eventType)
                             && bindingType.equals(FritzboxBindingProvider.TYPE_OUTBOUND)) {
                         state = itemType.isAssignableFrom(SwitchItem.class) ? OnOffType.ON
                                 : new CallType(event.internalNo, event.externalNo);
@@ -629,7 +630,7 @@ public class FritzboxBinding extends AbstractActiveBinding<FritzboxBindingProvid
                     org.openhab.core.types.State state = null;
 
                     if (itemType.isAssignableFrom(SwitchItem.class)) {
-                        if (answer.equals("1")) {
+                        if ("1".equals(answer)) {
                             state = OnOffType.ON;
                         } else {
                             state = OnOffType.OFF;

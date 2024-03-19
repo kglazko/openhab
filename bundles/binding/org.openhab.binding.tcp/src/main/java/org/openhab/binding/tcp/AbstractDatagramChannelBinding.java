@@ -889,8 +889,8 @@ public abstract class AbstractDatagramChannelBinding<P extends ChannelBindingPro
 
             for (Command someCommand : commands) {
                 Channel theChannel = null;
-                if (useAddressMask && (provider.getHost(itemName, someCommand).equals("*")
-                        || provider.getPortAsString(itemName, someCommand).equals("*"))) {
+                if (useAddressMask && ("*".equals(provider.getHost(itemName, someCommand))
+                        || "*".equals(provider.getPortAsString(itemName, someCommand)))) {
                     theChannel = channels.get(itemName, someCommand, provider.getDirection(itemName, someCommand),
                             provider.getHost(itemName, someCommand), provider.getPortAsString(itemName, someCommand));
                 } else {
@@ -1210,14 +1210,14 @@ public abstract class AbstractDatagramChannelBinding<P extends ChannelBindingPro
                     Direction direction = provider.getDirection(itemName, aCommand);
 
                     InetSocketAddress remoteAddress = null;
-                    if (!(remoteHost.equals("*") || remotePort.equals("*"))) {
+                    if (!("*".equals(remoteHost) || "*".equals(remotePort))) {
                         remoteAddress = new InetSocketAddress(remoteHost, Integer.parseInt(remotePort));
                     }
 
                     Channel newChannel = null;
                     Channel existingChannel = null;
 
-                    if (useAddressMask && (remoteHost.equals("*") || remotePort.equals("*"))) {
+                    if (useAddressMask && ("*".equals(remoteHost) || "*".equals(remotePort))) {
                         newChannel = new Channel(itemName, aCommand, remoteHost, remotePort,
                                 provider.getDirection(itemName, aCommand), false, null, false, null);
                         existingChannel = channels.get(itemName, aCommand, direction, remoteHost, remotePort);
@@ -1232,7 +1232,7 @@ public abstract class AbstractDatagramChannelBinding<P extends ChannelBindingPro
 
                             boolean assigned = false;
 
-                            if (useAddressMask && (remoteHost.equals("*") || remotePort.equals("*"))) {
+                            if (useAddressMask && ("*".equals(remoteHost) || "*".equals(remotePort))) {
                                 logger.warn(
                                         "When using address masks we will not verify if we are already listening to similar incoming connections");
                                 logger.info("We will accept data coming from the remote end {}:{}", remoteHost,
@@ -1273,7 +1273,7 @@ public abstract class AbstractDatagramChannelBinding<P extends ChannelBindingPro
                                 newChannel.channel = listenerChannel;
                             }
 
-                            if (useAddressMask && (remoteHost.equals("*") || remotePort.equals("*"))) {
+                            if (useAddressMask && ("*".equals(remoteHost) || "*".equals(remotePort))) {
                                 logger.info("We will accept data coming from the remote end with mask {}:{}",
                                         remoteHost, remotePort);
                             } else {
@@ -1286,7 +1286,7 @@ public abstract class AbstractDatagramChannelBinding<P extends ChannelBindingPro
 
                             boolean assigned = false;
 
-                            if (useAddressMask && (remoteHost.equals("*") || remotePort.equals("*"))) {
+                            if (useAddressMask && ("*".equals(remoteHost) || "*".equals(remotePort))) {
                                 logger.error(
                                         "We do not accept outgoing connections for Items that do use address masks");
                             } else {

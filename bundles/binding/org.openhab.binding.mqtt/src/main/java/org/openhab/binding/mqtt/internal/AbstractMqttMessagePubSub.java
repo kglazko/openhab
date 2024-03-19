@@ -170,7 +170,7 @@ public abstract class AbstractMqttMessagePubSub implements BindingConfig {
      *         transformation rule.
      */
     public String getTransformationServiceName() {
-        if (StringUtils.isEmpty(getTransformationRule()) || getTransformationRule().equalsIgnoreCase("default")) {
+        if (StringUtils.isEmpty(getTransformationRule()) || "default".equalsIgnoreCase(getTransformationRule())) {
             return null;
         }
 

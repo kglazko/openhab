@@ -19,12 +19,12 @@ public class DSID {
     private final String PRE = "3504175fe0000000";
 
     public DSID(String dsid) {
-        if (dsid != null && !dsid.trim().equals("")) {
+        if (dsid != null && !"".equals(dsid.trim())) {
             if (dsid.trim().length() == 24) {
                 this.dsid = dsid;
             } else if (dsid.trim().length() == 8) {
                 this.dsid = this.PRE + dsid;
-            } else if (dsid.trim().toUpperCase().equals("ALL")) {
+            } else if ("ALL".equals(dsid.trim().toUpperCase())) {
                 this.dsid = "ALL";
             } else {
                 this.dsid = DEFAULT_DSID;

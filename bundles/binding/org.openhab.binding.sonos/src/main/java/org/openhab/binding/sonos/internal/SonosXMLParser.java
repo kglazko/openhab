@@ -261,24 +261,24 @@ public class SonosXMLParser {
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
-            if (qName.equals("container") || qName.equals("item")) {
+            if ("container".equals(qName) || "item".equals(qName)) {
                 id = attributes.getValue("id");
                 parentId = attributes.getValue("parentID");
-            } else if (qName.equals("res")) {
+            } else if ("res".equals(qName)) {
                 element = Element.RES;
-            } else if (qName.equals("dc:title")) {
+            } else if ("dc:title".equals(qName)) {
                 element = Element.TITLE;
-            } else if (qName.equals("upnp:class")) {
+            } else if ("upnp:class".equals(qName)) {
                 element = Element.CLASS;
-            } else if (qName.equals("dc:creator")) {
+            } else if ("dc:creator".equals(qName)) {
                 element = Element.CREATOR;
-            } else if (qName.equals("upnp:album")) {
+            } else if ("upnp:album".equals(qName)) {
                 element = Element.ALBUM;
-            } else if (qName.equals("upnp:albumArtURI")) {
+            } else if ("upnp:albumArtURI".equals(qName)) {
                 element = Element.ALBUM_ART_URI;
-            } else if (qName.equals("upnp:originalTrackNumber")) {
+            } else if ("upnp:originalTrackNumber".equals(qName)) {
                 element = Element.TRACK_NUMBER;
-            } else if (qName.equals("r:resMD")) {
+            } else if ("r:resMD".equals(qName)) {
                 element = Element.RESMD;
             } else {
                 if (ignore == null) {
@@ -332,7 +332,7 @@ public class SonosXMLParser {
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
-            if (qName.equals("container") || qName.equals("item")) {
+            if ("container".equals(qName) || "item".equals(qName)) {
                 element = null;
 
                 int trackNumberVal = 0;
@@ -386,14 +386,14 @@ public class SonosXMLParser {
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
 
-            if (qName.equals("container") || qName.equals("item")) {
+            if ("container".equals(qName) || "item".equals(qName)) {
                 id = attributes.getValue("id");
                 parentId = attributes.getValue("parentID");
-            } else if (qName.equals("desc")) {
+            } else if ("desc".equals(qName)) {
                 element = Element.DESC;
-            } else if (qName.equals("upnp:class")) {
+            } else if ("upnp:class".equals(qName)) {
                 element = Element.CLASS;
-            } else if (qName.equals("dc:title")) {
+            } else if ("dc:title".equals(qName)) {
                 element = Element.TITLE;
             } else {
                 element = null;
@@ -423,7 +423,7 @@ public class SonosXMLParser {
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
-            if (qName.equals("DIDL-Lite")) {
+            if ("DIDL-Lite".equals(qName)) {
                 metaData = new SonosResourceMetaData(id, parentId, title.toString(), upnpClass.toString(),
                         desc.toString());
                 element = null;
@@ -462,7 +462,7 @@ public class SonosXMLParser {
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
 
-            if (qName.equals("Alarm")) {
+            if ("Alarm".equals(qName)) {
                 id = attributes.getValue("ID");
                 duration = attributes.getValue("Duration");
                 recurrence = attributes.getValue("Recurrence");
@@ -480,7 +480,7 @@ public class SonosXMLParser {
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
 
-            if (qName.equals("Alarm")) {
+            if ("Alarm".equals(qName)) {
 
                 int finalID = 0;
                 int finalVolume = 0;
@@ -492,13 +492,13 @@ public class SonosXMLParser {
                 try {
                     finalID = Integer.parseInt(id);
                     finalVolume = Integer.parseInt(volume);
-                    if (enabled.equals("0")) {
+                    if ("0".equals(enabled)) {
                         finalEnabled = false;
                     } else {
                         finalEnabled = true;
                     }
 
-                    if (includeLinkedZones.equals("0")) {
+                    if ("0".equals(includeLinkedZones)) {
                         finalIncludeLinkedZones = false;
                     } else {
                         finalIncludeLinkedZones = true;
@@ -542,17 +542,17 @@ public class SonosXMLParser {
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
-            if (qName.equals("ZoneGroup")) {
+            if ("ZoneGroup".equals(qName)) {
                 groupId = attributes.getValue("ID");
                 coordinator = attributes.getValue("Coordinator");
-            } else if (qName.equals("ZoneGroupMember")) {
+            } else if ("ZoneGroupMember".equals(qName)) {
                 currentGroupPlayers.add(attributes.getValue("UUID"));
             }
         }
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
-            if (qName.equals("ZoneGroup")) {
+            if ("ZoneGroup".equals(qName)) {
                 groups.add(new SonosZoneGroup(groupId, coordinator, currentGroupPlayers));
                 currentGroupPlayers.clear();
             }
@@ -594,21 +594,21 @@ public class SonosXMLParser {
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
-            if (qName.equals("outline")) {
+            if ("outline".equals(qName)) {
                 type = attributes.getValue("type");
-                if (type.equals("text")) {
+                if ("text".equals(type)) {
                     textField = attributes.getValue("text");
                 } else {
                     textField = null;
                 }
-            } else if (qName.equals("logo")) {
+            } else if ("logo".equals(qName)) {
                 // logo = attributes.getValue("UUID");
             }
         }
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
-            if (qName.equals("outline")) {
+            if ("outline".equals(qName)) {
                 if (textField != null) {
                     textFields.add(textField);
                 }

@@ -94,21 +94,21 @@ public class EBusTelegramParser {
         }
 
         // replace similar data types
-        if (type.equals("uint")) {
+        if ("uint".equals(type)) {
             type = "word";
         }
-        if (type.equals("byte")) {
+        if ("byte".equals(type)) {
             type = "uchar";
         }
 
         byte[] bytes = null;
-        if (type.equals("data2b") || type.equals("data2c") || type.equals("word")) {
+        if ("data2b".equals(type) || "data2c".equals(type) || "word".equals(type)) {
             bytes = new byte[] { byteBuffer.get(pos), byteBuffer.get(pos - 1) };
         } else {
             bytes = new byte[] { byteBuffer.get(pos - 1) };
         }
 
-        if (type.equals("bit")) {
+        if ("bit".equals(type)) {
             int bit = telegramValue.getBit();
             value = bytes[0];
 
@@ -310,7 +310,7 @@ public class EBusTelegramParser {
                 }
             }
 
-            if (debugWriter != null && debugWriteMode.equals("all")) {
+            if (debugWriter != null && "all".equals(debugWriteMode)) {
                 debugWriter.writeTelegram(telegram, registryEntry.getComment());
             }
 

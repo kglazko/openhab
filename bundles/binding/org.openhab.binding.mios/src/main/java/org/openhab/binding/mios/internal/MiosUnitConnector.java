@@ -190,7 +190,7 @@ public class MiosUnitConnector {
             logger.warn("callDevice: Command '{}' not supported, or missing command: mapping, for Item '{}'",
                     command.toString(), config.getItemName());
             return;
-        } else if (newCommand.equals("")) {
+        } else if ("".equals(newCommand)) {
             logger.trace("callDevice: Item '{}' has disabled the use of Command '{}' via it's configuration '{}'",
                     new Object[] { config.getItemName(), command.toString(), config.toProperty() });
             return;
@@ -480,15 +480,15 @@ public class MiosUnitConnector {
                 String key = entry.getKey();
                 Object value = entry.getValue();
 
-                if (!key.equals("devices") && !key.equals("scenes") && !key.equals("rooms")
-                        && !key.equals("sections")) {
+                if (!"devices".equals(key) && !"scenes".equals(key) && !"rooms".equals(key)
+                        && !"sections".equals(key)) {
                     if (value instanceof String || value instanceof Integer || value instanceof Double
                             || value instanceof Boolean) {
                         // Skip over Lua code blocks and
                         // fix [known] date-time values on the way through, so
                         // they use the native type.
-                        if (key.equals("DeviceSync") || key.equals("LoadTime") || key.equals("zwave_heal")
-                                || key.equals("TimeStamp")) {
+                        if ("DeviceSync".equals(key) || "LoadTime".equals(key) || "zwave_heal".equals(key)
+                                || "TimeStamp".equals(key)) {
                             value = fixTimestamp(value);
                         }
 
@@ -498,7 +498,7 @@ public class MiosUnitConnector {
                         // No need to bring these into openHAB, they'll only
                         // bulk up
                         // the system.
-                        if (key.equals("StartupCode") || key.equals("startup")) {
+                        if ("StartupCode".equals(key) || "startup".equals(key)) {
                             continue;
                         }
 
@@ -540,17 +540,17 @@ public class MiosUnitConnector {
 
                     if (value instanceof String || value instanceof Integer || value instanceof Double
                             || value instanceof Boolean) {
-                        if (key.equals("time_created")) {
+                        if ("time_created".equals(key)) {
                             // fix [known] date-time values on the way through,
                             // so they use the native type.
                             value = fixTimestamp(value);
-                        } else if (key.equals("id")) {
+                        } else if ("id".equals(key)) {
                             // Skip "id", since it's done at the end.
                             continue;
                         }
 
                         boolean force = false;
-                        boolean statusAttr = key.equals("status");
+                        boolean statusAttr = "status".equals(key);
 
                         // Handle a bug in MiOS's JSON, where they send the STATUS Attribute even if it hasn't
                         // changed. This resulted in a lot of unnecessary writes to openHAB. We can do this
@@ -571,8 +571,8 @@ public class MiosUnitConnector {
                         // No need to bring these into openHAB, they'll only
                         // bulk up
                         // the system.
-                        if (key.equals("states") || key.equals("ControlURLs") || key.equals("Jobs")
-                                || key.equals("tooltip")) {
+                        if ("states".equals(key) || "ControlURLs".equals(key) || "Jobs".equals(key)
+                                || "tooltip".equals(key)) {
                             continue;
                         }
 
@@ -634,7 +634,7 @@ public class MiosUnitConnector {
 
                     if (value instanceof String || value instanceof Integer || value instanceof Double
                             || value instanceof Boolean) {
-                        if (key.equals("Timestamp")) {
+                        if ("Timestamp".equals(key)) {
                             // fix [known] date-time values on the way through,
                             // so they use the native type.
                             value = fixTimestamp(value);
@@ -646,7 +646,7 @@ public class MiosUnitConnector {
                         }
 
                         boolean force = false;
-                        boolean statusAttr = key.equals("status");
+                        boolean statusAttr = "status".equals(key);
 
                         // Handle a bug in MiOS's JSON, where they send the STATUS Attribute even if it hasn't
                         // changed. This resulted in a lot of unnecessary writes to openHAB. We can do this
@@ -667,8 +667,8 @@ public class MiosUnitConnector {
                         // No need to bring these into openHAB, they'll only
                         // bulk up
                         // the system.
-                        if (key.equals("timers") || key.equals("triggers") || key.equals("groups")
-                                || key.equals("tooltip") || key.equals("Jobs") || key.equals("lua")) {
+                        if ("timers".equals(key) || "triggers".equals(key) || "groups".equals(key)
+                                || "tooltip".equals(key) || "Jobs".equals(key) || "lua".equals(key)) {
                             continue;
                         }
 

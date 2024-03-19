@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.panasonictv.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class PanasonicTVBinding extends AbstractBinding<PanasonicTVBindingProvid
 
             for (Enumeration<?> e = config.keys(); e.hasMoreElements();) {
                 String tv = (String) e.nextElement();
-                if (tv.equalsIgnoreCase("service.pid") || tv.equalsIgnoreCase("refresh")) {
+                if ("service.pid".equalsIgnoreCase(tv) || "refresh".equalsIgnoreCase(tv)) {
                     continue;
                 }
                 logger.info("TV registered '" + tv + "' with IP '" + config.get(tv) + "'");
@@ -178,7 +179,7 @@ public class PanasonicTVBinding extends AbstractBinding<PanasonicTVBindingProvid
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inFromServer));
 
-            String response = reader.readLine();
+            String response = BoundedLineReader.readLine(reader, 5_000_000);
 
             client.close();
 

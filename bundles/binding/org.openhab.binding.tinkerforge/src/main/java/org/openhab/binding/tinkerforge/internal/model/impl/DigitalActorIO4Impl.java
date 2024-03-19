@@ -845,12 +845,12 @@ public class DigitalActorIO4Impl extends MinimalEObjectImpl.Container implements
             if (getMbrick().getBrickd().isReconnected() && isKeepOnReconnect()) {
                 logger.debug("{} reconnected: no new port configuration set for {}", LoggerConstants.TFINIT,
                         getSubId());
-            } else if (defaultState == null || defaultState.equals("keep")) {
+            } else if (defaultState == null || "keep".equals(defaultState)) {
                 logger.debug("{} keep: no new port configuration set", LoggerConstants.TFINIT);
-            } else if (defaultState.equals("true")) {
+            } else if ("true".equals(defaultState)) {
                 logger.debug("{} setPortconfiguration to state: true", LoggerConstants.TFINIT);
                 getMbrick().getTinkerforgeDevice().setConfiguration((short) mask, BrickletIO4.DIRECTION_OUT, true);
-            } else if (defaultState.equals("false")) {
+            } else if ("false".equals(defaultState)) {
                 logger.debug("{} setPortconfiguration to state: false", LoggerConstants.TFINIT);
                 getMbrick().getTinkerforgeDevice().setConfiguration((short) mask, BrickletIO4.DIRECTION_OUT, false);
             }

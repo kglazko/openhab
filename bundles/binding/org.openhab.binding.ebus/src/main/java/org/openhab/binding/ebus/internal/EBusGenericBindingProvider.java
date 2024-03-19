@@ -104,16 +104,16 @@ public class EBusGenericBindingProvider extends AbstractGenericBindingProvider i
             configParts[0] = configParts[0].trim().toLowerCase();
             configParts[1] = configParts[1].trim();
 
-            if (configParts[0].equals("data")) {
+            if ("data".equals(configParts[0])) {
                 config.map.put(configParts[0], EBusUtils.toByteArray(configParts[1]));
 
-            } else if (configParts[0].equals("src")) {
+            } else if ("src".equals(configParts[0])) {
                 config.map.put(configParts[0], DatatypeConverter.parseHexBinary(configParts[1])[0]);
 
-            } else if (configParts[0].equals("dst")) {
+            } else if ("dst".equals(configParts[0])) {
                 config.map.put(configParts[0], DatatypeConverter.parseHexBinary(configParts[1])[0]);
 
-            } else if (configParts[0].equals("refresh")) {
+            } else if ("refresh".equals(configParts[0])) {
                 config.map.put(configParts[0], Integer.parseInt(configParts[1]));
 
             } else if (configParts[0].startsWith("data-")) {

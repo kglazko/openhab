@@ -922,11 +922,11 @@ public class MBrickletLEDStripImpl extends MinimalEObjectImpl.Container implemen
         if (tfConfig != null) {
             if (tfConfig.eIsSet(tfConfig.eClass().getEStructuralFeature("chiptype"))) {
                 String chipTypeString = tfConfig.getChiptype();
-                if (chipTypeString.equalsIgnoreCase("ws2801")) {
+                if ("ws2801".equalsIgnoreCase(chipTypeString)) {
                     chipType = BrickletLEDStrip.CHIP_TYPE_WS2801;
-                } else if (chipTypeString.equalsIgnoreCase("ws2811")) {
+                } else if ("ws2811".equalsIgnoreCase(chipTypeString)) {
                     chipType = BrickletLEDStrip.CHIP_TYPE_WS2811;
-                } else if (chipTypeString.equalsIgnoreCase("ws2812")) {
+                } else if ("ws2812".equalsIgnoreCase(chipTypeString)) {
                     chipType = BrickletLEDStrip.CHIP_TYPE_WS2812;
                 } else {
                     logger.error("Unkown ChipType {}", chipTypeString);

@@ -428,11 +428,11 @@ public class SerialParameters {
         parity = parity.toLowerCase();
         int intParity = SerialPort.PARITY_NONE;
 
-        if (parity.equals("none") || parity.equals("n")) {
+        if ("none".equals(parity) || "n".equals(parity)) {
             intParity = SerialPort.PARITY_NONE;
-        } else if (parity.equals("even") || parity.equals("e")) {
+        } else if ("even".equals(parity) || "e".equals(parity)) {
             intParity = SerialPort.PARITY_EVEN;
-        } else if (parity.equals("odd") || parity.equals("o")) {
+        } else if ("odd".equals(parity) || "o".equals(parity)) {
             intParity = SerialPort.PARITY_ODD;
         } else {
             throw new IllegalArgumentException("unknown parity string '" + parity + "'");
@@ -556,19 +556,19 @@ public class SerialParameters {
      */
     private int stringToFlow(String flowcontrol) {
         flowcontrol = flowcontrol.toLowerCase();
-        if (flowcontrol.equals("none")) {
+        if ("none".equals(flowcontrol)) {
             return SerialPort.FLOWCONTROL_NONE;
         }
-        if (flowcontrol.equals("xon/xoff out")) {
+        if ("xon/xoff out".equals(flowcontrol)) {
             return SerialPort.FLOWCONTROL_XONXOFF_OUT;
         }
-        if (flowcontrol.equals("xon/xoff in")) {
+        if ("xon/xoff in".equals(flowcontrol)) {
             return SerialPort.FLOWCONTROL_XONXOFF_IN;
         }
-        if (flowcontrol.equals("rts/cts in")) {
+        if ("rts/cts in".equals(flowcontrol)) {
             return SerialPort.FLOWCONTROL_RTSCTS_IN;
         }
-        if (flowcontrol.equals("rts/cts out")) {
+        if ("rts/cts out".equals(flowcontrol)) {
             return SerialPort.FLOWCONTROL_RTSCTS_OUT;
         }
         return SerialPort.FLOWCONTROL_NONE;

@@ -225,11 +225,11 @@ public class TACmiBinding extends AbstractActiveBinding<TACmiBindingProvider> {
             int portNumber = provider.getPortNumber(itemName);
             logger.trace("Type: {}, portNumber: {}, command: {}", portType, portNumber, command.toString());
             byte[] messageBytes;
-            if (portType.equals("d") && portNumber == 1 && command instanceof OnOffType) {
+            if ("d".equals(portType) && portNumber == 1 && command instanceof OnOffType) {
                 boolean state = OnOffType.ON.equals(command) ? true : false;
                 DigitalMessage message = new DigitalMessage((byte) canNode, state);
                 messageBytes = message.getRaw();
-            } else if (portType.equals("a") && (portNumber - 1) % 4 == 0 && command instanceof DecimalType) {
+            } else if ("a".equals(portType) && (portNumber - 1) % 4 == 0 && command instanceof DecimalType) {
                 TACmiMeasureType measureType = provider.getMeasureType(itemName);
                 AnalogMessage message = new AnalogMessage((byte) canNode, 1, (DecimalType) command, measureType);
                 messageBytes = message.getRaw();

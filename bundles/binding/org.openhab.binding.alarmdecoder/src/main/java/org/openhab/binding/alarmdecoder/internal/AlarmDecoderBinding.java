@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.alarmdecoder.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -221,7 +222,7 @@ public class AlarmDecoderBinding extends AbstractActiveBinding<AlarmDecoderBindi
             if (parts.length < 2) {
                 throw new ConfigurationException("alarmdecoder:connect", "missing :, check openhab.cfg!");
             }
-            if (parts[0].equals("tcp")) {
+            if ("tcp".equals(parts[0])) {
                 parseTcpConfig(parts);
             } else if (parts[0].startsWith("serial")) {
                 parseSerialConfig(parts);
@@ -234,7 +235,7 @@ public class AlarmDecoderBinding extends AbstractActiveBinding<AlarmDecoderBindi
                 refreshInterval = Long.parseLong(reconn);
             }
             String acceptCommands = (String) config.get("send_commands_and_compromise_security");
-            if (acceptCommands != null && acceptCommands.equalsIgnoreCase("true")) {
+            if (acceptCommands != null && "true".equalsIgnoreCase(acceptCommands)) {
                 logger.info("accepting commands!");
                 m_acceptCommands = true;
             }
@@ -394,7 +395,7 @@ public class AlarmDecoderBinding extends AbstractActiveBinding<AlarmDecoderBindi
             logger.debug("msg reader thread started");
             String msg;
             try {
-                while ((msg = m_reader.readLine()) != null && m_keepRunning) {
+                while ((msg = BoundedLineReader.readLine(m_reader, 5_000_000)) != null && m_keepRunning) {
                     logger.debug("got msg: {}", msg);
                     ADMsgType mt = s_getMsgType(msg);
                     try {

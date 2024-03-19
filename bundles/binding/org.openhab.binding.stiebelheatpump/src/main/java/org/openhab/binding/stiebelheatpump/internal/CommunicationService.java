@@ -155,7 +155,7 @@ public class CommunicationService {
         Request timeRequest = null;
 
         for (Request request : heatPumpSettingConfiguration) {
-            if (request.getName().equals("Time")) {
+            if ("Time".equals(request.getName())) {
                 timeRequest = request;
                 break;
             }
@@ -197,43 +197,43 @@ public class CommunicationService {
                         break;
                     }
                 }
-                if (entryName.equals("WeekDay") && !entryValue.equals(weekday)) {
+                if ("WeekDay".equals(entryName) && !entryValue.equals(weekday)) {
                     updateRequired = true;
                     response = parser.composeRecord(weekday, response, currentRecord);
                     logger.debug("WeekDay needs update from {} to {}", entryValue, weekday);
                     continue;
                 }
-                if (entryName.equals("Hours") && !entryValue.equals(hours)) {
+                if ("Hours".equals(entryName) && !entryValue.equals(hours)) {
                     updateRequired = true;
                     response = parser.composeRecord(hours, response, currentRecord);
                     logger.debug("Hours needs update from {} to {}", entryValue, hours);
                     continue;
                 }
-                if (entryName.equals("Minutes") && !entryValue.equals(minutes)) {
+                if ("Minutes".equals(entryName) && !entryValue.equals(minutes)) {
                     updateRequired = true;
                     response = parser.composeRecord(minutes, response, currentRecord);
                     logger.debug("Minutes needs update from {} to {}", entryValue, minutes);
                     continue;
                 }
-                if (entryName.equals("Seconds") && !entryValue.equals(seconds)) {
+                if ("Seconds".equals(entryName) && !entryValue.equals(seconds)) {
                     updateRequired = true;
                     response = parser.composeRecord(seconds, response, currentRecord);
                     logger.debug("Seconds needs update from {} to {}", entryValue, seconds);
                     continue;
                 }
-                if (entryName.equals("Year") && !entryValue.equals(year)) {
+                if ("Year".equals(entryName) && !entryValue.equals(year)) {
                     updateRequired = true;
                     response = parser.composeRecord(year, response, currentRecord);
                     logger.debug("Year needs update from {} to {}", entryValue, year);
                     continue;
                 }
-                if (entryName.equals("Month") && !entryValue.equals(month)) {
+                if ("Month".equals(entryName) && !entryValue.equals(month)) {
                     updateRequired = true;
                     response = parser.composeRecord(month, response, currentRecord);
                     logger.debug("Month needs update from {} to {}", entryValue, month);
                     continue;
                 }
-                if (entryName.equals("Day") && !entryValue.equals(day)) {
+                if ("Day".equals(entryName) && !entryValue.equals(day)) {
                     updateRequired = true;
                     response = parser.composeRecord(day, response, currentRecord);
                     logger.debug("Day needs update from {} to {}", entryValue, day);

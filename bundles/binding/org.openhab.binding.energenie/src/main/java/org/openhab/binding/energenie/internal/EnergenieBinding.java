@@ -246,12 +246,12 @@ public class EnergenieBinding extends AbstractActiveBinding<EnergenieBindingProv
                 String[] parts = slicedResponse.split(",");
                 String itemState = parts[pmsSocketId - 1];
                 logger.trace("Response for item {} = {}", itemName, itemState);
-                if (itemState.equals("0")) {
+                if ("0".equals(itemState)) {
                     State state = OnOffType.valueOf("OFF");
                     logger.trace("transformed state for item {} = {}", itemName, state);
                     eventPublisher.postUpdate(itemName, state);
                 }
-                if (itemState.equals("1")) {
+                if ("1".equals(itemState)) {
                     State state = OnOffType.valueOf("ON");
                     logger.trace("transformed state for item {} = {}", itemName, state);
                     eventPublisher.postUpdate(itemName, state);

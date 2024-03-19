@@ -191,7 +191,7 @@ public class Tr064Comm {
                 QName dataNode = new QName(itemMap.getReadDataInName()); // service specific node name
                 SOAPElement beDataNode = bodyData.addChildElement(dataNode);
                 // if input is mac address, replace "-" with ":" as fbox wants
-                if (itemMap.getItemCommand().equals("maconline")) {
+                if ("maconline".equals(itemMap.getItemCommand())) {
                     dataInValue = dataInValue.replaceAll("-", ":");
                 }
                 beDataNode.addTextNode(dataInValue); // add data which should be requested from fbox for this service
@@ -284,7 +284,7 @@ public class Tr064Comm {
             }
 
             // convert String command into numeric
-            String setDataInValue = cmd.toString().equalsIgnoreCase("on") ? "1" : "0";
+            String setDataInValue = "on".equalsIgnoreCase(cmd.toString()) ? "1" : "0";
             QName dataNode = new QName(itemMap.getWriteDataInName()); // service specific node name
             SOAPElement beDataNode = bodyData.addChildElement(dataNode);
             beDataNode.addTextNode(setDataInValue); // add data which should be requested from fbox for this service
@@ -624,7 +624,7 @@ public class Tr064Comm {
                             NodeList nlErrorCode = detail.getElementsByTagName("errorCode");
                             Node nErrorCode = nlErrorCode.item(0);
                             String errorCode = nErrorCode.getTextContent();
-                            if (errorCode.equals("714")) {
+                            if ("714".equals(errorCode)) {
                                 value = "MAC not known to FritzBox!";
                                 logger.debug(value);
                             } else {

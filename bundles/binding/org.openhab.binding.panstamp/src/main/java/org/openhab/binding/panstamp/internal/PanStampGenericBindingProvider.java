@@ -133,7 +133,7 @@ public class PanStampGenericBindingProvider extends AbstractGenericBindingProvid
         if (val.startsWith("'") && val.endsWith("'")) {
             val = val.replace("'", "");
         }
-        if (val.equals("")) {
+        if ("".equals(val)) {
             throw new BindingConfigParseException(String.format("Empty endpoint name"));
         }
         return val;

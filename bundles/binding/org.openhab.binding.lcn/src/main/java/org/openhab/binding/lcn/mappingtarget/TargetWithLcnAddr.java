@@ -92,7 +92,7 @@ public abstract class TargetWithLcnAddr extends Target {
         static CmdAndAddressRet parse(String input, boolean allowGroup) {
             Matcher matcher;
             if ((matcher = PATTERN.matcher(input)).matches()) {
-                boolean isGroup = matcher.group("type") != null && matcher.group("type").equalsIgnoreCase("G");
+                boolean isGroup = matcher.group("type") != null && "G".equalsIgnoreCase(matcher.group("type"));
                 if (isGroup && !allowGroup) {
                     logger.error(String.format("Binding does not allow LCN group addresses: %s", input));
                     return null;

@@ -197,15 +197,15 @@ public class WagoBinding extends AbstractActiveBinding<WagoBindingProvider>imple
 
                 String attrName = matcher.group(2);
                 String value = (String) config.get(key);
-                if (attrName.equals("ip")) {
+                if ("ip".equals(attrName)) {
                     coupler.setIp(value);
-                } else if (attrName.equals("modbus")) {
+                } else if ("modbus".equals(attrName)) {
                     coupler.setModbus(Integer.parseInt(value));
-                } else if (attrName.equals("ftp")) {
+                } else if ("ftp".equals(attrName)) {
                     coupler.setFTP(Integer.parseInt(value));
-                } else if (attrName.equals("username")) {
+                } else if ("username".equals(attrName)) {
                     coupler.setUsername(value);
-                } else if (attrName.equals("password")) {
+                } else if ("password".equals(attrName)) {
                     coupler.setPassword(value);
                 }
             }

@@ -59,17 +59,17 @@ public class BenqProjectorGenericBindingProvider extends AbstractGenericBindingP
         super.processBindingConfiguration(context, item, bindingConfig);
         BenqProjectorBindingConfig config = new BenqProjectorBindingConfig();
 
-        if (bindingConfig.equalsIgnoreCase("power")) {
+        if ("power".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.POWER;
-        } else if (bindingConfig.equalsIgnoreCase("mute")) {
+        } else if ("mute".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.MUTE;
-        } else if (bindingConfig.equalsIgnoreCase("volume")) {
+        } else if ("volume".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.VOLUME;
-        } else if (bindingConfig.equalsIgnoreCase("lamp_hours")) {
+        } else if ("lamp_hours".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.LAMP_HOURS;
-        } else if (bindingConfig.equalsIgnoreCase("source_number")) {
+        } else if ("source_number".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.SOURCE_NUMBER;
-        } else if (bindingConfig.equalsIgnoreCase("source_string")) {
+        } else if ("source_string".equalsIgnoreCase(bindingConfig)) {
             config.mode = BenqProjectorItemMode.SOURCE_STRING;
         } else {
             throw new BindingConfigParseException(

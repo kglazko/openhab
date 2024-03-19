@@ -115,7 +115,7 @@ public class WebAppServlet extends BaseServlet {
 				throw new RenderException("Sitemap '" + sitemapName + "' could not be found");
 			}
 			logger.debug("reading sitemap {}", sitemap.getName());
-			if(widgetId==null || widgetId.isEmpty() || widgetId.equals("Home")) {
+			if(widgetId==null || widgetId.isEmpty() || "Home".equals(widgetId)) {
 				// we are at the homepage, so we render the children of the sitemap root node
 				String label = sitemap.getLabel()!=null ? sitemap.getLabel() : sitemapName;
 				EList<Widget> children = sitemap.getChildren();
@@ -125,7 +125,7 @@ public class WebAppServlet extends BaseServlet {
 					return;
 				}
 				result.append(renderer.processPage("Home", sitemapName, label, sitemap.getChildren(), async));
-			} else if(!widgetId.equals("Colorpicker")) {
+			} else if(!"Colorpicker".equals(widgetId)) {
 				// we are on some subpage, so we have to render the children of the widget that has been selected
 				Widget w = renderer.getItemUIRegistry().getWidget(sitemap, widgetId);
 				if(w!=null) {
@@ -143,7 +143,7 @@ public class WebAppServlet extends BaseServlet {
 					result.append(renderer.processPage(renderer.getItemUIRegistry().getWidgetId(w), sitemapName, label, children, async));
 				}
 				
-			} else if (widgetId.equals("Colorpicker")) {
+			} else if ("Colorpicker".equals(widgetId)) {
 				result.append("<root></root>");
 			}
 		} catch(RenderException e) {

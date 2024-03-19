@@ -8,6 +8,9 @@
  */
 package org.openhab.io.multimedia.actions;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.SystemCommand;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -101,7 +104,7 @@ public class Audio {
         }
         try {
             if (url.toLowerCase().endsWith(".m3u")) {
-                InputStream is = new URL(url).openStream();
+                InputStream is = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream();
                 String urls = IOUtils.toString(is);
                 for (String line : urls.split("\n")) {
                     if (!line.isEmpty() && !line.startsWith("#")) {
@@ -110,7 +113,7 @@ public class Audio {
                     }
                 }
             } else if (url.toLowerCase().endsWith(".pls")) {
-                InputStream is = new URL(url).openStream();
+                InputStream is = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream();
                 String urls = IOUtils.toString(is);
                 for (String line : urls.split("\n")) {
                     if (!line.isEmpty() && line.startsWith("File")) {
@@ -122,10 +125,10 @@ public class Audio {
                     }
                 }
             }
-            URL streamUrl = new URL(url);
+            URL streamUrl = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             URLConnection connection = streamUrl.openConnection();
             InputStream is = null;
-            if (connection.getContentType().equals("unknown/unknown")) {
+            if ("unknown/unknown".equals(connection.getContentType())) {
                 // Java does not parse non-standard headers used by SHOUTCast
                 int port = streamUrl.getPort() > 0 ? streamUrl.getPort() : 80;
                 // Manipulate User-Agent to receive a stream
@@ -237,7 +240,7 @@ public class Audio {
     }
 
     private static void setMasterVolumeMac(float volume) throws IOException {
-        Runtime.getRuntime().exec(new String[] { "osascript", "-e", "set volume output volume " + volume });
+        SystemCommand.runCommand(Runtime.getRuntime(), new String[] { "osascript", "-e", "set volume output volume " + volume });
     }
 
     private static void setMasterVolumeJavaSound(final float volume) {
@@ -302,8 +305,7 @@ public class Audio {
     private static synchronized float getMasterVolumeMac() throws IOException {
         // we use a cache of the value as the script execution is pretty slow
         if (macVolumeValue == null) {
-            Process p = Runtime.getRuntime()
-                    .exec(new String[] { "osascript", "-e", "output volume of (get volume settings)" });
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), new String[] { "osascript", "-e", "output volume of (get volume settings)" });
             String value = IOUtils.toString(p.getInputStream()).trim();
             macVolumeValue = Float.valueOf(value) / 100f;
         }
@@ -412,7 +414,7 @@ public class Audio {
     }
 
     private static boolean isMacOSX() {
-        return System.getProperty("osgi.os").equals("macosx");
+        return "macosx".equals(System.getProperty("osgi.os"));
     }
 
 }

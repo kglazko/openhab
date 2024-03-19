@@ -55,7 +55,7 @@ public class DigitalSTROMBindingConfig implements BindingConfig {
                     throw new BindingConfigParseException(
                             "ERROR in item: " + item.getName() + " configuration: key is NULL");
                 }
-                if (valueStr.equals("")) {
+                if ("".equals(valueStr)) {
                     throw new BindingConfigParseException(
                             "ERROR in item: " + item.getName() + " configuration: value is NULL");
                 } else {

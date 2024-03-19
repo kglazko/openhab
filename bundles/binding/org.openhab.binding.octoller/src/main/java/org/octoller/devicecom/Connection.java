@@ -62,15 +62,15 @@ public class Connection {
     }
 
     public void processResultToPublisher(EventPublisher eventPublisher, String itemName, String result) {
-        if (result.equals("Up")) {
+        if ("Up".equals(result)) {
             eventPublisher.postUpdate(itemName, new PercentType(0));
-        } else if (result.equals("Down")) {
+        } else if ("Down".equals(result)) {
             eventPublisher.postUpdate(itemName, new PercentType(100));
-        } else if (result.equals("Unknown")) {
+        } else if ("Unknown".equals(result)) {
             eventPublisher.postUpdate(itemName, new PercentType(50));
-        } else if (result.equals("On")) {
+        } else if ("On".equals(result)) {
             eventPublisher.postUpdate(itemName, OnOffType.ON);
-        } else if (result.equals("Off")) {
+        } else if ("Off".equals(result)) {
             eventPublisher.postUpdate(itemName, OnOffType.OFF);
         }
     }

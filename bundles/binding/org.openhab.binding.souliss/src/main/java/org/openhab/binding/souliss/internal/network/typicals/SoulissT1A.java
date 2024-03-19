@@ -50,7 +50,7 @@ public class SoulissT1A extends SoulissGenericTypical {
     public State getOHState() {
         String sOHState = StateTraslator.statesSoulissToOH(this.getNote(), this.getType(), this.getState(iBit));
         if (sOHState != null) {
-            if (this.getNote().equals("ContactItem")) {
+            if ("ContactItem".equals(this.getNote())) {
                 return OpenClosedType.valueOf(sOHState);
             } else {
                 return OnOffType.valueOf(sOHState);

@@ -8,6 +8,7 @@
  */
 package org.openhab.binding.pilight.internal;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -88,7 +89,7 @@ public class PilightConnector extends Thread {
                 Socket socket = connection.getSocket();
                 if (!socket.isClosed()) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    String line = in.readLine();
+                    String line = BoundedLineReader.readLine(in, 5_000_000);
                     while (running && line != null) {
                         if (!StringUtils.isEmpty(line)) {
                             logger.debug("Received from pilight: {}", line);
@@ -100,7 +101,7 @@ public class PilightConnector extends Thread {
                                 // Status message, we're not using this for now.
                                 Response response = inputMapper.readValue(line, Response.class);
                                 logger.trace("Response success: " + response.isSuccess());
-                            } else if (line.equals("1")) {
+                            } else if ("1".equals(line)) {
                                 // pilight stopping
                                 throw new IOException("Connection to pilight lost");
                             } else {
@@ -109,7 +110,7 @@ public class PilightConnector extends Thread {
                                 callback.messageReceived(connection, status);
                             }
                         }
-                        line = in.readLine();
+                        line = BoundedLineReader.readLine(in, 5_000_000);
                     }
                 }
             } catch (IOException e) {

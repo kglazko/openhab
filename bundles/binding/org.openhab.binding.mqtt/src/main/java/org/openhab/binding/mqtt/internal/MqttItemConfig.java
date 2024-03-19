@@ -57,10 +57,10 @@ public class MqttItemConfig implements BindingConfig {
                 configContent = config.substring(firstPos + 1, lastPos);
             }
 
-            if (type.equals("<")) {
+            if ("<".equals(type)) {
                 MqttMessageSubscriber subscribeConfig = new MqttMessageSubscriber(configContent, item);
                 subscribeConfigurations.add(subscribeConfig);
-            } else if (type.equals(">")) {
+            } else if (">".equals(type)) {
                 MqttMessagePublisher publishConfig = new MqttMessagePublisher(configContent);
                 publishConfigurations.add(publishConfig);
             } else {

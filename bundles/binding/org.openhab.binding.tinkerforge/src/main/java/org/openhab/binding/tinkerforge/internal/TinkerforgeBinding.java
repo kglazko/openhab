@@ -910,7 +910,7 @@ public class TinkerforgeBinding extends AbstractActiveBinding<TinkerforgeBinding
             int port;
             String authkey = null;
             if (cfgHostAndPort.length > 1) {
-                if (!cfgHostAndPort[1].equals("")) {
+                if (!"".equals(cfgHostAndPort[1])) {
                     port = Integer.parseInt(cfgHostAndPort[1]);
                 } else {
                     port = BRICKD_DEFAULT_PORT;

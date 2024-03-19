@@ -159,7 +159,7 @@ public class Driver {
      * @return corresponding Port object or null if not found
      */
     public Port getPort(String port) {
-        if (port.equalsIgnoreCase("DEFAULT")) {
+        if ("DEFAULT".equalsIgnoreCase(port)) {
             if (m_ports.isEmpty()) {
                 logger.error("no default port found!");
                 return null;

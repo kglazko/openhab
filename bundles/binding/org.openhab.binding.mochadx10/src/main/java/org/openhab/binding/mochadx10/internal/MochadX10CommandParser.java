@@ -141,9 +141,9 @@ public class MochadX10CommandParser {
             String command = commandString.toLowerCase();
             Matcher matcher;
 
-            if (command.equals("on")) {
+            if ("on".equals(command)) {
                 return new MochadX10OnCommand(eventPublisher, address);
-            } else if (command.equals("off")) {
+            } else if ("off".equals(command)) {
                 return new MochadX10OffCommand(eventPublisher, address);
             } else if (command.contains("dim")) {
                 matcher = DIM_PATTERN.matcher(command);
