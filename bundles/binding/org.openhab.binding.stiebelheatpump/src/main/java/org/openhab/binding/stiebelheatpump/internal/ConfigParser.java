@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -52,7 +53,7 @@ public class ConfigParser {
         JAXBContext context;
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(xmlFileLocation));
+            writer = Files.newBufferedWriter(xmlFileLocation.toPath());
         } catch (IOException e) {
             throw new StiebelHeatPumpException(e.toString());
         }
