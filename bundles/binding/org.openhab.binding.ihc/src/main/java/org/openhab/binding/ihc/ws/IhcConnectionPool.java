@@ -111,7 +111,7 @@ public class IhcConnectionPool {
 
         try {
             // Controller supports only SSLv3 and TLSv1
-            sslContext = SSLContext.getInstance("TLSv1");
+            sslContext = SSLContext.getInstance("TLSv1.2");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
 
         } catch (NoSuchAlgorithmException e) {
