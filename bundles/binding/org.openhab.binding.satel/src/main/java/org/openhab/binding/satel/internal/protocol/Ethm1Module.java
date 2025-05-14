@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
@@ -126,7 +127,7 @@ public class Ethm1Module extends SatelModule {
             } catch (Exception e) {
                 throw new IOException("General encryption failure", e);
             }
-            this.rand = new Random();
+            this.rand = new SecureRandom();
             this.id_s = 0;
             this.id_r = 0;
             this.rollingCounter = 0;
